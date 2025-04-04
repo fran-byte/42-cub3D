@@ -1,2 +1,2 @@
 # cub3D
-Proyecto 42 cube3D
+Proyecto 42 cub3D
