@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/05 11:52:28 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/06 17:27:40 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct s_map
 	char **map;
 	// int width;
 	// int height;
-	int player_x;
-	int player_y;
+	// int player_x;
+	// int player_y;
 	t_sprites sprites;
 
 } t_map;
@@ -62,8 +62,7 @@ typedef struct s_game
 	t_map map;
 	void *mlx;
 	void *window;
-	int moves;
-	int game_over;
+	// int game_over;
 } t_game;
 
 int report_err(char *str);
