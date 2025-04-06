@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/04/04 20:38:27 by frromero         ###   ########.fr        #
+#    Updated: 2025/04/05 11:51:13 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ INC_DIR		:= include
 
 # External libraries directories
 LIBFT_DIR	:= libft       # Libft library
-MLX_DIR		:= mlx         # MinilibX library
+MLX_DIR =	minilibx-linux
 
 # ====================================================== #
 #                  COMPILATION FLAGS                     #
@@ -50,9 +50,9 @@ DEBUG_FLAGS	:= -g3			# Generate debug information (level 3)
 OPTIM_FLAGS	:= -O3			# Maximum optimization level
 
 # Warning flags
-WARN_FLAGS	:= -Wall		# Enable all warnings
-WARN_FLAGS	+= -Wextra		# Enable extra warnings
-WARN_FLAGS	+= -Werror		# Treat warnings as errors
+#WARN_FLAGS	:= -Wall		# Enable all warnings
+#WARN_FLAGS	+= -Wextra		# Enable extra warnings
+#WARN_FLAGS	+= -Werror		# Treat warnings as errors
 
 # Include paths for header files
 INC_FLAGS	:= -I$(INC_DIR)			# Project headers
@@ -71,18 +71,14 @@ UNAME := $(shell uname)
 
 # macOS configuration
 ifeq ($(UNAME), Darwin)
-	LIBS    := -L$(MLX_DIR) -lmlx				# MinilibX library path
-	LIBS    += -framework OpenGL				# OpenGL framework (macOS)
-	LIBS    += -framework AppKit				# AppKit framework (macOS)
-	LIBS    += -lm								# Math library
-	MLX_LIB := libmlx.dylib						# MinilibX library name
+	LIBS    := -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx
+	LIBS    += -framework OpenGL -framework AppKit -lm
+	MLX_LIB := libmlx.dylib
 # Linux configuration
 else
-	LIBS    := -L$(MLX_DIR) -lmlx				# MinilibX library path
-	LIBS    += -lX11							# X11 library (Linux)
-	LIBS    += -lXext							# X extensions library
-	LIBS    += -lm								# Math library
-	MLX_LIB := libmlx.a							# MinilibX library name
+	LIBS    := -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx
+	LIBS    += -lX11 -lXext -lm
+	MLX_LIB := libmlx.a
 endif
 
 # ====================================================== #
@@ -91,9 +87,12 @@ endif
 
 # List all source files with their relative paths
 SRCS := \
-	$(SRC_DIR)/main/cub3d.c \					# Main game file
-
-
+	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/errors/error.c \
+	$(SRC_DIR)/parse/parse.c \
+	$(SRC_DIR)/parse/parse_map.c \
+	$(SRC_DIR)/debugging/print_grid.c \
+	$(SRC_DIR)/exit/free.c
 
 
 # Generate object files list by replacing .c with .o and src with obj
@@ -108,25 +107,25 @@ all: $(NAME)
 
 # Main build rule - links everything together
 $(NAME): $(MLX_LIB) $(LIBFT_DIR)/libft.a $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)/libft.a $(LIBS) -o $(NAME)
-	@echo "\033[32m✔ $(NAME) compiled successfully\033[0m"
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+	@echo "\033[32m✔ $(NAME)    → compiled successfully\033[0m"
 
 # Rule to compile each source file into object file
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@$(MKDIR) $(dir $@)							# Create directory structure
-	@$(CC) $(CFLAGS) -c $< -o $@				# Compile source to object
-	@echo "\033[34m● Compiling:\033[0m $<"		# Print compilation status
+	@$(MKDIR) $(dir $@)					# Create directory structure
+	@$(CC) $(CFLAGS) -c $< -o $@ -s		# Compile source to object
+
 
 # Rule to build libft library
 $(LIBFT_DIR)/libft.a:
 	@$(MAKE) -C $(LIBFT_DIR) --silent			# Build libft silently
-	@echo "\033[32m✔ libft compiled\033[0m"		# Print success message
+	@echo "\033[32m✔ libft    → compiled successfully\033[0m"		# Print success message
 
 # Rule to build MinilibX library
 $(MLX_LIB):
 	@$(MAKE) -C $(MLX_DIR) --silent				# Build MinilibX silently
 	@cp $(MLX_DIR)/$(MLX_LIB) .					# Copy library to root
-	@echo "\033[32m✔ MinilibX compiled\033[0m"	# Print success message
+	@echo "\033[32m✔ MinilibX → compiled successfully\033[0m"	# Print success message
 
 # Clean rule - removes object files
 clean:

@@ -29,7 +29,7 @@ SRC =	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 		ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c \
 		get_next_line_bonus.c get_next_line.c get_next_line_utils_bonus.c \
-		get_next_line_utils.c 
+		get_next_line_utils.c
 
 
 # objects
@@ -41,7 +41,7 @@ all: ${NAME}
 # create the library from object files
 ${NAME}: ${OBJ}
 	@${AR} ${NAME} ${OBJ}
-	@echo "\n✨ library libft created ✨\n"
+#@echo "\n✨ library libft created ✨\n"
 
 # compile source files into object files
 %.o: %.c
