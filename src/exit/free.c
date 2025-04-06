@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 11:32:33 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/06 18:25:17 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/06 21:51:24 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ void free_map(t_map *map)
 {
 	if (map != NULL)
 	{
-		// Liberar raw_map si existe
-		if (map->raw_map != NULL && map->raw_map_height > 0)
+		if (map->map_file != NULL && map->height_file > 0)
 		{
-			free_char_matrix(map->raw_map, map->raw_map_height);
+			free_char_matrix(map->map_file, map->height_file);
 		}
-		if (map->map != NULL && map->map_height > 0)
+		if (map->map != NULL && map->height_map > 0)
 		{
-			free_char_matrix(map->map, map->map_height);
+			free_char_matrix(map->map, map->height_map);
 		}
 
 		// Si `t_sprites` necesitan liberación, hacerlo aquí

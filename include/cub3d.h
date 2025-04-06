@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/06 17:27:40 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/06 20:24:06 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef struct s_sprites
 } t_sprites;
 typedef struct s_map
 {
-	char **raw_map;
-	int raw_map_height;
-	int map_height;
+	char **map_file;
+	int height_file;
 	char **map;
+	int height_map;
 	// int width;
 	// int height;
 	// int player_x;
@@ -66,9 +66,10 @@ typedef struct s_game
 } t_game;
 
 int report_err(char *str);
-int parse_arg(char *arg, t_game *data);
-int load_map(char *arg, t_game *data);
+void parse_arg(char *arg, t_game *data);
+void load_map(char *arg, t_game *data);
 void free_function(t_game *data);
 void print_map_grid(char **grid, int height);
 int open_file(char *arg);
+void extract_map_data(t_game *data);
 #endif

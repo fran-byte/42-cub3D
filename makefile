@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/04/06 16:20:07 by frromero         ###   ########.fr        #
+#    Updated: 2025/04/06 20:23:28 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,8 +90,9 @@ SRCS := \
 	$(SRC_DIR)/main.c \
 	$(SRC_DIR)/errors/error.c \
 	$(SRC_DIR)/parse/parse.c \
-	$(SRC_DIR)/parse/parse_map.c \
+	$(SRC_DIR)/parse/extract_map.c \
 	$(SRC_DIR)/debugging/print_grid.c \
+	$(SRC_DIR)/utils/utils.c \
 	$(SRC_DIR)/exit/free.c
 
 
@@ -127,10 +128,16 @@ $(MLX_LIB):
 	@cp $(MLX_DIR)/$(MLX_LIB) .					# Copy library to root
 	@echo "\033[32m✔ MinilibX → compiled successfully\033[0m"	# Print success message
 
-# Rule to run the project with Valgrind
+# Rule to run the project with Valgrind (ok map)
 valgrind: $(NAME)
 	@echo "\033[33m✔ Running with Valgrind...\033[0m"
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./$(NAME) maps/ok/1.cub
+
+# Rule to run the project with Valgrind (ko map)
+valgrind_e: $(NAME)
+	@echo "\033[33m✔ Running with Valgrind...\033[0m"
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./$(NAME) maps/ok/1.cu
+
 
 # Clean rule - removes object files
 clean:
