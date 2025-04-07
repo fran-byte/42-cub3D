@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 19:40:40 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/06 21:19:52 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:03:27 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void parse_orientation(t_game *data)
 		if (!valid)
 		{
 			report_err(MAP_FORMAT);
+			free_function(data);
 			exit(EXIT_FAILURE);
 		}
 		i++;

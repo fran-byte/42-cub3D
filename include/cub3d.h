@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/06 20:24:06 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:36:45 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ void parse_arg(char *arg, t_game *data);
 void load_map(char *arg, t_game *data);
 void free_function(t_game *data);
 void print_map_grid(char **grid, int height);
-int open_file(char *arg);
+int open_file(char *arg, t_game *data);
 void extract_map_data(t_game *data);
 #endif
