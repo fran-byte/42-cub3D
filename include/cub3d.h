@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/07 16:36:45 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:32:44 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 #define OPEN_FILE_ERR "Map File error"
 #define MALLOC_ERR "Map File error"
 #define MAP_FORMAT "Invalid map format"
+#define ORIENTATION "Invalid Orientation format"
+#define TEXTURE_FILE "The texture file does not exist or is not accessible"
 
 /* STRUCTURES */
 
@@ -45,7 +47,7 @@ typedef struct s_sprites
 } t_sprites;
 typedef struct s_map
 {
-	char **map_file;
+	char **file;
 	int height_file;
 	char **map;
 	int height_map;
@@ -67,9 +69,9 @@ typedef struct s_game
 
 int report_err(char *str);
 void parse_arg(char *arg, t_game *data);
-void load_map(char *arg, t_game *data);
+void load_file(char *arg, t_game *data);
 void free_function(t_game *data);
 void print_map_grid(char **grid, int height);
 int open_file(char *arg, t_game *data);
-void extract_map_data(t_game *data);
+void parse_orientation(t_game *data);
 #endif

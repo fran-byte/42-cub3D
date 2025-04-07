@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 11:38:02 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/07 17:00:03 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:35:59 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void print_map_grid(char **grid, int height)
 	while (i < height)
 	{
 		if (grid[i])
-			printf("%s", grid[i]);
+			printf("%s\n", grid[i]);
 		else
 			printf("(null)\n");
 		i++;

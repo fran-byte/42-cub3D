@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 11:32:33 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/06 21:51:24 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:08:20 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void free_map(t_map *map)
 {
 	if (map != NULL)
 	{
-		if (map->map_file != NULL && map->height_file > 0)
+		if (map->file != NULL && map->height_file > 0)
 		{
-			free_char_matrix(map->map_file, map->height_file);
+			free_char_matrix(map->file, map->height_file);
 		}
 		if (map->map != NULL && map->height_map > 0)
 		{

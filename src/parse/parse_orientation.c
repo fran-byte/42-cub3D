@@ -1,23 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_map.c                                      :+:      :+:    :+:   */
+/*   parse_orientation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 19:40:40 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/07 17:05:24 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:43:26 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static void parse_orientation(t_game *data)
+static void parse_path_orientation(t_game *data)
+{
+	char **path_block;
+	int i;
+
+	i = 0;
+	path_block = data->map.file;
+	while (i < 4)
+	{
+		if (strlen(path_block[i]) < 3)
+		{
+			report_err(TEXTURE_FILE);
+			free_function(data);
+			exit(EXIT_FAILURE);
+		}
+		if (access((path_block[i] + 3), R_OK) != 0)
+		{
+			report_err(TEXTURE_FILE);
+			free_function(data);
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
+}
+
+static void parse_cardinals(t_game *d)
 {
 	int i;
 	int j;
 	int valid;
-	const char *prefixes[] = {"NO", "SO", "WE", "EA"};
+	const char *p[] = {"NO", "SO", "WE", "EA"};
 
 	i = 0;
 	valid = 1;
@@ -27,22 +52,21 @@ static void parse_orientation(t_game *data)
 		valid = 0;
 		while (++j < 4 && !valid)
 		{
-			if (data->map.map_file[i][0] == prefixes[j][0] && data->map.map_file[i][1] == prefixes[j][1] && (data->map.map_file[i][2] == ' ' || data->map.map_file[i][2] == '\t'))
+			if (d->map.file[i][0] == p[j][0] && d->map.file[i][1] == p[j][1] && (d->map.file[i][2] == ' ' || d->map.file[i][2] == '\t'))
 				valid = 1;
 		}
 		if (!valid)
 		{
-			report_err(MAP_FORMAT);
-			free_function(data);
+			report_err(ORIENTATION);
+			free_function(d);
 			exit(EXIT_FAILURE);
 		}
 		i++;
 	}
 }
 
-void extract_map_data(t_game *data)
+void parse_orientation(t_game *data)
 {
-	parse_orientation(data);
-	// parse_color(data);
-	// parse_map(data);
+	parse_cardinals(data);
+	parse_path_orientation(data);
 }

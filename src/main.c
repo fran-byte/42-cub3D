@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:17:52 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/07 17:01:19 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:08:20 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void init_game(t_game *data)
 {
 	data->mlx = NULL;
 	data->window = NULL;
-	data->map.map_file = NULL;
+	data->map.file = NULL;
 	data->map.map = NULL;
 	data->map.height_map = 0;
 	data->map.height_file = 0;
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 		return (report_err(SYNTAX_ERR), 1);
 	init_game(&data);
 	parse_arg(argv[1], &data);
-	print_map_grid(data.map.map_file, data.map.height_file);
+	print_map_grid(data.map.file, data.map.height_file);
 	free_function(&data);
 	return (0);
 }
