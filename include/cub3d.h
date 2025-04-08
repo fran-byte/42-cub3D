@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/08 10:36:35 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:04:29 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,6 @@ void print_map_grid(char **grid, int height);
 int open_file(char *arg, t_game *data);
 void parse_orientation(t_game *data);
 void free_split(char **grid_color);
+void parse_colors(t_game *data);
+
 #endif
