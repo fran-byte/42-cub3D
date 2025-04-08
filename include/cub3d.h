@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/07 19:32:44 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:46:30 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 #define MAP_FORMAT "Invalid map format"
 #define ORIENTATION "Invalid Orientation format"
 #define TEXTURE_FILE "The texture file does not exist or is not accessible"
-
+#define FORMAT_COLOR "Format Color Error"
 /* STRUCTURES */
 
 typedef struct s_sprites
