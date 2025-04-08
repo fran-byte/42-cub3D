@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 23:43:36 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/07 19:44:03 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/08 19:32:02 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void fill_file_grid(char *arg, t_game *data)
 	fd = open_file(arg, data);
 	i = 0;
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line != NULL && i < data->map.height_file)
 	{
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
@@ -92,4 +92,5 @@ void parse_arg(char *arg, t_game *data)
 	load_file(arg, data);
 	parse_orientation(data);
 	parse_colors(data);
+	parse_map(data);
 }

@@ -6,65 +6,86 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 09:37:27 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/08 12:07:08 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/08 19:17:39 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int ft_array_size(char **array)
-{
-	int count;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_colors.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 09:37:27 by frromero          #+#    #+#             */
+/*   Updated: 2025/04/08 17:25:03 by frromero         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-	count = 0;
-	while (array && array[count])
-		count++;
-	return (count);
+#include "../../include/cub3d.h"
+
+static void is_numeric_grid(t_game *data, char **grid_color)
+{
+	int i;
+
+	i = 0;
+	while (grid_color[i])
+	{
+		if (!is_numeric(grid_color[i]))
+		{
+			free_split(grid_color);
+			report_err(FORMAT_COLOR);
+			free_function(data);
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
+}
+
+static void exit_error_color(t_game *data, char **grid)
+{
+	if (grid)
+		free_split(grid);
+	report_err(FORMAT_COLOR);
+	free_function(data);
+	exit(EXIT_FAILURE);
+}
+
+static void parse_color_line(t_game *data, char *line)
+{
+	char **rgb;
+	int r;
+	int g;
+	int b;
+
+	r = 0;
+	g = 0;
+	b = 0;
+	rgb = ft_split(line + 2, ',');
+	if (!rgb || ft_array_size(rgb) != 3)
+		exit_error_color(data, rgb);
+	is_numeric_grid(data, rgb);
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		exit_error_color(data, rgb);
+	free_split(rgb);
 }
 
 void parse_colors(t_game *data)
 {
-	int i;
-	int j;
-	char **grid_color;
-	int valor;
 
-	if (!data->map.file[5] || !data->map.file[6] ||
-		(ft_strlen(data->map.file[5]) < 4 || ft_strlen(data->map.file[6]) < 4) ||
-		!((data->map.file[5][0] == 'C' && data->map.file[6][0] == 'F') ||
-		  (data->map.file[5][0] == 'F' && data->map.file[6][0] == 'C')))
-	{
-		report_err(FORMAT_COLOR);
-		free_function(data);
-		exit(EXIT_FAILURE);
-	}
-
-	i = 5;
-	while (i < 7)
-	{
-		grid_color = ft_split(data->map.file[i] + 2, ',');
-		if (!grid_color || ft_array_size(grid_color) != 3)
-		{
-			report_err(FORMAT_COLOR);
-			free_split(grid_color);
-			free_function(data);
-			exit(EXIT_FAILURE);
-		}
-
-		j = 0;
-		while (j < 3)
-		{
-			valor = ft_atoi(grid_color[j]);
-			if (valor < 0 || valor > 255)
-			{
-				report_err(FORMAT_COLOR);
-				free_split(grid_color);
-				free_function(data);
-				exit(EXIT_FAILURE);
-			}
-			j++;
-		}
-		free_split(grid_color);
-		i++;
-	}
+	if (!data->map.file[5] || !data->map.file[6])
+		exit_error_color(data, NULL);
+	if (data->map.file[5][0] == 'C' && data->map.file[6][0] == 'F' && data->map.file[6][1] == ' ')
+		parse_color_line(data, data->map.file[6]);
+	else if (data->map.file[5][0] == 'F' && data->map.file[6][0] == 'C' && data->map.file[6][1] == ' ')
+		parse_color_line(data, data->map.file[6]);
+	else
+		exit_error_color(data, NULL);
+	if ((count_char_in_str(data->map.file[5] + 2, ',') > 2) || (count_char_in_str(data->map.file[6] + 2, ',') > 2))
+		exit_error_color(data, NULL);
 }

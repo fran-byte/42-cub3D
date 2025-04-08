@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:17:52 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/07 17:08:20 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:29:48 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int main(int argc, char **argv)
 	init_game(&data);
 	parse_arg(argv[1], &data);
 	print_map_grid(data.map.file, data.map.height_file);
+	print_map_grid(data.map.map, data.map.height_map);
 	free_function(&data);
 	return (0);
 }

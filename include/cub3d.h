@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/08 11:04:29 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/08 19:21:46 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@
 #define OPEN_FILE_ERR "Map File error"
 #define MALLOC_ERR "Map File error"
 #define MAP_FORMAT "Invalid map format"
-#define ORIENTATION "Invalid Orientation format"
+#define MAP_VOID "Invalid (void) map format"
+#define ORIENTATION "Invalid orientation format (valid: NO textures/wall_1.xpm)"
 #define TEXTURE_FILE "The texture file does not exist or is not accessible"
-#define FORMAT_COLOR "Format Color Error"
+#define FORMAT_COLOR "Invalid color format (valid example: C 255,128,0)"
 /* STRUCTURES */
 
 typedef struct s_sprites
@@ -51,10 +52,8 @@ typedef struct s_map
 	int height_file;
 	char **map;
 	int height_map;
-	// int width;
-	// int height;
-	// int player_x;
-	// int player_y;
+	int celing_color;
+	int floor_color;
 	t_sprites sprites;
 
 } t_map;
@@ -76,5 +75,9 @@ int open_file(char *arg, t_game *data);
 void parse_orientation(t_game *data);
 void free_split(char **grid_color);
 void parse_colors(t_game *data);
+int is_numeric(const char *str);
+int count_char_in_str(const char *str, char c);
+void parse_map(t_game *data);
+int ft_array_size(char **array);
 
 #endif

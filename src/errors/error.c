@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:46:15 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/05 00:11:10 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:55:33 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int report_err(char *str)
 {
-	printf("cub3D: Error\n%s\n", str);
+	printf("Error\n%s\n", str);
 	return (1);
 }
