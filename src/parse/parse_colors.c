@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 09:37:27 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/08 10:23:39 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:34:46 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ void parse_colors(t_game *data)
 			if (valor > 255 || valor < 0 || grid_color[3])
 			{
 				report_err(FORMAT_COLOR);
-				// free_color_split(grid_color);
+				free_split(grid_color);
 				free_function(data);
 				exit(EXIT_FAILURE);
 			}
+			free_split(grid_color);
 			j++;
 		}
 		i++;
