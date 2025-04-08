@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 23:43:36 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/08 19:32:02 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/08 22:24:55 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void fill_file_grid(char *arg, t_game *data)
 		line = get_next_line(fd);
 		i++;
 	}
+	// data->map.file[i] = NULL;
 	close(fd);
 }
 
@@ -66,7 +67,7 @@ void load_file(char *arg, t_game *data)
 
 	fd = open_file(arg, data);
 	get_height_map(fd, data);
-	data->map.file = malloc(sizeof(char *) * data->map.height_file);
+	data->map.file = malloc(sizeof(char *) * data->map.height_file + 1);
 	if (!data->map.file)
 	{
 		report_err(MALLOC_ERR);

@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:19:35 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/08 19:32:12 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/08 22:27:27 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,29 @@ static int calculate_map_height(t_game *data)
 	int height;
 	char **lines;
 
-	lines = data->map.file + 8;
 	height = 0;
 	if (!data->map.file || !data->map.file[8])
 		return (0);
-	while (lines[height] != NULL && lines[height][0] != '\0')
+	lines = data->map.file + 8;
+	while (lines[height] != NULL)
+	{
+		printf("****DEBUGGER*********   lines[height] = %s   height = %d\n", lines[height], height);
 		height++;
+	}
+
 	return (height);
 }
 
-static char **extract_map_lines(t_game *data, int height)
+static char **extract_map_lines(t_game *data)
 {
 	char **map;
 	int i;
 
 	i = 0;
-	map = (char **)malloc(sizeof(char *) * (height + 1));
+	map = (char **)malloc(sizeof(char *) * (data->map.height_map + 1));
 	if (!map)
 		return (NULL);
-	while (i < height)
+	while (i < data->map.height_map)
 	{
 		map[i] = ft_strdup(data->map.file[8 + i]);
 		if (!map[i])
@@ -45,7 +49,7 @@ static char **extract_map_lines(t_game *data, int height)
 		}
 		i++;
 	}
-	map[height] = NULL;
+	// map[height] = NULL;
 	return (map);
 }
 
@@ -58,7 +62,8 @@ void parse_map(t_game *data)
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
-	data->map.map = extract_map_lines(data, data->map.height_map);
+	printf("********* %d", data->map.height_map);
+	data->map.map = extract_map_lines(data);
 	if (!data->map.map)
 	{
 		report_err(MAP_VOID);

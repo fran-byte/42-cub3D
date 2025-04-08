@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 11:38:02 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/07 19:35:59 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/08 19:44:06 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void print_map_grid(char **grid, int height)
 		return;
 	}
 	printf("\n=========== DEBUGGUER ==============");
-	printf("\n======== MAP or MAP(RAW)  ==========\n\n");
+	printf("\n======== FILE or MAP  ==============\n\n");
 	while (i < height)
 	{
 		if (grid[i])
