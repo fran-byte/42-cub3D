@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:17:52 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/08 21:06:21 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:20:38 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void init_game(t_game *data)
 	data->map.sprites.su = NULL;
 	data->map.sprites.we = NULL;
 	data->map.sprites.ea = NULL;
+	data->player.player_x = -1;
+	data->player.player_y = -1;
 }
 
 int main(int argc, char **argv)

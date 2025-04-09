@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/08 19:21:46 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:09:01 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 #define ORIENTATION "Invalid orientation format (valid: NO textures/wall_1.xpm)"
 #define TEXTURE_FILE "The texture file does not exist or is not accessible"
 #define FORMAT_COLOR "Invalid color format (valid example: C 255,128,0)"
+#define MAP_ITENS "Invalid (ITEMS) map format"
+
 /* STRUCTURES */
 
 typedef struct s_sprites
@@ -46,6 +48,22 @@ typedef struct s_sprites
 	void *we;
 	void *ea;
 } t_sprites;
+
+typedef enum e_orientation
+{
+	EAST,
+	WEST,
+	NORTH,
+	SOUTH
+} t_orientation;
+
+typedef struct s_player
+{
+	int player_x;
+	int player_y;
+	t_orientation player_orinetation;
+} t_player;
+
 typedef struct s_map
 {
 	char **file;
@@ -63,6 +81,7 @@ typedef struct s_game
 	t_map map;
 	void *mlx;
 	void *window;
+	t_player player;
 	// int game_over;
 } t_game;
 
@@ -79,5 +98,7 @@ int is_numeric(const char *str);
 int count_char_in_str(const char *str, char c);
 void parse_map(t_game *data);
 int ft_array_size(char **array);
+void parse_items_map(t_game *data);
+// void parse_validate_map(t_game *data);
 
 #endif
