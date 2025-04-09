@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 19:53:07 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:35:07 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_game
 	// int game_over;
 } t_game;
 
+// Functions
 int report_err(char *str);
 void parse_arg(char *arg, t_game *data);
 void load_file(char *arg, t_game *data);
