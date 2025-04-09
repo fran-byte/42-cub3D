@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:19:35 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 08:04:15 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/09 08:26:56 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int calculate_map_height(t_game *data)
 	if (!data->map.file || !data->map.file[8])
 		return (0);
 	lines = data->map.file + 8;
-	while (lines != NULL && *lines != NULL) // Recorre el array de punteros a las líneas del mapa
+	while (lines != NULL && *lines != NULL)
 	{
 		lines++;
 		height++;
@@ -61,7 +61,6 @@ void parse_map(t_game *data)
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
-	printf("****height**** %d", data->map.height_map);
 	data->map.map = extract_map_lines(data);
 	if (!data->map.map)
 	{
