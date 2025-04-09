@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 23:43:36 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/08 22:24:55 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/09 08:19:42 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void util_exit_fill_file_grid(int fd, t_game *data)
 	free_function(data);
 	exit(EXIT_FAILURE);
 }
+
 static void fill_file_grid(char *arg, t_game *data)
 {
 	char *line;
@@ -29,20 +30,24 @@ static void fill_file_grid(char *arg, t_game *data)
 	fd = open_file(arg, data);
 	i = 0;
 	line = get_next_line(fd);
+
 	while (line != NULL && i < data->map.height_file)
 	{
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
+
 		data->map.file[i] = malloc(len + 1);
 		if (!data->map.file[i])
 			util_exit_fill_file_grid(fd, data);
+
 		ft_strlcpy(data->map.file[i], line, len + 1);
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
-	// data->map.file[i] = NULL;
+
+	data->map.file[i] = NULL;
 	close(fd);
 }
 
@@ -52,22 +57,26 @@ void get_height_map(int fd, t_game *data)
 
 	data->map.height_file = 0;
 	line = get_next_line(fd);
+
 	while (line != NULL)
 	{
 		data->map.height_file++;
 		free(line);
 		line = get_next_line(fd);
 	}
+
 	close(fd);
 }
 
 void load_file(char *arg, t_game *data)
 {
 	int fd;
+	int i;
 
 	fd = open_file(arg, data);
 	get_height_map(fd, data);
-	data->map.file = malloc(sizeof(char *) * data->map.height_file + 1);
+
+	data->map.file = malloc(sizeof(char *) * (data->map.height_file + 1));
 	if (!data->map.file)
 	{
 		report_err(MALLOC_ERR);
@@ -75,8 +84,15 @@ void load_file(char *arg, t_game *data)
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
+
+	i = 0;
+	while (i <= data->map.height_file)
+	{
+		data->map.file[i] = NULL;
+		i++;
+	}
+
 	fill_file_grid(arg, data);
-	close(fd);
 }
 
 void parse_arg(char *arg, t_game *data)
@@ -90,6 +106,7 @@ void parse_arg(char *arg, t_game *data)
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
+
 	load_file(arg, data);
 	parse_orientation(data);
 	parse_colors(data);
