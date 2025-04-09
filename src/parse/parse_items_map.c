@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:08:51 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 10:23:37 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/09 12:21:55 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void count_and_store_items(t_game *data, int *player)
 		x = 0;
 		while (x < line_len)
 		{
-			if (data->map.map[y][x] != 'W' && data->map.map[y][x] != 'E' && data->map.map[y][x] != 'S' && data->map.map[y][x] != 'N' && data->map.map[y][x] != '0' && data->map.map[y][x] != '1')
+			if (data->map.map[y][x] != 'W' && data->map.map[y][x] != 'E' && data->map.map[y][x] != 'S' && data->map.map[y][x] != 'N' && data->map.map[y][x] != '0' && data->map.map[y][x] != '1' && data->map.map[y][x] != ' ' && data->map.map[y][x] != '\t')
 			{
 				report_err(MAP_ITENS);
 				free_function(data);
