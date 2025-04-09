@@ -6,13 +6,39 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 11:32:33 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/07 17:08:20 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:14:11 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-// Función para liberar las matrices de caracteres usando while
+// Liberar paths de texturas
+static void free_texture_paths(t_game *data)
+{
+
+	if (data->map.paths.north)
+	{
+		free(data->map.paths.north);
+		data->map.paths.north = NULL;
+	}
+	if (data->map.paths.south)
+	{
+		free(data->map.paths.south);
+		data->map.paths.south = NULL;
+	}
+	if (data->map.paths.west)
+	{
+		free(data->map.paths.west);
+		data->map.paths.west = NULL;
+	}
+	if (data->map.paths.east)
+	{
+		free(data->map.paths.east);
+		data->map.paths.east = NULL;
+	}
+}
+
+// liberar las matrices de caracteres
 void free_char_matrix(char **matrix, int height)
 {
 	if (matrix != NULL)
@@ -30,7 +56,7 @@ void free_char_matrix(char **matrix, int height)
 	}
 }
 
-// Función para liberar la estructura t_map
+// liberar la estructura t_map
 void free_map(t_map *map)
 {
 	if (map != NULL)
@@ -44,16 +70,17 @@ void free_map(t_map *map)
 			free_char_matrix(map->map, map->height_map);
 		}
 
-		// Si `t_sprites` necesitan liberación, hacerlo aquí
+		// Si t_sprites necesitan liberación, hacerlo aquí
 	}
 }
 
-// Liberando estructura t_game
-void free_function(t_game *game)
+// Liberando estructura t_game, map, texture_paths
+void free_function(t_game *data)
 {
-	if (game != NULL)
+	if (data != NULL)
 	{
-		free_map(&game->map);
+		free_map(&data->map);
+		free_texture_paths(data);
 
 		// Liberar otros miembros de t_game (como mlx, window, etc.)
 		// if (game->mlx != NULL)

@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 10:09:01 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/09 19:53:07 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 #define TEXTURE_FILE "The texture file does not exist or is not accessible"
 #define FORMAT_COLOR "Invalid color format (valid example: C 255,128,0)"
 #define MAP_ITENS "Invalid (ITEMS) map format"
+#define MAP_NOT_PLAYABLE "Map in not playable"
 
 /* STRUCTURES */
 
@@ -64,6 +65,14 @@ typedef struct s_player
 	t_orientation player_orinetation;
 } t_player;
 
+typedef struct s_paths // los paths del fichero
+{
+	char *north;
+	char *south;
+	char *west;
+	char *east;
+} t_paths;
+
 typedef struct s_map
 {
 	char **file;
@@ -72,6 +81,7 @@ typedef struct s_map
 	int height_map;
 	int celing_color;
 	int floor_color;
+	t_paths paths;
 	t_sprites sprites;
 
 } t_map;
@@ -99,6 +109,8 @@ int count_char_in_str(const char *str, char c);
 void parse_map(t_game *data);
 int ft_array_size(char **array);
 void parse_items_map(t_game *data);
-// void parse_validate_map(t_game *data);
+void parse_validate_map(t_game *data);
+void free_grid(char **grid, int height);
+char **duplicate_grid(char **grid, int height);
 
 #endif

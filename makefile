@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/04/09 09:09:25 by frromero         ###   ########.fr        #
+#    Updated: 2025/04/09 19:55:17 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,7 @@ SRCS := \
 	$(SRC_DIR)/parse/parse_validate_map.c \
 	$(SRC_DIR)/debugging/print_grid.c \
 	$(SRC_DIR)/utils/utils.c \
+	$(SRC_DIR)/utils/utils_2.c \
 	$(SRC_DIR)/exit/free.c
 
 
@@ -140,7 +141,7 @@ valgrind: $(NAME)
 # Rule to run the project with Valgrind (ko map)
 valgrind_e: $(NAME)
 	@echo "\033[33m✔ Running with Valgrind...\033[0m"
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./$(NAME) maps/ok/1.cu
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./$(NAME) maps/nok/1e.cub
 
 
 # Clean rule - removes object files
