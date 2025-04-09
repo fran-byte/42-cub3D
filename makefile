@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/04/08 18:20:07 by frromero         ###   ########.fr        #
+#    Updated: 2025/04/09 09:09:25 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,6 +93,8 @@ SRCS := \
 	$(SRC_DIR)/parse/parse_orientation.c \
 	$(SRC_DIR)/parse/parse_colors.c \
 	$(SRC_DIR)/parse/parse_map.c \
+	$(SRC_DIR)/parse/parse_items_map.c \
+	$(SRC_DIR)/parse/parse_validate_map.c \
 	$(SRC_DIR)/debugging/print_grid.c \
 	$(SRC_DIR)/utils/utils.c \
 	$(SRC_DIR)/exit/free.c
