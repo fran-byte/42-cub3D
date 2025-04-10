@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:50:04 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/10 19:22:42 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:37:12 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static void elements_and_file(t_game *data, int *elem, int *i)
 	}
 	while (data->map.file[*i] && is_empty_line(data->map.file[*i]))
 		*i += 1;
-
 	if (!data->map.file[*i])
 	{
 		report_err(MAP_VOID_ERR);

@@ -6,13 +6,13 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:08:51 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/10 16:49:08 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:50:02 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static void add_ORIENTATION_ERR(t_game *data, int *x, int *y)
+static void add_orientation(t_game *data, int *x, int *y, int *player)
 {
 	data->player.player_x = *x;
 	data->player.player_y = *y;
@@ -24,8 +24,15 @@ static void add_ORIENTATION_ERR(t_game *data, int *x, int *y)
 		data->player.player_orinetation = NORTH;
 	else if (data->map.map[*y][*x] == 'S')
 		data->player.player_orinetation = SOUTH;
+	*player += 1;
 }
 
+static void error_items(t_game *data)
+{
+	report_err(MAP_ITENS_ERR);
+	free_function(data);
+	exit(EXIT_FAILURE);
+}
 static void count_and_store_items(t_game *data, int *player)
 {
 	int x;
@@ -40,16 +47,9 @@ static void count_and_store_items(t_game *data, int *player)
 		while (x < line_len)
 		{
 			if (data->map.map[y][x] != 'W' && data->map.map[y][x] != 'E' && data->map.map[y][x] != 'S' && data->map.map[y][x] != 'N' && data->map.map[y][x] != '0' && data->map.map[y][x] != '1' && data->map.map[y][x] != ' ' && data->map.map[y][x] != '\t')
-			{
-				report_err(MAP_ITENS_ERR);
-				free_function(data);
-				exit(EXIT_FAILURE);
-			}
+				error_items(data);
 			else if (data->map.map[y][x] == 'W' || data->map.map[y][x] == 'E' || data->map.map[y][x] == 'S' || data->map.map[y][x] == 'N')
-			{
-				add_ORIENTATION_ERR(data, &x, &y);
-				*player = *player + 1;
-			}
+				add_orientation(data, &x, &y, player);
 			x++;
 		}
 		y++;
