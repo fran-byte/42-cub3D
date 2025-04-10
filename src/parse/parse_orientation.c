@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_orientation.c                                :+:      :+:    :+:   */
+/*   parse_ORIENTATION_ERR.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -26,7 +26,7 @@ static void store_path(t_game *data, char *line, char **dest)
 	if (access(path, R_OK) != 0)
 	{
 		free(path);
-		report_err(TEXTURE_FILE);
+		report_err(TEXTURE_FILE_ERR);
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
@@ -45,18 +45,18 @@ static void parse_line(t_game *data, char *line)
 		store_path(data, line, &data->map.paths.east);
 	else
 	{
-		report_err(ORIENTATION);
+		report_err(ORIENTATION_ERR);
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
 }
 
-void parse_orientation(t_game *data)
+void parse_ORIENTATION_ERR(t_game *data)
 {
 	if (!data->map.file[0] || !data->map.file[1] ||
 		!data->map.file[2] || !data->map.file[3])
 	{
-		report_err(ORIENTATION);
+		report_err(ORIENTATION_ERR);
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
@@ -67,7 +67,7 @@ void parse_orientation(t_game *data)
 	if (!data->map.paths.north || !data->map.paths.south ||
 		!data->map.paths.west || !data->map.paths.east)
 	{
-		report_err(ORIENTATION);
+		report_err(ORIENTATION_ERR);
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}

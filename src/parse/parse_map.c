@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:19:35 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 19:29:18 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:48:27 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,19 @@ void parse_map(t_game *data)
 	data->map.height_map = calculate_map_height(data);
 	if (data->map.height_map == 0)
 	{
-		report_err(MAP_VOID);
+		report_err(MAP_VOID_ERR);
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
 	data->map.map = extract_map_lines(data);
 	if (!data->map.map)
 	{
-		report_err(MAP_VOID);
+		report_err(MAP_VOID_ERR);
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
 	parse_items_map(data);
 	parse_validate_map(data);
-	// store_orientation_sprites(data);
+	// store_ORIENTATION_ERR_sprites(data);
 	//  store_colors(data);
 }

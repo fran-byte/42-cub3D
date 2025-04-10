@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/10 16:45:59 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:49:54 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@
 #define SYNTAX_ERR "You must use this: ./cub3d <the_path/to/map.cub>"
 #define OPEN_FILE_ERR "Map File error"
 #define MALLOC_ERR "Malloc error"
-#define MAP_FORMAT "Invalid map format"
-#define MAP_VOID "Invalid (void) map format"
-#define ORIENTATION "Invalid orientation format (valid: NO textures/wall_1.xpm)"
-#define TEXTURE_FILE "The texture file does not exist or is not accessible"
-#define FORMAT_COLOR "Invalid color format (valid example: C 255,128,0)"
-#define MAP_ITENS "Invalid (ITEMS) map format"
-#define MAP_NOT_PLAYABLE "Map in not playable"
+#define MAP_FORMAT_ERR "Invalid map format"
+#define MAP_VOID_ERR "Invalid (void) map format"
+#define ORIENTATION_ERR "Invalid ORIENTATION_ERR format (valid: NO textures/wall_1.xpm)"
+#define TEXTURE_FILE_ERR "The texture file does not exist or is not accessible"
+#define FORMAT_COLOR_ERR "Invalid color format (valid example: C 255,128,0)"
+#define MAP_ITENS_ERR "Invalid (ITEMS) map format"
+#define MAP_PLAYABLE_ERR "Map in not playable"
 
 /* STRUCTURES */
 
@@ -50,19 +50,19 @@ typedef struct s_sprites
 	void *ea;
 } t_sprites;
 
-typedef enum e_orientation
+typedef enum e_ORIENTATION_ERR
 {
 	EAST,
 	WEST,
 	NORTH,
 	SOUTH
-} t_orientation;
+} t_ORIENTATION_ERR;
 
 typedef struct s_player
 {
 	double player_x;
 	double player_y;
-	t_orientation player_orinetation;
+	t_ORIENTATION_ERR player_orinetation;
 } t_player;
 
 typedef struct s_paths // los paths del fichero
@@ -103,7 +103,7 @@ void load_file(char *arg, t_game *data);
 void free_function(t_game *data);
 void print_map_grid(char **grid, int height);
 int open_file(char *arg, t_game *data);
-void parse_orientation(t_game *data);
+void parse_ORIENTATION_ERR(t_game *data);
 void free_split(char **grid_color);
 void parse_colors(t_game *data);
 int is_numeric(const char *str);

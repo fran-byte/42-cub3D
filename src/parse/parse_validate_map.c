@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 08:43:36 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/10 16:40:30 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:49:53 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void parse_validate_map(t_game *data)
 	free_grid(temp_grid, data->map.height_map);
 	if (!valid || !check_internal_spaces(data))
 	{
-		report_err(MAP_NOT_PLAYABLE);
+		report_err(MAP_PLAYABLE_ERR);
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}

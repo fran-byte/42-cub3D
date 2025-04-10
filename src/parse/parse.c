@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 23:43:36 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 08:19:42 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:48:27 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void parse_arg(char *arg, t_game *data)
 	}
 
 	load_file(arg, data);
-	parse_orientation(data);
+	parse_ORIENTATION_ERR(data);
 	parse_colors(data);
 	parse_map(data);
 }

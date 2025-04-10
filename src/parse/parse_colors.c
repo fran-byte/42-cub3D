@@ -24,7 +24,7 @@ static void is_numeric_grid(t_game *data, char **grid_color)
 		if (!is_numeric(grid_color[i]))
 		{
 			free_split(grid_color);
-			report_err(FORMAT_COLOR);
+			report_err(FORMAT_COLOR_ERR);
 			free_function(data);
 			exit(EXIT_FAILURE);
 		}
@@ -36,7 +36,7 @@ static void exit_error_color(t_game *data, char **grid)
 {
 	if (grid)
 		free_split(grid);
-	report_err(FORMAT_COLOR);
+	report_err(FORMAT_COLOR_ERR);
 	free_function(data);
 	exit(EXIT_FAILURE);
 }
