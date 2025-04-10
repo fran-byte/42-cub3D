@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/10 16:41:16 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:45:59 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 /* ERRORS */
 #define SYNTAX_ERR "You must use this: ./cub3d <the_path/to/map.cub>"
 #define OPEN_FILE_ERR "Map File error"
-#define MALLOC_ERR "Map File error"
+#define MALLOC_ERR "Malloc error"
 #define MAP_FORMAT "Invalid map format"
 #define MAP_VOID "Invalid (void) map format"
 #define ORIENTATION "Invalid orientation format (valid: NO textures/wall_1.xpm)"
