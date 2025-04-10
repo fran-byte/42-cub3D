@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:16:50 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 17:32:43 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:55:55 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,23 @@ char **duplicate_grid(char **grid, int height)
 		i++;
 	}
 	return (new_grid);
+}
+int ft_isspace(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' ||
+			c == '\v' || c == '\f' || c == '\r');
+}
+
+int is_empty_line(char *line)
+{
+	if (!line)
+		return (1);
+
+	while (*line)
+	{
+		if (!ft_isspace(*line))
+			return (0);
+		line++;
+	}
+	return (1);
 }

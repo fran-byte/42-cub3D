@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/04/10 16:50:55 by frromero         ###   ########.fr        #
+#    Updated: 2025/04/10 18:31:27 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,8 @@ SRCS := \
 	$(SRC_DIR)/main.c \
 	$(SRC_DIR)/errors/error.c \
 	$(SRC_DIR)/parse/parse.c \
-	$(SRC_DIR)/parse/parse_orientation.c \
+	$(SRC_DIR)/parse/parse_elements.c \
+	$(SRC_DIR)/parse/parse_store_map.c \
 	$(SRC_DIR)/parse/parse_colors.c \
 	$(SRC_DIR)/parse/parse_map.c \
 	$(SRC_DIR)/parse/parse_items_map.c \

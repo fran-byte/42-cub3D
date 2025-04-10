@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:17:52 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/10 16:41:20 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:58:55 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void init_game(t_game *data)
 	data->map.paths.south = NULL;
 	data->map.paths.east = NULL;
 	data->map.paths.west = NULL;
+	data->map.map_start_index = -1;
 }
 
 int main(int argc, char **argv)

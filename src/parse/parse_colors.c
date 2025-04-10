@@ -41,7 +41,7 @@ static void exit_error_color(t_game *data, char **grid)
 	exit(EXIT_FAILURE);
 }
 
-static void parse_color_line(t_game *data, char *line)
+void parse_color_line(t_game *data, char *line)
 {
 	char **rgb;
 	int r;

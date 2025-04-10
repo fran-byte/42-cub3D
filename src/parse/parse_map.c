@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:19:35 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/10 16:48:27 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:33:44 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int calculate_map_height(t_game *data)
 	return (height);
 }
 
-static char **extract_map_lines(t_game *data)
+static char **extract_map_lines(t_game *data, int start_index)
 {
 	char **map;
 	int i;
@@ -38,9 +38,10 @@ static char **extract_map_lines(t_game *data)
 	map = (char **)malloc(sizeof(char *) * (data->map.height_map + 1));
 	if (!map)
 		return (NULL);
+
 	while (i < data->map.height_map)
 	{
-		map[i] = ft_strdup(data->map.file[8 + i]);
+		map[i] = ft_strdup(data->map.file[start_index + i]);
 		if (!map[i])
 		{
 			free_split(map);
@@ -48,20 +49,27 @@ static char **extract_map_lines(t_game *data)
 		}
 		i++;
 	}
-	// map[height] = NULL;
+	map[i] = NULL;
 	return (map);
 }
 
 void parse_map(t_game *data)
 {
-	data->map.height_map = calculate_map_height(data);
+	int i;
+	int height;
+
+	height = 0;
+	i = data->map.map_start_index;
+	while (data->map.file[i + height])
+		height++;
+	data->map.height_map = height;
 	if (data->map.height_map == 0)
 	{
 		report_err(MAP_VOID_ERR);
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
-	data->map.map = extract_map_lines(data);
+	data->map.map = extract_map_lines(data, i);
 	if (!data->map.map)
 	{
 		report_err(MAP_VOID_ERR);
@@ -70,6 +78,4 @@ void parse_map(t_game *data)
 	}
 	parse_items_map(data);
 	parse_validate_map(data);
-	// store_ORIENTATION_ERR_sprites(data);
-	//  store_colors(data);
 }
