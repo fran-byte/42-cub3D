@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 20:35:07 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:41:16 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef enum e_orientation
 
 typedef struct s_player
 {
-	int player_x;
-	int player_y;
+	double player_x;
+	double player_y;
 	t_orientation player_orinetation;
 } t_player;
 
@@ -96,6 +96,7 @@ typedef struct s_game
 } t_game;
 
 // Functions
+
 int report_err(char *str);
 void parse_arg(char *arg, t_game *data);
 void load_file(char *arg, t_game *data);
@@ -114,4 +115,6 @@ void parse_validate_map(t_game *data);
 void free_grid(char **grid, int height);
 char **duplicate_grid(char **grid, int height);
 
+// debugguer/testing
+void testing(t_game *data);
 #endif

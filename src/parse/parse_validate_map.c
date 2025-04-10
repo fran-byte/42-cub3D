@@ -6,21 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 08:43:36 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 17:32:51 by frromero         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../../include/cub3d.h"
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_validate_map.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 08:43:36 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 10:01:42 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:40:30 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +22,9 @@ static void find_player_position(t_game *data, int *x, int *y)
 		{
 			if (ft_strchr("NSEW", data->map.map[*y][*x]))
 			{
-				data->player.player_x = *x;
-				data->player.player_y = *y;
+				data->player.player_x = (double)*x + 0.5; // Para que Raycasting funcione correctamente
+				data->player.player_y = (double)*y + 0.5;
+				data->map.map[*y][*x] = '0'; // borramos el caracter del jugador limpiando el mapa
 				return;
 			}
 			(*x)++;
