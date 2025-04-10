@@ -45,7 +45,7 @@ static void parse_line(t_game *data, char *line)
 		store_path(data, line, &data->map.paths.east);
 	else
 	{
-		report_err(ORIENTATION_ERR);
+		report_err(ORIENTATION_FILE_ERR);
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
@@ -56,7 +56,7 @@ void parse_ORIENTATION_ERR(t_game *data)
 	if (!data->map.file[0] || !data->map.file[1] ||
 		!data->map.file[2] || !data->map.file[3])
 	{
-		report_err(ORIENTATION_ERR);
+		report_err(ORIENTATION_FILE_ERR);
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}
@@ -67,7 +67,7 @@ void parse_ORIENTATION_ERR(t_game *data)
 	if (!data->map.paths.north || !data->map.paths.south ||
 		!data->map.paths.west || !data->map.paths.east)
 	{
-		report_err(ORIENTATION_ERR);
+		report_err(ORIENTATION_FILE_ERR);
 		free_function(data);
 		exit(EXIT_FAILURE);
 	}

@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/10 16:49:54 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:08:43 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 #define MALLOC_ERR "Malloc error"
 #define MAP_FORMAT_ERR "Invalid map format"
 #define MAP_VOID_ERR "Invalid (void) map format"
-#define ORIENTATION_ERR "Invalid ORIENTATION_ERR format (valid: NO textures/wall_1.xpm)"
+#define ORIENTATION_FILE_ERR "Invalid Orinetation format (valid: NO textures/wall_1.xpm)"
 #define TEXTURE_FILE_ERR "The texture file does not exist or is not accessible"
 #define FORMAT_COLOR_ERR "Invalid color format (valid example: C 255,128,0)"
 #define MAP_ITENS_ERR "Invalid (ITEMS) map format"
@@ -50,19 +50,19 @@ typedef struct s_sprites
 	void *ea;
 } t_sprites;
 
-typedef enum e_ORIENTATION_ERR
+typedef enum e_orientation
 {
 	EAST,
 	WEST,
 	NORTH,
 	SOUTH
-} t_ORIENTATION_ERR;
+} t_orientation;
 
 typedef struct s_player
 {
 	double player_x;
 	double player_y;
-	t_ORIENTATION_ERR player_orinetation;
+	t_orientation player_orinetation;
 } t_player;
 
 typedef struct s_paths // los paths del fichero
