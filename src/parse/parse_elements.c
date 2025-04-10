@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:50:04 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/10 19:14:18 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:22:42 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ static void elements_and_file(t_game *data, int *elem, int *i)
 	}
 	data->map.map_start_index = *i;
 }
+static void parse_error(t_game *data)
+{
+	report_err(ELEMENT_FORMAT_ERR);
+	free_function(data);
+	exit(EXIT_FAILURE);
+}
 
 void parse_elements(t_game *data)
 {
@@ -97,11 +103,7 @@ void parse_elements(t_game *data)
 			(!data->elem.north && !data->elem.south &&
 			 !data->elem.west && !data->elem.east &&
 			 !data->elem.floor && !data->elem.ceiling))
-		{
-			report_err(ELEMENT_FORMAT_ERR);
-			free_function(data);
-			exit(EXIT_FAILURE);
-		}
+			parse_error(data);
 		i++;
 	}
 	elements_and_file(data, &elem, &i);
