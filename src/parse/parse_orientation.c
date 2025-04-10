@@ -51,7 +51,7 @@ static void parse_line(t_game *data, char *line)
 	}
 }
 
-void parse_ORIENTATION_ERR(t_game *data)
+void parse_orientation(t_game *data)
 {
 	if (!data->map.file[0] || !data->map.file[1] ||
 		!data->map.file[2] || !data->map.file[3])
