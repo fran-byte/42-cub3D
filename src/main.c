@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:17:52 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 09:20:38 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 23:04:54 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ static void init_game(t_game *data)
 	data->map.sprites.ea = NULL;
 	data->player.player_x = -1;
 	data->player.player_y = -1;
+	data->map.paths.north = NULL;
+	data->map.paths.south = NULL;
+	data->map.paths.east = NULL;
+	data->map.paths.west = NULL;
 }
 
 int main(int argc, char **argv)
@@ -37,8 +41,10 @@ int main(int argc, char **argv)
 		return (report_err(SYNTAX_ERR), 1);
 	init_game(&data);
 	parse_arg(argv[1], &data);
-	print_map_grid(data.map.file, data.map.height_file);
-	print_map_grid(data.map.map, data.map.height_map);
+	init_player(&data);
+	testing(&data);
+	window_init(&data, 800, 600);
+	game_loop(&data);
 	free_function(&data);
 	return (0);
 }

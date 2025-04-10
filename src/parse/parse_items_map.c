@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parse_items_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:08:51 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 12:21:55 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 23:02:03 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static void put_orientation(t_game *data, int *x, int *y)
+static void add_orientation(t_game *data, int *x, int *y)
 {
+	data->player.player_x = *x;
+	data->player.player_y = *y;
 	if (data->map.map[*y][*x] == 'W')
 		data->player.player_orinetation = WEST;
 	else if (data->map.map[*y][*x] == 'E')
@@ -45,7 +47,7 @@ static void count_and_store_items(t_game *data, int *player)
 			}
 			else if (data->map.map[y][x] == 'W' || data->map.map[y][x] == 'E' || data->map.map[y][x] == 'S' || data->map.map[y][x] == 'N')
 			{
-				put_orientation(data, &x, &y);
+				add_orientation(data, &x, &y);
 				*player = *player + 1;
 			}
 			x++;

@@ -6,123 +6,105 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 08:43:36 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 10:01:42 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:40:30 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-// /**
-//  * Flood-fill algorithm to check if all collectibles are reachable.
-//  * Marks visited cells as 'V' to avoid revisiting.
-//  * Decrements collectible count when a collectible is found.
-//  *
-//  * @param grid  Map grid.
-//  * @param x     Current x-coordinate.
-//  * @param y     Current y-coordinate.
-//  * @param map   Map structure.
-//  */
+static void find_player_position(t_game *data, int *x, int *y)
+{
+	*y = 0;
+	while (*y < data->map.height_map)
+	{
+		*x = 0;
+		while (*x < (int)ft_strlen(data->map.map[*y]))
+		{
+			if (ft_strchr("NSEW", data->map.map[*y][*x]))
+			{
+				data->player.player_x = (double)*x + 0.5; // Para que Raycasting funcione correctamente
+				data->player.player_y = (double)*y + 0.5;
+				data->map.map[*y][*x] = '0'; // borramos el caracter del jugador limpiando el mapa
+				return;
+			}
+			(*x)++;
+		}
+		(*y)++;
+	}
+}
 
-// /**
-//  * Checks if the exit is reachable from the player's position using a
-//  * flood-fill approach.
-//  * Marks visited cells as 'V' to avoid revisiting.
-//  *
-//  * @param grid  Map grid.
-//  * @param x     Current x-coordinate.
-//  * @param y     Current y-coordinate.
-//  * @param map   Map structure.
-//  *
-//  * @return 1 if exit is reachable, 0 otherwise.
-//  */
-// int is_exit_reachable(char **grid, int x, int y, t_map *map)
-// {
-// 	if (x < 0 || y < 0 || x >= map->width || y >= map->height || grid[y][x] == '1')
-// 		return (0);
-// 	if (grid[y][x] == 'E')
-// 		return (1);
-// 	if (grid[y][x] == 'V')
-// 		return (0);
-// 	grid[y][x] = 'V';
-// 	return (is_exit_reachable(grid, x + 1, y, map) || is_exit_reachable(grid, x - 1, y, map) || is_exit_reachable(grid, x, y + 1, map) || is_exit_reachable(grid, x, y - 1, map));
-// }
+static int is_valid_position(t_game *data, int x, int y)
+{
+	if (x < 0 || y < 0 || y >= data->map.height_map ||
+		x >= (int)ft_strlen(data->map.map[y]))
+		return (0);
+	return (1);
+}
 
-// /**
-//  * Creates a duplicate of the map grid.
-//  * Allocates memory for a new grid and copies the content from the
-//  * original grid.
-//  * If memory allocation fails, returns NULL.
-//  *
-//  * @param grid   Original map grid.
-//  * @param height Map height (number of rows).
-//  *
-//  * @return A new grid, or NULL if allocation fails.
-//  */
-// char **duplicate_grid(char **grid, int height)
-// {
-// 	char **new_grid;
-// 	int i;
+static int check_map_borders(t_game *data, char **grid, int x, int y)
+{
+	if (!is_valid_position(data, x, y))
+		return (0);
+	if (grid[y][x] == ' ' || grid[y][x] == '\0')
+		return (0);
+	if (grid[y][x] == '1' || grid[y][x] == 'V')
+		return (1);
 
-// 	i = 0;
-// 	new_grid = malloc(sizeof(char *) * height);
-// 	if (!new_grid)
-// 		return (NULL);
-// 	while (i < height)
-// 	{
-// 		new_grid[i] = ft_strdup(grid[i]);
-// 		if (!new_grid[i])
-// 		{
-// 			while (i > 0)
-// 			{
-// 				free(new_grid[i - 1]);
-// 				i--;
-// 			}
-// 			free(new_grid);
-// 			return (NULL);
-// 		}
-// 		i++;
-// 	}
-// 	return (new_grid);
-// }
+	grid[y][x] = 'V';
+	if (!check_map_borders(data, grid, x + 1, y) ||
+		!check_map_borders(data, grid, x - 1, y) ||
+		!check_map_borders(data, grid, x, y + 1) ||
+		!check_map_borders(data, grid, x, y - 1))
+		return (0);
 
-// /**
-//  * Frees the memory allocated for a grid.
-//  *
-//  * @param grid   Map grid.
-//  * @param height Map height (number of rows).
-//  */
-// void free_grid(char **grid, int height)
-// {
-// 	int i;
+	return (1);
+}
 
-// 	i = 0;
-// 	while (i < height)
-// 	{
-// 		free(grid[i]);
-// 		i++;
-// 	}
-// 	free(grid);
-// }
+static int check_internal_spaces(t_game *data)
+{
+	int y;
+	int x;
 
-// /**
-//  * Validates if the map is playable.
-//  * Ensures all collectibles and the exit are reachable.
-//  * Uses duplicated grids to avoid modifying the original grid.
-//  *
-//  * @param map   Map structure.
-//  */
-// void parse_validate_map(t_game *data)
-// {
+	y = 0;
+	while (y < data->map.height_map)
+	{
+		x = 0;
+		while (x < (int)ft_strlen(data->map.map[y]))
+		{
+			if (data->map.map[y][x] == ' ')
+			{
+				if (x > 0 && x < (int)ft_strlen(data->map.map[y]) - 1 &&
+					y > 0 && y < data->map.height_map - 1)
+					return (0);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}
 
-// 	int exit_accessible;
-// 	char **temp_grid;
+void parse_validate_map(t_game *data)
+{
+	char **temp_grid;
+	int x;
+	int y;
+	int valid;
 
-// 	temp_grid = duplicate_grid(map->grid, map->height);
-// 	if (!temp_grid)
-// 		free_map_error(map, "Error\nMemory allocation error\n");
-// 	exit_accessible = is_exit_reachable(temp_grid, map->player_x,
-// 										map->player_y, map);
-// 	free_grid(temp_grid, map->height);
-// 	if (!exit_accessible)
-// 		free_map_error(map, "Error\nExit is not reachable\n");
-// }
+	find_player_position(data, &x, &y);
+	temp_grid = duplicate_grid(data->map.map, data->map.height_map);
+	if (!temp_grid)
+	{
+		report_err(MALLOC_ERR);
+		free_function(data);
+		exit(EXIT_FAILURE);
+	}
+	valid = check_map_borders(data, temp_grid, x, y);
+	free_grid(temp_grid, data->map.height_map);
+	if (!valid || !check_internal_spaces(data))
+	{
+		report_err(MAP_NOT_PLAYABLE);
+		free_function(data);
+		exit(EXIT_FAILURE);
+	}
+}

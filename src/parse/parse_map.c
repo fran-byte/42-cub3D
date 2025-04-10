@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:19:35 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 10:02:21 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/09 19:29:18 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void parse_map(t_game *data)
 		exit(EXIT_FAILURE);
 	}
 	parse_items_map(data);
-	// parse_validate_map(data);
+	parse_validate_map(data);
 	// store_orientation_sprites(data);
-	// store_colors(data);
+	//  store_colors(data);
 }

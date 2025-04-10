@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/09 10:09:01 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/10 23:25:25 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,30 @@
 #include <X11/keysym.h>
 #include <X11/X.h>
 
+/* CONSTANTS */
+#define FOV_COEF 0.66
+#define MOVE_SPEED 0.05
+
+// MOVEMENT
+# define KEY_W         119 // 'w'
+# define KEY_A         97  // 'a'
+# define KEY_S         115 // 's'
+# define KEY_D         100 // 'd'
+# define KEY_ESC       65307 // ESC
+# define KEY_LEFT      65361 // LEFT
+# define KEY_RIGHT     65363 // RIGHT
+
 /* ERRORS */
 #define SYNTAX_ERR "You must use this: ./cub3d <the_path/to/map.cub>"
 #define OPEN_FILE_ERR "Map File error"
-#define MALLOC_ERR "Map File error"
+#define MALLOC_ERR "Malloc error"
 #define MAP_FORMAT "Invalid map format"
 #define MAP_VOID "Invalid (void) map format"
 #define ORIENTATION "Invalid orientation format (valid: NO textures/wall_1.xpm)"
 #define TEXTURE_FILE "The texture file does not exist or is not accessible"
 #define FORMAT_COLOR "Invalid color format (valid example: C 255,128,0)"
 #define MAP_ITENS "Invalid (ITEMS) map format"
+#define MAP_NOT_PLAYABLE "Map in not playable"
 
 /* STRUCTURES */
 
@@ -59,10 +73,24 @@ typedef enum e_orientation
 
 typedef struct s_player
 {
-	int player_x;
-	int player_y;
+	double player_x;
+	double player_y;
+	double x;
+	double y;
+	double dir_x;
+	double dir_y;
+	double plane_x;
+	double plane_y;
 	t_orientation player_orinetation;
 } t_player;
+
+typedef struct s_paths // los paths del fichero
+{
+	char *north;
+	char *south;
+	char *west;
+	char *east;
+} t_paths;
 
 typedef struct s_map
 {
@@ -72,6 +100,7 @@ typedef struct s_map
 	int height_map;
 	int celing_color;
 	int floor_color;
+	t_paths paths;
 	t_sprites sprites;
 
 } t_map;
@@ -84,6 +113,8 @@ typedef struct s_game
 	t_player player;
 	// int game_over;
 } t_game;
+
+// Functions
 
 int report_err(char *str);
 void parse_arg(char *arg, t_game *data);
@@ -99,6 +130,22 @@ int count_char_in_str(const char *str, char c);
 void parse_map(t_game *data);
 int ft_array_size(char **array);
 void parse_items_map(t_game *data);
-// void parse_validate_map(t_game *data);
+void parse_validate_map(t_game *data);
+void free_grid(char **grid, int height);
+char **duplicate_grid(char **grid, int height);
+// INIT GAME AND KEYS
+void	init_player(t_game *data);
+void	init_player_vectors(t_game *p);
+int		key_press(int keycode, t_game *game);
+void	move_forward(t_game *game);
+void	move_backward(t_game *game);
+void	move_left(t_game *game);
+void	move_right(t_game *game);
+void	game_loop(t_game *game);
+int		exit_game(t_game *game);
+void	window_init(t_game *game, int width, int height);
+void	rotate_view(t_game *g, double angle);
 
+// debugguer/testing
+void testing(t_game *data);
 #endif

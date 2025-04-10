@@ -6,67 +6,69 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 19:40:40 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/07 19:43:26 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/09 19:54:17 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static void parse_path_orientation(t_game *data)
+static void store_path(t_game *data, char *line, char **dest)
 {
-	char **path_block;
-	int i;
+	char *path;
 
-	i = 0;
-	path_block = data->map.file;
-	while (i < 4)
+	path = ft_strtrim(line + 2, " \t");
+	if (!path)
 	{
-		if (strlen(path_block[i]) < 3)
-		{
-			report_err(TEXTURE_FILE);
-			free_function(data);
-			exit(EXIT_FAILURE);
-		}
-		if (access((path_block[i] + 3), R_OK) != 0)
-		{
-			report_err(TEXTURE_FILE);
-			free_function(data);
-			exit(EXIT_FAILURE);
-		}
-		i++;
+		report_err(MALLOC_ERR);
+		free_function(data);
+		exit(EXIT_FAILURE);
 	}
+	if (access(path, R_OK) != 0)
+	{
+		free(path);
+		report_err(TEXTURE_FILE);
+		free_function(data);
+		exit(EXIT_FAILURE);
+	}
+	*dest = path;
 }
 
-static void parse_cardinals(t_game *d)
+static void parse_line(t_game *data, char *line)
 {
-	int i;
-	int j;
-	int valid;
-	const char *p[] = {"NO", "SO", "WE", "EA"};
-
-	i = 0;
-	valid = 1;
-	while (i < 4 && valid)
+	if (ft_strncmp(line, "NO ", 3) == 0)
+		store_path(data, line, &data->map.paths.north);
+	else if (ft_strncmp(line, "SO ", 3) == 0)
+		store_path(data, line, &data->map.paths.south);
+	else if (ft_strncmp(line, "WE ", 3) == 0)
+		store_path(data, line, &data->map.paths.west);
+	else if (ft_strncmp(line, "EA ", 3) == 0)
+		store_path(data, line, &data->map.paths.east);
+	else
 	{
-		j = -1;
-		valid = 0;
-		while (++j < 4 && !valid)
-		{
-			if (d->map.file[i][0] == p[j][0] && d->map.file[i][1] == p[j][1] && (d->map.file[i][2] == ' ' || d->map.file[i][2] == '\t'))
-				valid = 1;
-		}
-		if (!valid)
-		{
-			report_err(ORIENTATION);
-			free_function(d);
-			exit(EXIT_FAILURE);
-		}
-		i++;
+		report_err(ORIENTATION);
+		free_function(data);
+		exit(EXIT_FAILURE);
 	}
 }
 
 void parse_orientation(t_game *data)
 {
-	parse_cardinals(data);
-	parse_path_orientation(data);
+	if (!data->map.file[0] || !data->map.file[1] ||
+		!data->map.file[2] || !data->map.file[3])
+	{
+		report_err(ORIENTATION);
+		free_function(data);
+		exit(EXIT_FAILURE);
+	}
+	parse_line(data, data->map.file[0]);
+	parse_line(data, data->map.file[1]);
+	parse_line(data, data->map.file[2]);
+	parse_line(data, data->map.file[3]);
+	if (!data->map.paths.north || !data->map.paths.south ||
+		!data->map.paths.west || !data->map.paths.east)
+	{
+		report_err(ORIENTATION);
+		free_function(data);
+		exit(EXIT_FAILURE);
+	}
 }
