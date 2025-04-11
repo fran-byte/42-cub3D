@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/10 18:59:53 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:16:44 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@
 #include <unistd.h>
 #include <X11/keysym.h>
 #include <X11/X.h>
+
+/* CONSTANTS */
+#define FOV_COEF 0.66
+#define MOVE_SPEED 0.05
+
+// MOVEMENT
+#define KEY_W 119		// 'w'
+#define KEY_A 97		// 'a'
+#define KEY_S 115		// 's'
+#define KEY_D 100		// 'd'
+#define KEY_ESC 65307	// ESC
+#define KEY_LEFT 65361	// LEFT
+#define KEY_RIGHT 65363 // RIGHT
 
 /* ERRORS */
 #define SYNTAX_ERR "You must use this: ./cub3d <the_path/to/map.cub>"
@@ -74,8 +87,15 @@ typedef struct s_player
 {
 	double player_x;
 	double player_y;
+	double x;
+	double y;
+	double dir_x;
+	double dir_y;
+	double plane_x;
+	double plane_y;
 	t_orientation player_orinetation;
 } t_player;
+;
 
 typedef struct s_paths // los paths del fichero
 {
@@ -132,6 +152,18 @@ void free_grid(char **grid, int height);
 char **duplicate_grid(char **grid, int height);
 int is_empty_line(char *line);
 
+// INIT GAME AND KEYS
+void init_player(t_game *data);
+void init_player_vectors(t_game *p);
+int key_press(int keycode, t_game *game);
+void move_forward(t_game *game);
+void move_backward(t_game *game);
+void move_left(t_game *game);
+void move_right(t_game *game);
+void game_loop(t_game *game);
+int exit_game(t_game *game);
+void window_init(t_game *game, int width, int height);
+void rotate_view(t_game *g, double angle);
 // debugguer/testing
 void testing(t_game *data);
 #endif
