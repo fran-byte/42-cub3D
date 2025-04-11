@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 22:34:10 by user              #+#    #+#             */
-/*   Updated: 2025/04/11 09:25:19 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:59:31 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ void window_init(t_game *game, int width, int height)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
-		fprintf(stderr, "Error: mlx_init failed\n");
+		report_err(MLX_INIT_ERR);
+		free_function(game);
 		exit(EXIT_FAILURE);
 	}
 
 	game->window = mlx_new_window(game->mlx, width, height, "Cub3D");
 	if (!game->window)
 	{
-		fprintf(stderr, "Error: mlx_new_window failed\n");
+		mlx_destroy_display(game->mlx);
+		report_err(MLX_NEW_WINDOW_ERR);
+		free_function(game);
 		exit(EXIT_FAILURE);
 	}
 

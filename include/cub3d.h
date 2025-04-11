@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/11 09:16:44 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:53:08 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,16 @@
 #define MALLOC_ERR "Malloc error"
 #define MAP_FORMAT_ERR "Invalid map format"
 #define ELEMENT_FORMAT_ERR "Invalid map format"
-#define MISSING_ELEMENT_ERR "Invalid map format"
-#define MAP_VOID_ERR "Invalid (void) map format"
+#define MISSING_ELEMENT_ERR "Invalid map format (Missing Elements)"
+#define MAP_VOID_ERR "Invalid map format (void)"
 #define ORIENTATION_FILE_ERR "Invalid Orinetation format (valid: NO textures/wall_1.xpm)"
 #define TEXTURE_FILE_ERR "The texture file does not exist or is not accessible"
 #define FORMAT_COLOR_ERR "Invalid color format (valid example: C 255,128,0)"
-#define MAP_ITENS_ERR "Invalid (ITEMS) map format"
+#define MAP_ITENS_ERR "Invalid map format (Items)"
 #define MAP_PLAYABLE_ERR "Map in not playable"
+#define MLX_INIT_ERR "mlx_init failed"
+#define MLX_NEW_WINDOW_ERR "mlx_new_window failed"
+#define MLX_OR_WINDOW_ERR "mlx or window not initialized"
 
 /* STRUCTURES */
 

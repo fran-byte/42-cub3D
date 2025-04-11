@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:23:34 by user              #+#    #+#             */
-/*   Updated: 2025/04/11 09:25:24 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:55:13 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void game_loop(t_game *game)
 {
 	if (!game->mlx || !game->window)
 	{
-		printf("Error: mlx or window not initialized\n");
+		report_err(MLX_OR_WINDOW_ERR);
+		free_function(game);
 		exit(EXIT_FAILURE);
 	}
 	mlx_hook(game->window, 2, 1L << 0, key_press, game); // Teclado
