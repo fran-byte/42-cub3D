@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:17:52 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/10 17:58:55 by frromero         ###   ########.fr       */
+/*   Updated: 2025/04/11 12:15:30 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ int main(int argc, char **argv)
 		return (report_err(SYNTAX_ERR), 1);
 	init_game(&data);
 	parse_arg(argv[1], &data);
+	init_player(&data);
 	testing(&data);
+	window_init(&data, 800, 600);
+	game_loop(&data);
 	free_function(&data);
 	return (0);
 }
