@@ -402,10 +402,6 @@ C 30,30,30
 
 # Fase Inicialización de Libreria/Ventana y Movimientos (sin renderizar)
 
-Aquí tienes el análisis en orden cronológico/lógico de implementación, desde la inicialización hasta el movimiento:
-
----
-
 ### **1. Inicialización del Jugador**
 
 **Archivos**: `init_player.c` + `init_orientation.c`
