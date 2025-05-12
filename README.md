@@ -367,7 +367,7 @@ graph TD
 
 ---
 
-### **Ejemplo de Archivo Válido**
+### **Ejemplos de Archivos Válidos**
 
 ```plaintext
 NO ./path/north.xpm
@@ -380,6 +380,22 @@ C 30,30,30
 111111
 1000N1  # Mapa válido: bordes cerrados, 1 jugador
 111111
+```
+
+```plaintext
+NO ./path/north.xpm
+SO ./path/south.xpm
+
+WE ./path/west.xpm
+EA ./path/east.xpm
+F 220,100,0
+
+C 30,30,30
+
+111111111
+10E001  # Mapa válido: bordes cerrados, 1 jugador
+111111
+11111111
 ```
 
 ---
@@ -508,7 +524,7 @@ Aquí tienes el análisis en orden cronológico/lógico de implementación, desd
 
 ---
 
-### **7. Problemas Detectados**
+### **7. Posibles Problemas A Verificar**
 
 1. **Movimiento discontinuo**:
 
