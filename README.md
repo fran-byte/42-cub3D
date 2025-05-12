@@ -232,19 +232,17 @@ Cub3D es un proyecto desafiante pero gratificante. ¡Disfruta el proceso de crea
 - [Tutorial de Raycasting en 2D por 3DSage](https://youtube.com/3DSage)
 - [42-CLI por Herbie Vine](https://github.com/herbievine/42-cli)
 
-````
-
 ---
-
-
 
 # Fase de Parseo
 
 ---
 
 #### **1. Inicialización y Validación del Archivo (`parse.c`)**
+
 **Objetivo**: Cargar y validar el archivo `.cub`.
 **Flujo**:
+
 1. **`parse_arg()`**:
    - Verifica que la extensión sea `.cub`.
    - Llama a `load_file()` para leer el archivo.
@@ -254,6 +252,7 @@ Cub3D es un proyecto desafiante pero gratificante. ¡Disfruta el proceso de crea
    - `fill_file_grid()` copia cada línea del archivo al array, eliminando `\n`.
 
 **Ejemplo de archivo válido**:
+
 ```plaintext
 NO ./textures/north.xpm
 SO ./textures/south.xpm
@@ -262,7 +261,7 @@ C 30,30,30
 111111
 1000N1
 111111
-````
+```
 
 ---
 
