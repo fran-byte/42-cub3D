@@ -233,7 +233,7 @@ Cub3D es un proyecto desafiante pero gratificante. ¡Disfruta el proceso de crea
 - [42-CLI por Herbie Vine](https://github.com/herbievine/42-cli)
 
 ````
----
+
 ---
 
 
@@ -262,13 +262,15 @@ C 30,30,30
 111111
 1000N1
 111111
-```
+````
 
 ---
 
 #### **2. Procesamiento de Elementos (`parse_elements.c`)**
+
 **Objetivo**: Extraer texturas (NO/SO/EA/WE) y colores (F/C).
 **Funciones clave**:
+
 1. **`process_textures()`**:
    - Detecta líneas que empiezan con `"NO "`, `"SO "`, etc.
    - Usa `store_path()` (de `parse_store_map.c`) para validar y guardar rutas.
@@ -277,20 +279,24 @@ C 30,30,30
    - Llama a `parse_color_line()` (de `parse_colors.c`) para validar RGB.
 
 **Validaciones**:
+
 - Cada elemento debe ser **único** (no duplicados).
 - Formato de colores: `F 220,100,0` (valores 0-255).
 
 ---
 
 #### **3. Procesamiento del Mapa**
+
 **Archivos**: `parse_map.c`, `parse_items_map.c`, `parse_validate_map.c`.
 
 ##### **a) Extracción del Mapa (`parse_map.c`)**
+
 - **`parse_map()`**:
   - Calcula `height_map` (número de líneas desde `map_start_index`).
   - `extract_map_lines()` duplica las líneas del mapa a `data->map.map`.
 
 ##### **b) Validación de Caracteres (`parse_items_map.c`)**
+
 - **`parse_items_map()`**:
   - Caracteres permitidos: `0`, `1`, ` `, `N/S/E/W`.
   - **Jugador**:
@@ -298,12 +304,14 @@ C 30,30,30
     - Guarda posición y orientación en `data->player`.
 
 ##### **c) Validación de Bordes (`parse_validate_map.c`)**
+
 - **Flood Fill recursivo**:
   1. Crea una copia temporal del mapa.
   2. Marca celdas visitadas como `'V'`.
   3. Si encuentra un `0` tocando un espacio (` `) o borde, el mapa es inválido.
 
 **Ejemplo de mapa inválido**:
+
 ```plaintext
 11111
 10 01  # El '0' toca un espacio → Error
@@ -313,6 +321,7 @@ C 30,30,30
 ---
 
 #### **4. Estructuras Clave**
+
 - **`t_game`**:
   ```c
   typedef struct s_game {
@@ -325,6 +334,7 @@ C 30,30,30
 ---
 
 #### **5. Diagrama de Flujo**
+
 ```mermaid
 graph TD
     A[parse_arg] --> B[load_file]
@@ -339,6 +349,7 @@ graph TD
 ---
 
 #### **6. Errores Comunes y Soluciones**
+
 1. **Texturas faltantes**:
    - Asegúrate de que haya exactamente 4 texturas (NO/SO/EA/WE).
 2. **Colores inválidos**:
@@ -349,6 +360,7 @@ graph TD
 ---
 
 #### **7. Integración con el Motor Gráfico**
+
 - **Datos críticos para el engine**:
   - `data->map.map`: Grid para colisiones.
   - `data->player`: Posición inicial y dirección.
@@ -357,6 +369,7 @@ graph TD
 ---
 
 ### **Ejemplo de Archivo Válido**
+
 ```plaintext
 NO ./path/north.xpm
 SO ./path/south.xpm
@@ -379,9 +392,12 @@ Aquí tienes el análisis en orden cronológico/lógico de implementación, desd
 ---
 
 ### **1. Inicialización del Jugador**
+
 **Archivos**: `init_player.c` + `init_orientation.c`
 **Flujo**:
+
 1. **Posición inicial**:
+
    - El parser guarda las coordenadas (`player_x`, `player_y`) y orientación (`N/S/E/W`) en `t_game`.
    - `init_player()` copia estos valores a `player.x` y `player.y`.
 
@@ -389,17 +405,21 @@ Aquí tienes el análisis en orden cronológico/lógico de implementación, desd
    - `init_player_vectors()` configura:
      - **Dirección (`dir_x`, `dir_y`)**: Apunta hacia donde mira el jugador (ej: `(0, -1)` para Norte).
      - **Plano (`plane_x`, `plane_y`)**: Define el FOV (ej: `(0.66, 0)` para Norte).
-     - *Relación*: El plano es perpendicular a la dirección y su magnitud afecta el ángulo de visión.
+     - _Relación_: El plano es perpendicular a la dirección y su magnitud afecta el ángulo de visión.
 
 ---
 
 ### **2. Configuración de MLX y Hooks**
+
 **Archivo**: `game_loop.c`
 **Flujo**:
+
 1. **Inicialización MLX**:
+
    - `game->mlx` y `game->window` deben crearse antes (no mostrado en el código).
 
 2. **Hooks**:
+
    - **Teclado**: `mlx_hook(..., 2, key_press, game)`: Llama a `key_press()` cuando se presiona una tecla.
    - **Cierre**: `mlx_hook(..., 17, exit_game, game)`: Llama a `exit_game()` al cerrar la ventana.
 
@@ -409,16 +429,21 @@ Aquí tienes el análisis en orden cronológico/lógico de implementación, desd
 ---
 
 ### **3. Manejo de Inputs**
+
 **Archivo**: `key_hooks.c`
 **Flujo por tecla**:
+
 1. **Teclas WASD**:
+
    - `W/S`: Llama a `move_forward()`/`move_backward()`.
    - `A/D`: Llama a `move_left()`/`move_right()` (strafe usando el vector plano).
 
 2. **Flechas**:
+
    - `LEFT/RIGHT`: Llama a `rotate_view()` con ángulo positivo/negativo.
 
 3. **ESC**:
+
    - Cierra el juego con `exit_game()`.
 
 4. **Debug**:
@@ -427,13 +452,17 @@ Aquí tienes el análisis en orden cronológico/lógico de implementación, desd
 ---
 
 ### **4. Movimiento (Cálculos)**
+
 **Archivo**: `movement_utils.c`
 **Flujo en `move_forward()` (ejemplo)**:
+
 1. **Nueva posición**:
+
    - `nx = x + dir_x * MOVE_SPEED` (avance en eje X).
    - `ny = y + dir_y * MOVE_SPEED` (avance en eje Y).
 
 2. **Colisiones**:
+
    - `is_wall()` verifica **por separado** si `(x, ny)` y `(nx, y)` son paredes.
    - Si no hay pared, actualiza `player.x` o `player.y`.
 
@@ -443,9 +472,12 @@ Aquí tienes el análisis en orden cronológico/lógico de implementación, desd
 ---
 
 ### **5. Rotación (Cálculos)**
+
 **Archivo**: `rotation.c`
 **Flujo en `rotate_view()`**:
+
 1. **Rotar dirección**:
+
    - Aplica matriz de rotación a `(dir_x, dir_y)` con `cos(angle)` y `sin(angle)`.
    - **Fórmula**:
      ```c
@@ -459,13 +491,17 @@ Aquí tienes el análisis en orden cronológico/lógico de implementación, desd
 ---
 
 ### **6. Orden de Ejecución (Ejemplo)**
+
 1. **Inicio**:
+
    - `init_player()` → `init_player_vectors()` (Norte: `dir=(0,-1)`, `plane=(0.66, 0)`).
 
 2. **Presionar `W`**:
+
    - `key_press()` → `move_forward()` → `player.y -= 1 * MOVE_SPEED`.
 
 3. **Presionar `LEFT`**:
+
    - `key_press()` → `rotate_view(-0.1)` → Rota dirección y plano 0.1 radianes a la izquierda.
 
 4. **Debug**:
@@ -474,10 +510,13 @@ Aquí tienes el análisis en orden cronológico/lógico de implementación, desd
 ---
 
 ### **7. Problemas Detectados**
+
 1. **Movimiento discontinuo**:
+
    - Sin `KeyRelease`, el jugador solo se mueve al mantener presionada la tecla (MLX no detecta repetición automática).
 
 2. **Colisiones simples**:
+
    - `is_wall()` no evita esquinas o bordes del mapa.
 
 3. **Sin normalización**:
@@ -486,8 +525,11 @@ Aquí tienes el análisis en orden cronológico/lógico de implementación, desd
 ---
 
 ### **8. Próximos Pasos (Renderizado)**
+
 Para conectar esto con el raycasting:
+
 1. **Datos necesarios**:
+
    - `player.x`, `player.y`: Origen de los rayos.
    - `player.dir_x`, `player.dir_y`: Dirección central.
    - `player.plane_x`, `player.plane_y`: Define el ancho del FOV.
@@ -495,4 +537,6 @@ Para conectar esto con el raycasting:
 2. **Bucle de render**:
    - Lanzar rayos desde `-plane` hasta `+plane` (en pasos según `SCREEN_WIDTH`).
 
-````
+```
+
+```
