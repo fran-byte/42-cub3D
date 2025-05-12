@@ -342,7 +342,7 @@ graph TD
     D --> E[parse_map]
     E --> F[Validar caracteres y jugador]
     F --> G[Validar bordes con Flood Fill]
-    G --> H[Mapa listo para el engine]
+    G --> H[Mapa listo]
 ```
 
 ---
