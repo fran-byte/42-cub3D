@@ -39,6 +39,8 @@ Usa [42-CLI](https://github.com/herbievine/42-cli) para simplificar la instalaci
 
 ---
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/g8p7nAbDz6Y?si=ttGoTxEICdLUaAMg&amp;clip=Ugkx4WrcXp1Yttv_awOz4RlETRzVlO3ukYuw&amp;clipt=ELa3ARjOrAI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Las Matemáticas del Ray Casting
 
 ### Paso 1: Dirección del Rayo
@@ -418,7 +420,6 @@ C 30,30,30
      - **Plano (`plane_x`, `plane_y`)**: Define el FOV (ej: `(0.66, 0)` para Norte).
      - _Relación_: El plano es perpendicular a la dirección y su magnitud afecta el ángulo de visión.
 
-
 # Explicación de direcciones, Planos y Vectores
 
 ### **Explicación del vector: `p->player.dir_x = 0` y `p->player.dir_y = -1`**
@@ -428,6 +429,7 @@ Estas líneas configuran el **vector de dirección** del jugador en cub3d. Repre
 ---
 
 #### **1. ¿Qué son `dir_x` y `dir_y`?**
+
 - **`dir_x`**: Componente horizontal del vector dirección (eje X).
   - `1` = Derecha, `-1` = Izquierda, `0` = Sin componente horizontal.
 - **`dir_y`**: Componente vertical del vector dirección (eje Y).
@@ -436,10 +438,12 @@ Estas líneas configuran el **vector de dirección** del jugador en cub3d. Repre
 ---
 
 #### **2. Caso específico: `dir_x = 0`, `dir_y = -1`**
-- **Interpretación**:  
-  - `dir_x = 0`: El jugador **no se mueve horizontalmente** (no mira ni izquierda ni derecha).  
-  - `dir_y = -1`: El jugador mira **hacia arriba** en el eje Y (Norte).  
-    - *Nota*: En sistemas gráficos, el eje Y suele aumentar hacia abajo, por eso `-1` es Norte.
+
+- **Interpretación**:
+
+  - `dir_x = 0`: El jugador **no se mueve horizontalmente** (no mira ni izquierda ni derecha).
+  - `dir_y = -1`: El jugador mira **hacia arriba** en el eje Y (Norte).
+    - _Nota_: En sistemas gráficos, el eje Y suele aumentar hacia abajo, por eso `-1` es Norte.
 
 - **Visualización**:
   ```
@@ -455,76 +459,65 @@ Estas líneas configuran el **vector de dirección** del jugador en cub3d. Repre
 ---
 
 #### **3. ¿Por qué es importante?**
-- **Movimiento**:  
-  - Cuando el jugador avanza (`W`), se suman estos valores a su posición:  
+
+- **Movimiento**:
+  - Cuando el jugador avanza (`W`), se suman estos valores a su posición:
     ```c
     x += dir_x * speed; // x += 0 * speed (no cambia en X)
     y += dir_y * speed; // y += -1 * speed (se mueve hacia -Y)
     ```
-- **Rotación**:  
+- **Rotación**:
   - Si el jugador gira, estos valores se actualizan con fórmulas de rotación (matriz 2D).
 
 ---
 
-#### **4. Relación con el vector `plane` (FOV)**  
+#### **4. Relación con el vector `plane` (FOV)**
+
 El vector `plane` (ej. `plane_x = 0.66`, `plane_y = 0`) es **perpendicular** a la dirección y define el campo de visión:
-- Para `dir = (0, -1)` (Norte), `plane = (0.66, 0)` (derecha).  
+
+- Para `dir = (0, -1)` (Norte), `plane = (0.66, 0)` (derecha).
 - Esto crea un ángulo de ~66° (ajustable con `FOV_COEF`).
 
 ---
 
-#### **Ejemplo práctico**  
+#### **Ejemplo práctico**
+
 Si el jugador está en `(x=5, y=5)` mirando al Norte (`dir = (0, -1)`):
-- **Avanzar (`W`)**:  
+
+- **Avanzar (`W`)**:
   ```c
   x += 0 * speed;   // x sigue siendo 5
   y += -1 * speed;  // y = 5 - speed (se mueve hacia Norte)
   ```
-- **Rotar 90° derecha**:  
-  - Nueva dirección: `dir = (1, 0)` (Este).  
+- **Rotar 90° derecha**:
+  - Nueva dirección: `dir = (1, 0)` (Este).
   - Nuevo plano: `plane = (0, 0.66)` (arriba).
 
 ---
 
-### **¿Para qué sirve en el raycasting?**  
-El motor usa `dir` y `plane` para calcular la dirección de cada rayo:  
+### **¿Para qué sirve en el raycasting?**
+
+El motor usa `dir` y `plane` para calcular la dirección de cada rayo:
+
 ```c
 // Para cada columna de pantalla (camera_x ∈ [-1, 1]):
 ray_dir_x = dir_x + plane_x * camera_x;
 ray_dir_y = dir_y + plane_y * camera_x;
 ```
+
 - Esto genera un abanico de rayos para simular la perspectiva 3D.
 
 ---
 
-### **Resumen**  
-- `dir_x = 0`, `dir_y = -1` = Jugador mirando al **Norte**.  
-- El vector dirección es fundamental para:  
-  - Movimiento (`WASD`).  
-  - Rotación (flechas).  
-  - Cálculo de rayos (renderizado 3D).  
+### **Resumen**
+
+- `dir_x = 0`, `dir_y = -1` = Jugador mirando al **Norte**.
+- El vector dirección es fundamental para:
+  - Movimiento (`WASD`).
+  - Rotación (flechas).
+  - Cálculo de rayos (renderizado 3D).
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 
