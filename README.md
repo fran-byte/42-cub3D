@@ -39,7 +39,7 @@ Usa [42-CLI](https://github.com/herbievine/42-cli) para simplificar la instalaci
 
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/g8p7nAbDz6Y?si=ttGoTxEICdLUaAMg&amp;clip=Ugkx4WrcXp1Yttv_awOz4RlETRzVlO3ukYuw&amp;clipt=ELa3ARjOrAI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[![Video tutorial](https://img.youtube.com/vi/g8p7nAbDz6Y/0.jpg)](https://www.youtube.com/embed/g8p7nAbDz6Y?si=ttGoTxEICdLUaAMg&clip=Ugkx4WrcXp1Yttv_awOz4RlETRzVlO3ukYuw&clipt=ELa3ARjOrAI)
 
 ## Las Matemáticas del Ray Casting
 
