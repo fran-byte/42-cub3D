@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/04/11 09:30:38 by frromero         ###   ########.fr        #
+#    Updated: 2025/05/14 19:28:35 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ SRCS := \
 	$(SRC_DIR)/parse/parse_validate_map.c \
 	$(SRC_DIR)/debugging/print_grid.c \
 	$(SRC_DIR)/debugging/testing.c \
+	$(SRC_DIR)/debugging/debug_render.c \
 	$(SRC_DIR)/game/window_init.c \
 	$(SRC_DIR)/player/game_loop.c \
 	$(SRC_DIR)/player/init_orientation.c \

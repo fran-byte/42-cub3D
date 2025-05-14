@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/11 15:53:08 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/14 20:18:12 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include "../libft/libft.h"
 #include "../minilibx-linux/mlx.h"
+#include <X11/X.h>
+#include <X11/keysym.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <math.h>
@@ -22,24 +24,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
-#include <X11/keysym.h>
-#include <X11/X.h>
 
 /* CONSTANTS */
 #define FOV_COEF 0.66
 #define MOVE_SPEED 0.05
 
+#define SCREEN_WIDTH 1280 // Ancho en píxeles
+#define SCREEN_HEIGHT 720 // Alto en píxeles
+
 // MOVEMENT
-#define KEY_W 119		// 'w'
-#define KEY_A 97		// 'a'
-#define KEY_S 115		// 's'
-#define KEY_D 100		// 'd'
-#define KEY_ESC 65307	// ESC
-#define KEY_LEFT 65361	// LEFT
+#define KEY_W 119       // 'w'
+#define KEY_A 97        // 'a'
+#define KEY_S 115       // 's'
+#define KEY_D 100       // 'd'
+#define KEY_ESC 65307   // ESC
+#define KEY_LEFT 65361  // LEFT
 #define KEY_RIGHT 65363 // RIGHT
+
+#define KEY_K 107 // 'k' DEBUG*******************BORRAR
+#define KEY_L 108 // 'l' DEBUG*******************BORRAR
 
 /* ERRORS */
 #define SYNTAX_ERR "You must use this: ./cub3d <the_path/to/map.cub>"
@@ -49,7 +55,8 @@
 #define ELEMENT_FORMAT_ERR "Invalid map format"
 #define MISSING_ELEMENT_ERR "Invalid map format (Missing Elements)"
 #define MAP_VOID_ERR "Invalid map format (void)"
-#define ORIENTATION_FILE_ERR "Invalid Orinetation format (valid: NO textures/wall_1.xpm)"
+#define ORIENTATION_FILE_ERR                                                   \
+    "Invalid Orinetation format (valid: NO textures/wall_1.xpm)"
 #define TEXTURE_FILE_ERR "The texture file does not exist or is not accessible"
 #define FORMAT_COLOR_ERR "Invalid color format (valid example: C 255,128,0)"
 #define MAP_ITENS_ERR "Invalid map format (Items)"
@@ -60,76 +67,95 @@
 
 /* STRUCTURES */
 
+typedef struct s_ray_info
+{
+    double distance; // distancia corregida (sin fisheye)
+    int wall_height; // altura de la pared proyectada en pantalla
+    int draw_start;  // dónde empieza a pintar
+    int draw_end;    // dónde termina
+    int tex_x;       // qué columna de textura usar
+    int wall_dir;    // dirección de la pared (N, S, E, O)
+} t_ray_info;
+
 typedef struct s_elem
 {
-	int north;
-	int south;
-	int west;
-	int east;
-	int floor;
-	int ceiling;
+    int north;
+    int south;
+    int west;
+    int east;
+    int floor;
+    int ceiling;
 } t_elem;
 
 typedef struct s_sprites
 {
-	void *no;
-	void *su;
-	void *we;
-	void *ea;
+    void *no;
+    void *su;
+    void *we;
+    void *ea;
 } t_sprites;
 
 typedef enum e_orientation
 {
-	EAST,
-	WEST,
-	NORTH,
-	SOUTH
+    EAST,
+    WEST,
+    NORTH,
+    SOUTH
 } t_orientation;
 
 typedef struct s_player
 {
-	double player_x;
-	double player_y;
-	double x;
-	double y;
-	double dir_x;
-	double dir_y;
-	double plane_x;
-	double plane_y;
-	t_orientation player_orinetation;
+    double player_x;
+    double player_y;
+    double x;
+    double y;
+    double dir_x;
+    double dir_y;
+    double plane_x;
+    double plane_y;
+    t_orientation player_orinetation;
 } t_player;
-;
 
 typedef struct s_paths // los paths del fichero
 {
-	char *north;
-	char *south;
-	char *west;
-	char *east;
+    char *north;
+    char *south;
+    char *west;
+    char *east;
 } t_paths;
 
 typedef struct s_map
 {
-	int map_start_index;
-	char **file;
-	int height_file;
-	char **map;
-	int height_map;
-	int celing_color;
-	int floor_color;
-	t_paths paths;
-	t_sprites sprites;
+    int map_start_index;
+    char **file;
+    int height_file;
+    char **map;
+    int height_map;
+    int celing_color;
+    int floor_color;
+    t_paths paths;
+    t_sprites sprites;
 
 } t_map;
 
+/*typedef struct s_img
+{
+    void *img;    // Puntero a la imagen de MLX
+    char *addr;   // Dirección del buffer de píxeles
+    int bpp;      // Bits por píxel (ej: 32 para ARGB)
+    int line_len; // Bytes por línea (¡importante!)
+    int endian;   // Orden de bytes (little/big endian)
+} t_img;*/
+
 typedef struct s_game
 {
-	t_map map;
-	void *mlx;
-	void *window;
-	t_player player;
-	t_elem elem;
-	// int game_over;
+    t_map map;
+    void *mlx;
+    void *window;
+    t_player player;
+    t_elem elem;
+    // t_img img;
+    //  int game_over;
 } t_game;
 
 // Functions
@@ -169,4 +195,5 @@ void window_init(t_game *game, int width, int height);
 void rotate_view(t_game *g, double angle);
 // debugguer/testing
 void testing(t_game *data);
+void debug_render_test_wall(t_game *g, int i);
 #endif
