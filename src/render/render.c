@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:33:15 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 13:45:00 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:00:43 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void render_frame(t_game *g)
     x = 0;
     t_ray_info rays[SCREEN_WIDTH];
 
-    // 1. Calcular raycasting (función de tu compañero)
+    // 1. Calcular raycasting
     // calculate_raycasting(g, rays);
 
     // 2. Limpiar imagen anterior

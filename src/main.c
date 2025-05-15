@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:17:52 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 14:38:50 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:59:44 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ static void elements(t_game *data)
     data->elem.ceiling = 0;
 }
 
+static void sprites(t_game *data)
+{
+    data->map.sprites.no = NULL;
+    data->map.sprites.su = NULL;
+    data->map.sprites.we = NULL;
+    data->map.sprites.ea = NULL;
+}
 /* Initialize all fields of the t_game structure to safe default values */
 static void init_game(t_game *data)
 {
@@ -51,10 +58,7 @@ static void init_game(t_game *data)
     data->map.paths.south = NULL;
     data->map.paths.east = NULL;
     data->map.paths.west = NULL;
-    data->map.sprites.no = NULL;
-    data->map.sprites.su = NULL;
-    data->map.sprites.we = NULL;
-    data->map.sprites.ea = NULL;
+    sprites(data);
     data->img.img = NULL;
     data->img.addr = NULL;
     data->img.bpp = 0;
@@ -62,6 +66,8 @@ static void init_game(t_game *data)
     data->img.endian = 0;
     player(data);
     elements(data);
+    data->map.file = NULL;
+    data->map.map = NULL;
 }
 
 int main(int argc, char **argv)
