@@ -23,7 +23,7 @@ static void exit_error_color(t_game *data, char **grid)
     exit(EXIT_FAILURE);
 }
 
-static int is_numeric(char *str)
+static int is_numeric(const char *str)
 {
     while (*str)
     {

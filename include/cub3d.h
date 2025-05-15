@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/12 19:17:49 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:09:52 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 #define FOV_COEF 0.66
 #define MOVE_SPEED 0.05
 
+#define SCREEN_WIDTH 1280 // Ancho en píxeles
+#define SCREEN_HEIGHT 720 // Alto en píxeles
+
 // MOVEMENT
 #define KEY_W 119       // 'w'
 #define KEY_A 97        // 'a'
@@ -40,6 +43,9 @@
 #define KEY_ESC 65307   // ESC
 #define KEY_LEFT 65361  // LEFT
 #define KEY_RIGHT 65363 // RIGHT
+
+#define KEY_K 107 // 'k' DEBUG*******************BORRAR
+#define KEY_L 108 // 'l' DEBUG*******************BORRAR
 
 /* ERRORS */
 #define SYNTAX_ERR "You must use this: ./cub3d <the_path/to/map.cub>"
@@ -58,8 +64,21 @@
 #define MLX_INIT_ERR "mlx_init failed"
 #define MLX_NEW_WINDOW_ERR "mlx_new_window failed"
 #define MLX_OR_WINDOW_ERR "mlx or window not initialized"
+#define TEXTURE_LOADING_ERROR "Texture loading Error"
 
 /* STRUCTURES */
+
+// Estructura especial contener mas variables para render_walls.c (reder_wall())
+typedef struct s_wall_info
+{
+    int x;
+    int tex_width;
+    int *texture;
+    int tex_x;
+    double step;
+    double tex_pos;
+    int y;
+} t_wall_info;
 
 typedef struct s_elem
 {
@@ -87,6 +106,25 @@ typedef enum e_orientation
     SOUTH
 } t_orientation;
 
+typedef struct s_ray_info
+{
+    double distance;        // distancia corregida (sin fisheye)
+    int wall_height;        // altura de la pared proyectada en pantalla
+    int draw_start;         // dónde empieza a pintar
+    int draw_end;           // dónde termina
+    int tex_x;              // qué columna de textura usar
+    t_orientation wall_dir; // dirección de la pared (N, S, E, O)
+} t_ray_info;
+
+typedef struct s_img
+{
+    void *img;    // Puntero a la imagen de MLX
+    char *addr;   // Dirección de memoria de los píxeles
+    int bpp;      // Bits por píxel (ej: 32 para ARGB)
+    int line_len; // Bytes por línea horizontal
+    int endian;   // Formato de color (little/big endian)
+} t_img;
+
 typedef struct s_player
 {
     double player_x;
@@ -99,7 +137,6 @@ typedef struct s_player
     double plane_y;
     t_orientation player_orientation;
 } t_player;
-;
 
 typedef struct s_paths // los paths del fichero
 {
@@ -130,34 +167,40 @@ typedef struct s_game
     void *window;
     t_player player;
     t_elem elem;
-    // int game_over;
+    t_img img;
+    //  int game_over;
 } t_game;
 
 // Functions
-
+void init_game(t_game *);
 int report_err(char *str);
-void parse_arg(char *arg, t_game *data);
-void load_file(char *arg, t_game *data);
-void free_function(t_game *data);
+void parse_arg(char *arg, t_game *);
+void load_file(char *arg, t_game *);
+void free_function(t_game *);
 void print_map_grid(char **grid, int height);
-int open_file(char *arg, t_game *data);
-void parse_color_line(t_game *data, char *line);
-void store_path(t_game *data, char *line, char **dest);
-void parse_elements(t_game *data);
+int open_file(char *arg, t_game *);
+void parse_color_line(t_game *, char *line);
+void store_path(t_game *, char *line, char **dest);
+void parse_elements(t_game *);
 void free_split(char **grid_color);
-void parse_colors(t_game *data);
-
+void parse_colors(t_game *);
 int count_char_in_str(const char *str, char c);
-void parse_map(t_game *data);
+void parse_map(t_game *);
 int ft_array_size(char **array);
-void parse_items_map(t_game *data);
-void parse_validate_map(t_game *data);
+void parse_items_map(t_game *);
+void parse_validate_map(t_game *);
 void free_grid(char **grid, int height);
 char **duplicate_grid(char **grid, int height);
 int is_empty_line(char *line);
+// Render
+void render_wall(t_game *g, int x, t_ray_info *ray);
+// Load Textures
+void load_textures(t_game *g);
+void clean_exit(t_game *g, int exit_code);
+bool check_texture_sizes(int *w, int *h);
 
 // INIT GAME AND KEYS
-void init_player(t_game *data);
+void init_player(t_game *);
 void init_player_vectors(t_game *p);
 int key_press(int keycode, t_game *game);
 void move_forward(t_game *game);
@@ -168,6 +211,7 @@ void game_loop(t_game *game);
 int exit_game(t_game *game);
 void window_init(t_game *game, int width, int height);
 void rotate_view(t_game *g, double angle);
-// debugguer/testing
-void testing(t_game *data);
+// debugger/testing
+void testing(t_game *);
+void debug_render_test_wall(t_game *g, int i);
 #endif
