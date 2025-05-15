@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:47:40 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 19:00:25 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:14:18 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ bool check_texture_sizes(int *w, int *h)
     for (int i = 1; i < 4; i++)
     {
         if (w[i] != w[0] || h[i] != h[0])
-            return false;
+            return (false);
     }
-    return true;
+    return (true);
 }
 
 /**
