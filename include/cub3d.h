@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 17:09:52 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:36:10 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 #define FOV_COEF 0.66
 #define MOVE_SPEED 0.05
 
-#define SCREEN_WIDTH 1280 // Ancho en píxeles
-#define SCREEN_HEIGHT 720 // Alto en píxeles
+#define SCREEN_WIDTH 1280 // Ancho en px
+#define SCREEN_HEIGHT 720 // Alto en px
 
 // MOVEMENT
 #define KEY_W 119       // 'w'
