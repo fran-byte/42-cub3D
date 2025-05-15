@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:10:26 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 18:58:16 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:20:59 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,63 +19,63 @@
  * for player, map, elements, and image data before the game starts.
  */
 
-static void player_init(t_game *data)
+static void player_init(t_game *game)
 {
-    data->player.player_x = -1;
-    data->player.player_y = -1;
-    data->player.x = 0;
-    data->player.y = 0;
-    data->player.dir_x = 0;
-    data->player.dir_y = 0;
-    data->player.plane_x = 0;
-    data->player.plane_y = 0;
-    data->player.player_orientation = NORTH;
+    game->player.player_x = -1;
+    game->player.player_y = -1;
+    game->player.x = 0;
+    game->player.y = 0;
+    game->player.dir_x = 0;
+    game->player.dir_y = 0;
+    game->player.plane_x = 0;
+    game->player.plane_y = 0;
+    game->player.player_orientation = NORTH;
 }
 
-static void elements_init(t_game *data)
+static void elements_init(t_game *game)
 {
-    data->elem.north = 0;
-    data->elem.south = 0;
-    data->elem.east = 0;
-    data->elem.west = 0;
-    data->elem.floor = 0;
-    data->elem.ceiling = 0;
+    game->elem.north = 0;
+    game->elem.south = 0;
+    game->elem.east = 0;
+    game->elem.west = 0;
+    game->elem.floor = 0;
+    game->elem.ceiling = 0;
 }
 
-static void map_init(t_game *data)
+static void map_init(t_game *game)
 {
-    data->map.file = NULL;
-    data->map.map = NULL;
-    data->map.height_map = 0;
-    data->map.height_file = 0;
-    data->map.map_start_index = -1;
-    data->map.celing_color = -1;
-    data->map.floor_color = -1;
-    data->map.paths.north = NULL;
-    data->map.paths.south = NULL;
-    data->map.paths.east = NULL;
-    data->map.paths.west = NULL;
-    data->map.sprites.no = NULL;
-    data->map.sprites.su = NULL;
-    data->map.sprites.we = NULL;
-    data->map.sprites.ea = NULL;
+    game->map.file = NULL;
+    game->map.map = NULL;
+    game->map.height_map = 0;
+    game->map.height_file = 0;
+    game->map.map_start_index = -1;
+    game->map.celing_color = -1;
+    game->map.floor_color = -1;
+    game->map.paths.north = NULL;
+    game->map.paths.south = NULL;
+    game->map.paths.east = NULL;
+    game->map.paths.west = NULL;
+    game->map.sprites.no = NULL;
+    game->map.sprites.su = NULL;
+    game->map.sprites.we = NULL;
+    game->map.sprites.ea = NULL;
 }
 
-static void image_init(t_game *data)
+static void image_init(t_game *game)
 {
-    data->img.img = NULL;
-    data->img.addr = NULL;
-    data->img.bpp = 0;
-    data->img.line_len = 0;
-    data->img.endian = 0;
+    game->img.img = NULL;
+    game->img.addr = NULL;
+    game->img.bpp = 0;
+    game->img.line_len = 0;
+    game->img.endian = 0;
 }
 
-void init_game(t_game *data)
+void init_game(t_game *game)
 {
-    data->mlx = NULL;
-    data->window = NULL;
-    map_init(data);
-    player_init(data);
-    elements_init(data);
-    image_init(data);
+    game->mlx = NULL;
+    game->window = NULL;
+    map_init(game);
+    player_init(game);
+    elements_init(game);
+    image_init(game);
 }

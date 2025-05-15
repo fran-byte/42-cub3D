@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:08:51 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 18:51:50 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:23:41 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static void add_orientation(t_game *game, int *x, int *y, int *player)
  *
  * Frees allocated memory, shows an error message, and exits the program.
  *
- * @param data Pointer to the main game structure.
+ * @param game Pointer to the main game structure.
  */
-static void error_items(t_game *data)
+static void error_items(t_game *game)
 {
     report_err(MAP_ITENS_ERR);
-    free_function(data);
+    free_function(game);
     exit(EXIT_FAILURE);
 }
 

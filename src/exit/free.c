@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 11:32:33 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 19:10:50 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:19:20 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,30 @@
 /**
  * @brief Frees memory allocated for texture file paths.
  *
- * @param data Pointer to the game data structure.
+ * @param game Pointer to the game data structure.
  */
-static void free_texture_paths(t_game *data)
+static void free_texture_paths(t_game *game)
 {
 
-    if (data->map.paths.north)
+    if (game->map.paths.north)
     {
-        free(data->map.paths.north);
-        data->map.paths.north = NULL;
+        free(game->map.paths.north);
+        game->map.paths.north = NULL;
     }
-    if (data->map.paths.south)
+    if (game->map.paths.south)
     {
-        free(data->map.paths.south);
-        data->map.paths.south = NULL;
+        free(game->map.paths.south);
+        game->map.paths.south = NULL;
     }
-    if (data->map.paths.west)
+    if (game->map.paths.west)
     {
-        free(data->map.paths.west);
-        data->map.paths.west = NULL;
+        free(game->map.paths.west);
+        game->map.paths.west = NULL;
     }
-    if (data->map.paths.east)
+    if (game->map.paths.east)
     {
-        free(data->map.paths.east);
-        data->map.paths.east = NULL;
+        free(game->map.paths.east);
+        game->map.paths.east = NULL;
     }
 }
 
@@ -92,12 +92,12 @@ void free_map(t_map *map)
  *
  * @param data Pointer to the game data structure to free.
  */
-void free_function(t_game *data)
+void free_function(t_game *game)
 {
-    if (data != NULL)
+    if (game != NULL)
     {
-        free_map(&data->map);
-        free_texture_paths(data);
+        free_map(&game->map);
+        free_texture_paths(game);
 
         /*Liberar otros miembros de t_game (como mlx, window, etc.)
          if (game->mlx != NULL)

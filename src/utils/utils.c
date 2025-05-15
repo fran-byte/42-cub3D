@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 19:32:50 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 19:08:20 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:28:18 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
  * Exits the program if the file cannot be opened.
  *
  * @param arg The path to the file.
- * @param data Pointer to the game data structure for cleanup on error.
+ * @param game Pointer to the game data structure for cleanup on error.
  * @return File descriptor of the opened file.
  */
-int open_file(char *arg, t_game *data)
+int open_file(char *arg, t_game *game)
 {
     int fd;
 
@@ -29,7 +29,7 @@ int open_file(char *arg, t_game *data)
     if (fd < 0)
     {
         report_err(OPEN_FILE_ERR);
-        free_function(data);
+        free_function(game);
         exit(EXIT_FAILURE);
     }
     return (fd);

@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 18:29:10 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 18:53:09 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:25:16 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
  * is accessible, and stores it in the destination pointer.
  * Exits on memory allocation or access error.
  *
- * @param data Pointer to the game data structure.
+ * @param game Pointer to the game data structure.
  * @param line The line containing the texture directive and path.
  * @param dest Pointer to where the extracted path will be stored.
  */
-void store_path(t_game *data, char *line, char **dest)
+void store_path(t_game *game, char *line, char **dest)
 {
     char *path;
 
@@ -31,14 +31,14 @@ void store_path(t_game *data, char *line, char **dest)
     if (!path)
     {
         report_err(MALLOC_ERR);
-        free_function(data);
+        free_function(game);
         exit(EXIT_FAILURE);
     }
     if (access(path, R_OK) != 0)
     {
         free(path);
         report_err(TEXTURE_FILE_ERR);
-        free_function(data);
+        free_function(game);
         exit(EXIT_FAILURE);
     }
     *dest = path;

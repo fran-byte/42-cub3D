@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 23:43:36 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 18:57:19 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:26:26 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
  * frees all game resources, and exits.
  *
  * @param fd File descriptor of the opened file.
- * @param data Pointer to the main game structure.
+ * @param game Pointer to the main game structure.
  */
-static void util_exit_fill_file_grid(int fd, t_game *data)
+static void util_exit_fill_file_grid(int fd, t_game *game)
 {
     report_err(MALLOC_ERR);
     close(fd);
-    free_function(data);
+    free_function(game);
     exit(EXIT_FAILURE);
 }
 
@@ -34,39 +34,39 @@ static void util_exit_fill_file_grid(int fd, t_game *data)
  * @brief Fills the file grid with lines read from the .cub file.
  *
  * Reads each line from the specified file and stores it in
- * the `data->map.file` array for later parsing.
+ * the `game->map.file` array for later parsing.
  *
  * @param arg Path to the .cub file.
- * @param data Pointer to the main game structure.
+ * @param game Pointer to the main game structure.
  */
-static void fill_file_grid(char *arg, t_game *data)
+static void fill_file_grid(char *arg, t_game *game)
 {
     char *line;
     int i;
     int fd;
     int len;
 
-    fd = open_file(arg, data);
+    fd = open_file(arg, game);
     i = 0;
     line = get_next_line(fd);
 
-    while (line != NULL && i < data->map.height_file)
+    while (line != NULL && i < game->map.height_file)
     {
         len = ft_strlen(line);
         if (len > 0 && line[len - 1] == '\n')
             line[len - 1] = '\0';
 
-        data->map.file[i] = malloc(len + 1);
-        if (!data->map.file[i])
-            util_exit_fill_file_grid(fd, data);
+        game->map.file[i] = malloc(len + 1);
+        if (!game->map.file[i])
+            util_exit_fill_file_grid(fd, game);
 
-        ft_strlcpy(data->map.file[i], line, len + 1);
+        ft_strlcpy(game->map.file[i], line, len + 1);
         free(line);
         line = get_next_line(fd);
         i++;
     }
 
-    data->map.file[i] = NULL;
+    game->map.file[i] = NULL;
     close(fd);
 }
 
@@ -74,21 +74,21 @@ static void fill_file_grid(char *arg, t_game *data)
  * @brief Calculates the number of lines in the .cub file.
  *
  * Iterates through the file to count how many lines it contains
- * and stores the result in `data->map.height_file`.
+ * and stores the result in `game->map.height_file`.
  *
  * @param fd File descriptor of the opened file.
- * @param data Pointer to the main game structure.
+ * @param game Pointer to the main game structure.
  */
-void get_height_map(int fd, t_game *data)
+void get_height_map(int fd, t_game *game)
 {
     char *line;
 
-    data->map.height_file = 0;
+    game->map.height_file = 0;
     line = get_next_line(fd);
 
     while (line != NULL)
     {
-        data->map.height_file++;
+        game->map.height_file++;
         free(line);
         line = get_next_line(fd);
     }
@@ -99,37 +99,37 @@ void get_height_map(int fd, t_game *data)
 /**
  * @brief Loads the content of the .cub file into memory.
  *
- * Allocates memory for `data->map.file`, calculates the height,
+ * Allocates memory for `game->map.file`, calculates the height,
  * and fills the grid with the file's contents.
  *
  * @param arg Path to the .cub file.
- * @param data Pointer to the main game structure.
+ * @param game Pointer to the main game structure.
  */
-void load_file(char *arg, t_game *data)
+void load_file(char *arg, t_game *game)
 {
     int fd;
     int i;
 
-    fd = open_file(arg, data);
-    get_height_map(fd, data);
+    fd = open_file(arg, game);
+    get_height_map(fd, game);
 
-    data->map.file = malloc(sizeof(char *) * (data->map.height_file + 1));
-    if (!data->map.file)
+    game->map.file = malloc(sizeof(char *) * (game->map.height_file + 1));
+    if (!game->map.file)
     {
         report_err(MALLOC_ERR);
         close(fd);
-        free_function(data);
+        free_function(game);
         exit(EXIT_FAILURE);
     }
 
     i = 0;
-    while (i <= data->map.height_file)
+    while (i <= game->map.height_file)
     {
-        data->map.file[i] = NULL;
+        game->map.file[i] = NULL;
         i++;
     }
 
-    fill_file_grid(arg, data);
+    fill_file_grid(arg, game);
 }
 
 /**
@@ -139,9 +139,9 @@ void load_file(char *arg, t_game *data)
  * the map elements and structure.
  *
  * @param arg Path to the .cub file.
- * @param data Pointer to the main game structure.
+ * @param game Pointer to the main game structure.
  */
-void parse_arg(char *arg, t_game *data)
+void parse_arg(char *arg, t_game *game)
 {
     int ln;
 
@@ -150,11 +150,11 @@ void parse_arg(char *arg, t_game *data)
           arg[ln - 4] == '.'))
     {
         report_err(SYNTAX_ERR);
-        free_function(data);
+        free_function(game);
         exit(EXIT_FAILURE);
     }
 
-    load_file(arg, data);
-    parse_elements(data);
-    parse_map(data);
+    load_file(arg, game);
+    parse_elements(game);
+    parse_map(game);
 }
