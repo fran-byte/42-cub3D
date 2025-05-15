@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:43:11 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 13:41:20 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:43:53 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void load_textures(t_game *g)
         free_error(g);
     g->map.sprites.we =
         mlx_xpm_file_to_image(g->mlx, g->map.paths.west, &tex_w, &tex_h);
-    if (!g->map.sprites.no)
+    if (!g->map.sprites.we)
         free_error(g);
     g->map.sprites.ea =
         mlx_xpm_file_to_image(g->mlx, g->map.paths.east, &tex_w, &tex_h);
-    if (!g->map.sprites.su)
+    if (!g->map.sprites.ea)
         free_error(g);
 }
