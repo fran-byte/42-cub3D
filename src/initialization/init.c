@@ -6,11 +6,11 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:10:26 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 17:11:09 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:25:44 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 static void player_init(t_game *data)
 {
