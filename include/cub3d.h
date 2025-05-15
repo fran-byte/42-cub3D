@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 13:50:08 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:00:03 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@
 #define TEXTURE_LOADING_ERROR "Texture loading Error"
 
 /* STRUCTURES */
-// Estructura para render_walls.c (reder_wall())
+
+// Estructura especial contener mas variables para render_walls.c (reder_wall())
 typedef struct s_wall_info
 {
     int x;
