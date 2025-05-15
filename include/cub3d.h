@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 14:00:03 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:24:58 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ void render_wall(t_game *g, int x, t_ray_info *ray);
 // Load Textures
 void load_textures(t_game *g);
 void clean_exit(t_game *g, int exit_code);
+bool check_texture_sizes(int *w, int *h);
 
 // INIT GAME AND KEYS
 void init_player(t_game *data);

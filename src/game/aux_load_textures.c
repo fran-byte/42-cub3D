@@ -6,34 +6,20 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:47:40 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 14:18:58 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:24:59 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static bool check_texture_sizes(t_game *g)
+bool check_texture_sizes(int *w, int *h)
 {
-    int widths[4];
-    int heights[4];
-    int i;
-
-    i = 1;
-    mlx_get_data_addr(g->map.sprites.no, &g->img.bpp, &widths[0],
-                      &g->img.endian);
-    mlx_get_data_addr(g->map.sprites.su, &g->img.bpp, &widths[1],
-                      &g->img.endian);
-    mlx_get_data_addr(g->map.sprites.ea, &g->img.bpp, &widths[2],
-                      &g->img.endian);
-    mlx_get_data_addr(g->map.sprites.we, &g->img.bpp, &widths[3],
-                      &g->img.endian);
-    while (i < 4)
+    for (int i = 1; i < 4; i++)
     {
-        if (widths[i] != widths[0] || heights[i] != heights[0])
+        if (w[i] != w[0] || h[i] != h[0])
             return false;
-        i++;
     }
-    return (true);
+    return true;
 }
 
 void clean_exit(t_game *g, int exit_code)
