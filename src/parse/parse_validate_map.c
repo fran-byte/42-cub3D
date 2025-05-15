@@ -6,12 +6,21 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 08:43:36 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/12 17:49:41 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:55:23 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+/**
+ * @brief Finds the initial player position in the map.
+ *
+ * Replaces the position in the map with '0' once located.
+ *
+ * @param data Pointer to the game structure.
+ * @param x Pointer to store the player's x-coordinate.
+ * @param y Pointer to store the player's y-coordinate.
+ */
 static void find_player_position(t_game *data, int *x, int *y)
 {
     *y = 0;
@@ -33,6 +42,14 @@ static void find_player_position(t_game *data, int *x, int *y)
     }
 }
 
+/**
+ * @brief Checks if a coordinate is within the map bounds.
+ *
+ * @param data Pointer to the game structure.
+ * @param x X-coordinate to validate.
+ * @param y Y-coordinate to validate.
+ * @return 1 if valid, 0 if out of bounds.
+ */
 static int is_valid_position(t_game *data, int x, int y)
 {
     if (x < 0 || y < 0 || y >= data->map.height_map ||
@@ -41,12 +58,29 @@ static int is_valid_position(t_game *data, int x, int y)
     return (1);
 }
 
+/**
+ * @brief Checks if a map character is walkable.
+ *
+ * @param c Character from the map grid.
+ * @return 1 if character is traversable, 0 otherwise.
+ */
 static int is_traversable(char c)
 {
     return (c == '0' || c == ' ' || c == 'N' || c == 'S' || c == 'E' ||
             c == 'W');
 }
 
+/**
+ * @brief Recursively checks that the map is properly enclosed.
+ *
+ * Performs a flood fill from the player's position to ensure no leaks.
+ *
+ * @param data Pointer to the game structure.
+ * @param grid Copy of the map to validate.
+ * @param x Current x-coordinate being checked.
+ * @param y Current y-coordinate being checked.
+ * @return 1 if map is valid, 0 if invalid or open.
+ */
 static int check_map_borders(t_game *data, char **grid, int x, int y)
 {
     if (!is_valid_position(data, x, y))
@@ -69,6 +103,14 @@ static int check_map_borders(t_game *data, char **grid, int x, int y)
     return (1);
 }
 
+/**
+ * @brief Validates the overall structure of the map.
+ *
+ * Ensures the map is closed and the player's position is valid.
+ * Exits if validation fails.
+ *
+ * @param data Pointer to the game structure.
+ */
 void parse_validate_map(t_game *data)
 {
     char **temp_grid;

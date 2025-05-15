@@ -6,12 +6,21 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:33:15 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 16:00:43 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:05:42 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+/**
+ * @brief Renders a complete frame by casting rays and drawing walls.
+ *
+ * This function clears the previous frame, performs raycasting to determine
+ * wall positions and textures, renders all vertical wall slices, and updates
+ * the window with the new image.
+ *
+ * @param g Pointer to the main game structure containing all rendering info.
+ */
 void render_frame(t_game *g)
 {
     int x;

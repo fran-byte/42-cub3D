@@ -6,11 +6,18 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:10:26 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 17:25:44 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:58:16 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+/*
+ * Initializes all main structures of the game.
+ *
+ * This file contains functions to set initial default values
+ * for player, map, elements, and image data before the game starts.
+ */
 
 static void player_init(t_game *data)
 {

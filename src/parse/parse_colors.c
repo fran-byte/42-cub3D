@@ -14,6 +14,9 @@
 
 #include "../../include/cub3d.h"
 
+/**
+ * @brief Frees memory and exits on color format error.
+ */
 static void exit_error_color(t_game *data, char **grid)
 {
     if (grid)
@@ -23,6 +26,9 @@ static void exit_error_color(t_game *data, char **grid)
     exit(EXIT_FAILURE);
 }
 
+/**
+ * @brief Returns 1 if the string is numeric, 0 otherwise.
+ */
 static int is_numeric(const char *str)
 {
     while (*str)
@@ -34,6 +40,15 @@ static int is_numeric(const char *str)
     return (1);
 }
 
+/**
+ * @brief Parses an RGB color line from the map file.
+ *
+ * Validates and extracts RGB values from a string (e.g., "F 220,100,0").
+ * Ensures values are numeric and within the 0–255 range. Exits on error.
+ *
+ * @param data Pointer to the main game structure.
+ * @param line The line containing the color definition.
+ */
 void parse_color_line(t_game *data, char *line)
 {
     char **rgb;

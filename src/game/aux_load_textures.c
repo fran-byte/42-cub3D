@@ -6,12 +6,24 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:47:40 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 15:24:59 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:00:25 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+/**
+ * @brief Verifies that all texture sizes match.
+ *
+ * This function compares the width and height of all loaded textures to ensure
+ * they are consistent. Only the first four textures are considered (indexed 0
+ * to 3).
+ *
+ * @param w Array of texture widths.
+ * @param h Array of texture heights.
+ * @return true if all textures have the same width and height as the first one,
+ * false otherwise.
+ */
 bool check_texture_sizes(int *w, int *h)
 {
     for (int i = 1; i < 4; i++)
@@ -22,6 +34,15 @@ bool check_texture_sizes(int *w, int *h)
     return true;
 }
 
+/**
+ * @brief Cleans up allocated resources and exits the program.
+ *
+ * This function destroys loaded textures and frees all allocated memory
+ * before exiting the program with the given exit code.
+ *
+ * @param g Pointer to the main game structure.
+ * @param exit_code Exit status code to return to the operating system.
+ */
 void clean_exit(t_game *g, int exit_code)
 {
     if (g->map.sprites.no)

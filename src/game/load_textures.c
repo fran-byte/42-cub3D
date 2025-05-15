@@ -6,12 +6,19 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:43:11 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 15:25:02 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:59:28 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+/**
+ * @brief Frees allocated resources and exits the program on texture loading
+ * error.
+ *
+ * @param game Pointer to the main game structure that holds allocated
+ * resources.
+ */
 static void free_error(t_game *game)
 {
     report_err(TEXTURE_LOADING_ERROR);
@@ -19,6 +26,18 @@ static void free_error(t_game *game)
     exit(EXIT_FAILURE);
 }
 
+/**
+ * @brief Loads wall textures from XPM files using MiniLibX.
+ *
+ * This function attempts to load all four wall textures (north, south, west,
+ * east) into the game structure using paths previously stored. It also checks
+ * if the textures were loaded successfully and have valid dimensions.
+ *
+ * If any texture fails to load or if the dimensions are incorrect,
+ * the program will exit using free_error().
+ *
+ * @param g Pointer to the main game structure.
+ */
 void load_textures(t_game *g)
 {
     int tex_w[4];
