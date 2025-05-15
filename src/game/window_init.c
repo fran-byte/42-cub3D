@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 22:34:10 by user              #+#    #+#             */
-/*   Updated: 2025/05/15 16:29:49 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:51:20 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void window_init(t_game *game, int width, int height)
         exit(EXIT_FAILURE);
     }
 
-    load_textures(game); // AÑADIDA *********************
-
     game->window = mlx_new_window(game->mlx, width, height, "Cub3D");
     if (!game->window)
     {
@@ -32,8 +30,10 @@ void window_init(t_game *game, int width, int height)
         free_function(game);
         exit(EXIT_FAILURE);
     }
+
     game->img.img = mlx_new_image(game->mlx, width,
                                   height); // AÑADIDA
     game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp, // AÑADIDA
                                        &game->img.line_len, &game->img.endian);
+    load_textures(game); // AÑADIDA *********************
 }
