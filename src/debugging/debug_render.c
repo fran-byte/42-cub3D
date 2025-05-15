@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 19:27:59 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 11:28:38 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 11:37:58 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * Dibuja una línea vertical en la columna 'x' desde 'start_y' hasta 'end_y' con
  * un color. Usaremos esto para simular paredes.
  */
-void draw_vertical_line(t_game *g, int x, int start_y, int end_y, int color)
+static void draw_vert_line(t_game *g, int x, int start_y, int end_y, int color)
 {
     int y;
 
@@ -55,7 +55,7 @@ void debug_render_test_wall(t_game *g, int i)
 
     while (z < 100)
     {
-        draw_vertical_line(g, wall_x + z, draw_start + z, draw_end + z, color);
+        draw_vert_line(g, wall_x + z, draw_start + z, draw_end + z, color);
         z = z + 10;
     }
 }

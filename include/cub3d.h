@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 11:30:21 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 13:50:08 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,20 @@
 #define MLX_INIT_ERR "mlx_init failed"
 #define MLX_NEW_WINDOW_ERR "mlx_new_window failed"
 #define MLX_OR_WINDOW_ERR "mlx or window not initialized"
+#define TEXTURE_LOADING_ERROR "Texture loading Error"
 
 /* STRUCTURES */
-
-typedef struct s_ray_info
+// Estructura para render_walls.c (reder_wall())
+typedef struct s_wall_info
 {
-    double distance; // distancia corregida (sin fisheye)
-    int wall_height; // altura de la pared proyectada en pantalla
-    int draw_start;  // dónde empieza a pintar
-    int draw_end;    // dónde termina
-    int tex_x;       // qué columna de textura usar
-    int wall_dir;    // dirección de la pared (N, S, E, O)
-} t_ray_info;
+    int x;
+    int tex_width;
+    int *texture;
+    int tex_x;
+    double step;
+    double tex_pos;
+    int y;
+} t_wall_info;
 
 typedef struct s_elem
 {
@@ -102,6 +104,25 @@ typedef enum e_orientation
     NORTH,
     SOUTH
 } t_orientation;
+
+typedef struct s_ray_info
+{
+    double distance;        // distancia corregida (sin fisheye)
+    int wall_height;        // altura de la pared proyectada en pantalla
+    int draw_start;         // dónde empieza a pintar
+    int draw_end;           // dónde termina
+    int tex_x;              // qué columna de textura usar
+    t_orientation wall_dir; // dirección de la pared (N, S, E, O)
+} t_ray_info;
+
+typedef struct s_img
+{
+    void *img;    // Puntero a la imagen de MLX
+    char *addr;   // Dirección de memoria de los píxeles
+    int bpp;      // Bits por píxel (ej: 32 para ARGB)
+    int line_len; // Bytes por línea horizontal
+    int endian;   // Formato de color (little/big endian)
+} t_img;
 
 typedef struct s_player
 {
@@ -138,15 +159,6 @@ typedef struct s_map
 
 } t_map;
 
-/*typedef struct s_img
-{
-    void *img;    // Puntero a la imagen de MLX
-    char *addr;   // Dirección del buffer de píxeles
-    int bpp;      // Bits por píxel (ej: 32 para ARGB)
-    int line_len; // Bytes por línea (¡importante!)
-    int endian;   // Orden de bytes (little/big endian)
-} t_img;*/
-
 typedef struct s_game
 {
     t_map map;
@@ -154,7 +166,7 @@ typedef struct s_game
     void *window;
     t_player player;
     t_elem elem;
-    // t_img img;
+    t_img img;
     //  int game_over;
 } t_game;
 
@@ -180,6 +192,11 @@ void parse_validate_map(t_game *data);
 void free_grid(char **grid, int height);
 char **duplicate_grid(char **grid, int height);
 int is_empty_line(char *line);
+// Render
+void render_wall(t_game *g, int x, t_ray_info *ray);
+// Load Textures
+void load_textures(t_game *g);
+void clean_exit(t_game *g, int exit_code);
 
 // INIT GAME AND KEYS
 void init_player(t_game *data);
