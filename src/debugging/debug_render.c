@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 19:27:59 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/14 20:16:11 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 11:28:38 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,26 @@ void draw_vertical_line(t_game *g, int x, int start_y, int end_y, int color)
  */
 void debug_render_test_wall(t_game *g, int i)
 {
-    int color;
-    int wall_x = SCREEN_WIDTH / 2;                      // Columna central
-    int wall_height = SCREEN_HEIGHT / 2;                // Altura fija
-    int draw_start = (SCREEN_HEIGHT - wall_height) / 2; // Centrar verticalmente
-    int draw_end = draw_start + wall_height;
+    int color = 0x000000;
+
+    int wall_x;
+    int wall_height;
+    int draw_start;
+    int draw_end;
+    int z = 0;
+
+    wall_x = SCREEN_WIDTH / 2;                      // Columna central
+    wall_height = SCREEN_HEIGHT / 3;                // Altura fija
+    draw_start = (SCREEN_HEIGHT - wall_height) / 2; // Centrar verticalmente
+    draw_end = draw_start + wall_height;
     if (i == 1)
         color = 0xFF0000; // Color Rojo
-    if (i == 2)
-        color = 0xFFFF00; // Color Amarillo
+    else if (i == 2)
+        color = 0x000000; // Color Negro
 
-    draw_vertical_line(g, wall_x, draw_start, draw_end, color);
+    while (z < 100)
+    {
+        draw_vertical_line(g, wall_x + z, draw_start + z, draw_end + z, color);
+        z = z + 10;
+    }
 }

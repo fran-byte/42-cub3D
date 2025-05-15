@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/14 20:18:12 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 11:30:21 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void game_loop(t_game *game);
 int exit_game(t_game *game);
 void window_init(t_game *game, int width, int height);
 void rotate_view(t_game *g, double angle);
-// debugguer/testing
+// debugger/testing
 void testing(t_game *data);
 void debug_render_test_wall(t_game *g, int i);
 #endif
