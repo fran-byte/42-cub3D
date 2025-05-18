@@ -14,66 +14,60 @@
 
 #include "../../include/cub3d.h"
 
-static void is_numeric_grid(t_game *data, char **grid_color)
+/**
+ * @brief Frees memory and exits on color format error.
+ */
+static void exit_error_color(t_game *game, char **grid)
 {
-	int i;
-
-	i = 0;
-	while (grid_color[i])
-	{
-		if (!is_numeric(grid_color[i]))
-		{
-			free_split(grid_color);
-			report_err(FORMAT_COLOR);
-			free_function(data);
-			exit(EXIT_FAILURE);
-		}
-		i++;
-	}
+    if (grid)
+        free_split(grid);
+    report_err(FORMAT_COLOR_ERR);
+    free_function(game);
+    exit(EXIT_FAILURE);
 }
 
-static void exit_error_color(t_game *data, char **grid)
+/**
+ * @brief Returns 1 if the string is numeric, 0 otherwise.
+ */
+static int is_numeric(const char *str)
 {
-	if (grid)
-		free_split(grid);
-	report_err(FORMAT_COLOR);
-	free_function(data);
-	exit(EXIT_FAILURE);
+    while (*str)
+    {
+        if (!ft_isdigit(*str))
+            return (0);
+        str++;
+    }
+    return (1);
 }
 
-static void parse_color_line(t_game *data, char *line)
+/**
+ * @brief Parses an RGB color line from the map file.
+ *
+ * Validates and extracts RGB values from a string (e.g., "F 220,100,0").
+ * Ensures values are numeric and within the 0–255 range. Exits on error.
+ *
+ * @param game Pointer to the main game structure.
+ * @param line The line containing the color definition.
+ */
+void parse_color_line(t_game *game, char *line)
 {
-	char **rgb;
-	int r;
-	int g;
-	int b;
+    char **rgb;
+    int r;
+    int g;
+    int b;
 
-	r = 0;
-	g = 0;
-	b = 0;
-	rgb = ft_split(line + 2, ',');
-	if (!rgb || ft_array_size(rgb) != 3)
-		exit_error_color(data, rgb);
-	is_numeric_grid(data, rgb);
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		exit_error_color(data, rgb);
-	free_split(rgb);
-}
-
-void parse_colors(t_game *data)
-{
-
-	if (!data->map.file[5] || !data->map.file[6])
-		exit_error_color(data, NULL);
-	if (data->map.file[5][0] == 'C' && data->map.file[6][0] == 'F' && data->map.file[6][1] == ' ')
-		parse_color_line(data, data->map.file[6]);
-	else if (data->map.file[5][0] == 'F' && data->map.file[6][0] == 'C' && data->map.file[6][1] == ' ')
-		parse_color_line(data, data->map.file[6]);
-	else
-		exit_error_color(data, NULL);
-	if ((count_char_in_str(data->map.file[5] + 2, ',') > 2) || (count_char_in_str(data->map.file[6] + 2, ',') > 2))
-		exit_error_color(data, NULL);
+    r = 0;
+    g = 0;
+    b = 0;
+    rgb = ft_split(line + 2, ',');
+    if (!rgb || ft_array_size(rgb) != 3)
+        exit_error_color(game, rgb);
+    if (!is_numeric(rgb[0]) || !is_numeric(rgb[1]) || !is_numeric(rgb[2]))
+        exit_error_color(game, rgb);
+    r = ft_atoi(rgb[0]);
+    g = ft_atoi(rgb[1]);
+    b = ft_atoi(rgb[2]);
+    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+        exit_error_color(game, rgb);
+    free_split(rgb);
 }
