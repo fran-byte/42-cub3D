@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:17:52 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 18:41:37 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:22:54 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int main(int argc, char **argv)
     init_game(&game);
     parse_arg(argv[1], &game);
     init_player(&game);
-    testing(&game); // ****** DEBUG
-    window_init(&game, 800, 600);
+    // testing(&game); // ****** DEBUG
+    window_init(&game, SCREEN_WIDTH, SCREEN_HEIGHT);
     game_loop(&game);
     free_function(&game);
     return (0);

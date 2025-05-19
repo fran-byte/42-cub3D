@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 17:36:10 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:45:36 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 
 #define KEY_K 107 // 'k' DEBUG*******************BORRAR
 #define KEY_L 108 // 'l' DEBUG*******************BORRAR
+#define KEY_C 99  // 'c'
 
 /* ERRORS */
 #define SYNTAX_ERR "You must use this: ./cub3d <the_path/to/map.cub>"
@@ -153,12 +154,28 @@ typedef struct s_map
     int height_file;
     char **map;
     int height_map;
-    int celing_color;
+    int ceiling_color;
     int floor_color;
     t_paths paths;
     t_sprites sprites;
 
 } t_map;
+
+typedef struct s_ray_vars
+{
+    double camera_x;
+    double ray_dir_x;
+    double ray_dir_y;
+    int map_x;
+    int map_y;
+    double side_dist_x;
+    double side_dist_y;
+    double delta_dist_x;
+    double delta_dist_y;
+    int step_x;
+    int step_y;
+    int side; // 0 si golpea en X, 1 en Y
+} t_ray_vars;
 
 typedef struct s_game
 {
@@ -194,6 +211,15 @@ char **duplicate_grid(char **grid, int height);
 int is_empty_line(char *line);
 // Render
 void render_wall(t_game *g, int x, t_ray_info *ray);
+void calculate_raycasting(t_game *g, t_ray_info rays[]);
+void init_ray(t_game *g, int x, t_ray_vars *v);
+void perform_dda(t_game *g, t_ray_vars *v);
+void compute_wall_info(t_game *g, t_ray_info *ray, t_ray_vars *v);
+void compute_wall_orientation(t_ray_info *ray, t_ray_vars *v);
+void render_frame(t_game *g);
+void render_floor(t_game *g, int y_start, int color);
+void render_ceiling(t_game *g, int y_end, int color);
+
 // Load Textures
 void load_textures(t_game *g);
 void clean_exit(t_game *g, int exit_code);
@@ -214,4 +240,5 @@ void rotate_view(t_game *g, double angle);
 // debugger/testing
 void testing(t_game *);
 void debug_render_test_wall(t_game *g, int i);
+void debug_print_column(t_ray_info rays[]);
 #endif

@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/05/15 18:39:56 by frromero         ###   ########.fr        #
+#    Updated: 2025/05/19 17:12:20 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,7 @@ SRCS := \
 	$(SRC_DIR)/debugging/print_grid.c \
 	$(SRC_DIR)/debugging/testing.c \
 	$(SRC_DIR)/debugging/debug_render.c \
+	$(SRC_DIR)/debugging/debug_screen_columns.c \
 	$(SRC_DIR)/game/window_init.c \
 	$(SRC_DIR)/game/load_textures.c \
 	$(SRC_DIR)/game/aux_load_textures.c \
@@ -111,6 +112,10 @@ SRCS := \
 	$(SRC_DIR)/player/rotation.c \
 	$(SRC_DIR)/render/render.c \
 	$(SRC_DIR)/render/render_walls.c \
+	$(SRC_DIR)/render/compute_wall.c \
+	$(SRC_DIR)/render/perform_dda.c \
+	$(SRC_DIR)/render/ray_init.c \
+	$(SRC_DIR)/render/raycasting.c \
 	$(SRC_DIR)/utils/utils.c \
 	$(SRC_DIR)/utils/utils_2.c \
 	$(SRC_DIR)/exit/free.c
