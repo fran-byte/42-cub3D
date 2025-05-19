@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:10:26 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/19 19:31:51 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/19 19:48:25 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static void map_init(t_game *game)
     game->map.height_map = 0;
     game->map.height_file = 0;
     game->map.map_start_index = -1;
-    game->map.ceiling_color = 0x149288;
-    game->map.floor_color = 0x3e352b;
+    game->map.ceiling_color = 0xa3b9a9;
+    game->map.floor_color = 0x3b3630;
     game->map.paths.north = NULL;
     game->map.paths.south = NULL;
     game->map.paths.east = NULL;
