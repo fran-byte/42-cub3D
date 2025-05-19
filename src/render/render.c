@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:33:15 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/19 18:46:07 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:17:49 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void render_frame(t_game *g)
 
     // 1. Calcular raycasting
     calculate_raycasting(g, rays);
-    debug_print_column(rays);
-    // 2. Renderizar techo (usando color del .cub)
+    // debug_print_column(rays);
+    //  2. Renderizar techo (usando color del .cub)
     render_ceiling(g, SCREEN_HEIGHT / 2, g->map.ceiling_color);
 
     // 3. Renderizar suelo (usando color del .cub)
