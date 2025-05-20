@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 11:32:33 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 19:19:20 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:39:42 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	free_texture_paths(t_game *game)
  */
 void	free_char_matrix(char **matrix, int height)
 {
-		int i;
+	int	i;
 
 	if (matrix != NULL)
 	{
@@ -81,7 +81,6 @@ void	free_map(t_map *map)
 		{
 			free_char_matrix(map->map, map->height_map);
 		}
-		/* Si t_sprites necesitan liberación, hacerlo aquí*/
 	}
 }
 
@@ -96,11 +95,5 @@ void	free_function(t_game *game)
 	{
 		free_map(&game->map);
 		free_texture_paths(game);
-		/*Liberar otros miembros de t_game (como mlx, window, etc.)
-			if (game->mlx != NULL)
-			{
-					mlx_destroy_window(game->mlx, game->window);
-			}
-			free(game);*/
 	}
 }

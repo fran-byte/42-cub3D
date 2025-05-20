@@ -24,21 +24,21 @@
  * @param game Pointer to main game structure containing player and state
  * @return int Always returns 0 (MLX hook convention)
  */
-int key_press(int keycode, t_game *game)
+int	key_press(int keycode, t_game *game)
 {
-    if (keycode == KEY_ESC)
-        exit_game(game);
-    if (keycode == KEY_W)
-        move_forward(game);
-    if (keycode == KEY_S)
-        move_backward(game);
-    if (keycode == KEY_A)
-        move_left(game);
-    if (keycode == KEY_D)
-        move_right(game);
-    if (keycode == KEY_LEFT)
-        rotate_view(game, -MOVE_SPEED);
-    if (keycode == KEY_RIGHT)
-        rotate_view(game, +MOVE_SPEED);
-    return (0);
+	if (keycode == KEY_ESC)
+		exit_game(game);
+	if (keycode == KEY_W)
+		move_forward(game);
+	if (keycode == KEY_S)
+		move_backward(game);
+	if (keycode == KEY_A)
+		move_left(game);
+	if (keycode == KEY_D)
+		move_right(game);
+	if (keycode == KEY_LEFT)
+		rotate_view(game, -MOVE_SPEED);
+	if (keycode == KEY_RIGHT)
+		rotate_view(game, +MOVE_SPEED);
+	return (0);
 }

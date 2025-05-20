@@ -22,9 +22,9 @@
  *
  * @param game Pointer to the main game structure containing player data
  */
-void init_player(t_game *game)
+void	init_player(t_game *game)
 {
-    game->player.x = game->player.player_x;
-    game->player.y = game->player.player_y;
-    init_player_vectors(game);
+	game->player.x = game->player.player_x;
+	game->player.y = game->player.player_y;
+	init_player_vectors(game);
 }

@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/20 19:51:43 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:37:10 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 # define ELEMENT_FORMAT_ERR "Invalid map format"
 # define MISSING_ELEMENT_ERR "Invalid map format (Missing Elements)"
 # define MAP_VOID_ERR "Invalid map format (void)"
-# define ORIENTATION_FILE_ERR "Invalid Orinetation format (valid: NO textures/wall_1.xpm)"
+# define ORIENTATION_FILE_ERR "Invalid Orinetation format (valid: wall_1.xpm)"
 # define TEXTURE_FILE_ERR "The texture file does not exist or is not accessible"
 # define FORMAT_COLOR_ERR "Invalid color format (valid example: C 255,128,0)"
 # define MAP_ITENS_ERR "Invalid map format (Items)"
@@ -232,27 +232,27 @@ typedef struct s_game
 /* ************************************************************************** */
 /*                        Core game initialization                           */
 /* ************************************************************************** */
-void				init_game(t_game *);
+void				init_game(t_game *game);
 int					report_err(char *str);
-void				parse_arg(char *arg, t_game *);
-void				load_file(char *arg, t_game *);
-void				free_function(t_game *);
+void				parse_arg(char *arg, t_game *game);
+void				load_file(char *arg, t_game *game);
+void				free_function(t_game *game);
 
 /* ************************************************************************** */
 /*                          Map parsing utilities                            */
 /* ************************************************************************** */
 void				print_map_grid(char **grid, int height);
-int					open_file(char *arg, t_game *);
-int					parse_color_line(t_game *, char *line);
-void				store_path(t_game *, char *line, char **dest);
-void				parse_elements(t_game *);
+int					open_file(char *arg, t_game *game);
+int					parse_color_line(t_game *game, char *line);
+void				store_path(t_game *game, char *line, char **dest);
+void				parse_elements(t_game *game);
 void				free_split(char **grid_color);
-void				parse_colors(t_game *);
+void				parse_colors(t_game *game);
 int					count_char_in_str(const char *str, char c);
-void				parse_map(t_game *);
+void				parse_map(t_game *game);
 int					ft_array_size(char **array);
-void				parse_items_map(t_game *);
-void				parse_validate_map(t_game *);
+void				parse_items_map(t_game *game);
+void				parse_validate_map(t_game *game);
 void				free_grid(char **grid, int height);
 char				**duplicate_grid(char **grid, int height);
 int					is_empty_line(char *line);
@@ -281,7 +281,7 @@ bool				check_texture_sizes(int *w, int *h);
 /* ************************************************************************** */
 /*                      Player movement and controls                         */
 /* ************************************************************************** */
-void				init_player(t_game *);
+void				init_player(t_game *game);
 void				init_player_vectors(t_game *p);
 int					key_press(int keycode, t_game *game);
 void				move_forward(t_game *game);

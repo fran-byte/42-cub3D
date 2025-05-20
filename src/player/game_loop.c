@@ -22,13 +22,13 @@
  * resources.
  * @return Always returns 0 (unused, required for MLX hook compatibility).
  */
-int exit_game(t_game *game)
+int	exit_game(t_game *game)
 {
-    if (game->window)
-        mlx_destroy_window(game->mlx, game->window);
-    free_function(game);
-    exit(0);
-    return (0);
+	if (game->window)
+		mlx_destroy_window(game->mlx, game->window);
+	free_function(game);
+	exit(0);
+	return (0);
 }
 
 /**
@@ -40,15 +40,15 @@ int exit_game(t_game *game)
  *
  * @param game Pointer to the game structure containing MLX context and window.
  */
-void game_loop(t_game *game)
+void	game_loop(t_game *game)
 {
-    if (!game->mlx || !game->window)
-    {
-        report_err(MLX_OR_WINDOW_ERR);
-        free_function(game);
-        exit(EXIT_FAILURE);
-    }
-    mlx_hook(game->window, 2, 1L << 0, key_press, game); // Teclado
-    mlx_hook(game->window, 17, 0, exit_game, game);      // Botón cerrar
-    mlx_loop(game->mlx);
+	if (!game->mlx || !game->window)
+	{
+		report_err(MLX_OR_WINDOW_ERR);
+		free_function(game);
+		exit(EXIT_FAILURE);
+	}
+	mlx_hook(game->window, 2, 1L << 0, key_press, game); // Teclado
+	mlx_hook(game->window, 17, 0, exit_game, game);      // Botón cerrar
+	mlx_loop(game->mlx);
 }

@@ -20,22 +20,22 @@
  *
  * @param g Game structure
  */
-static void update_player_orientation(t_game *g)
+static void	update_player_orientation(t_game *g)
 {
-    if (fabs(g->player.dir_x) > fabs(g->player.dir_y))
-    {
-        if (g->player.dir_x > 0)
-            g->player.player_orientation = EAST;
-        else
-            g->player.player_orientation = WEST;
-    }
-    else
-    {
-        if (g->player.dir_y > 0)
-            g->player.player_orientation = SOUTH;
-        else
-            g->player.player_orientation = NORTH;
-    }
+	if (fabs(g->player.dir_x) > fabs(g->player.dir_y))
+	{
+		if (g->player.dir_x > 0)
+			g->player.player_orientation = EAST;
+		else
+			g->player.player_orientation = WEST;
+	}
+	else
+	{
+		if (g->player.dir_y > 0)
+			g->player.player_orientation = SOUTH;
+		else
+			g->player.player_orientation = NORTH;
+	}
 }
 
 /**
@@ -48,19 +48,19 @@ static void update_player_orientation(t_game *g)
  * @param g Game structure
  * @param angle Rotation angle in radians
  */
-void rotate_view(t_game *g, double angle)
+void	rotate_view(t_game *g, double angle)
 {
-    double old_dir_x;
-    double old_plane_x;
+	double	old_dir_x;
+	double	old_plane_x;
 
-    old_dir_x = g->player.dir_x;
-    old_plane_x = g->player.plane_x;
-    g->player.dir_x = old_dir_x * cos(angle) - g->player.dir_y * sin(angle);
-    g->player.dir_y = old_dir_x * sin(angle) + g->player.dir_y * cos(angle);
-    g->player.plane_x =
-        old_plane_x * cos(angle) - g->player.plane_y * sin(angle);
-    g->player.plane_y =
-        old_plane_x * sin(angle) + g->player.plane_y * cos(angle);
-    update_player_orientation(g);
-    render_frame(g);
+	old_dir_x = g->player.dir_x;
+	old_plane_x = g->player.plane_x;
+	g->player.dir_x = old_dir_x * cos(angle) - g->player.dir_y * sin(angle);
+	g->player.dir_y = old_dir_x * sin(angle) + g->player.dir_y * cos(angle);
+	g->player.plane_x = old_plane_x * cos(angle) - g->player.plane_y
+		* sin(angle);
+	g->player.plane_y = old_plane_x * sin(angle) + g->player.plane_y
+		* cos(angle);
+	update_player_orientation(g);
+	render_frame(g);
 }

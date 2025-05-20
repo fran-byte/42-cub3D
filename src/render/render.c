@@ -22,24 +22,24 @@
  * @param y_start Starting y-coordinate for floor rendering.
  * @param color Floor color in integer format.
  */
-void render_floor(t_game *g, int y_start, int color)
+void	render_floor(t_game *g, int y_start, int color)
 {
-    int x;
-    int y;
-    int pixel;
+	int	x;
+	int	y;
+	int	pixel;
 
-    y = y_start;
-    while (y < SCREEN_HEIGHT)
-    {
-        x = 0;
-        while (x < SCREEN_WIDTH)
-        {
-            pixel = (y * g->img.line_len) + (x * (g->img.bpp / 8));
-            *(int *)(g->img.addr + pixel) = color;
-            x++;
-        }
-        y++;
-    }
+	y = y_start;
+	while (y < SCREEN_HEIGHT)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			pixel = (y * g->img.line_len) + (x * (g->img.bpp / 8));
+			*(int *)(g->img.addr + pixel) = color;
+			x++;
+		}
+		y++;
+	}
 }
 
 /**
@@ -52,24 +52,24 @@ void render_floor(t_game *g, int y_start, int color)
  * @param y_end Ending y-coordinate for ceiling rendering.
  * @param color Ceiling color in integer format.
  */
-void render_ceiling(t_game *g, int y_end, int color)
+void	render_ceiling(t_game *g, int y_end, int color)
 {
-    int x;
-    int y;
-    int pixel;
+	int	x;
+	int	y;
+	int	pixel;
 
-    y = 0;
-    while (y < y_end)
-    {
-        x = 0;
-        while (x < SCREEN_WIDTH)
-        {
-            pixel = (y * g->img.line_len) + (x * (g->img.bpp / 8));
-            *(int *)(g->img.addr + pixel) = color;
-            x++;
-        }
-        y++;
-    }
+	y = 0;
+	while (y < y_end)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			pixel = (y * g->img.line_len) + (x * (g->img.bpp / 8));
+			*(int *)(g->img.addr + pixel) = color;
+			x++;
+		}
+		y++;
+	}
 }
 
 /**
@@ -80,19 +80,19 @@ void render_ceiling(t_game *g, int y_end, int color)
  *
  * @param g Pointer to the main game structure containing all rendering info.
  */
-void render_frame(t_game *g)
+void	render_frame(t_game *g)
 {
-    int x;
-    t_ray_info rays[SCREEN_WIDTH];
+	int			x;
+	t_ray_info	rays[SCREEN_WIDTH];
 
-    x = 0;
-    calculate_raycasting(g, rays);
-    render_ceiling(g, SCREEN_HEIGHT / 2, g->map.ceiling_color);
-    render_floor(g, SCREEN_HEIGHT / 2, g->map.floor_color);
-    while (x < SCREEN_WIDTH)
-    {
-        render_wall(g, x, &rays[x]);
-        x++;
-    }
-    mlx_put_image_to_window(g->mlx, g->window, g->img.img, 0, 0);
+	x = 0;
+	calculate_raycasting(g, rays);
+	render_ceiling(g, SCREEN_HEIGHT / 2, g->map.ceiling_color);
+	render_floor(g, SCREEN_HEIGHT / 2, g->map.floor_color);
+	while (x < SCREEN_WIDTH)
+	{
+		render_wall(g, x, &rays[x]);
+		x++;
+	}
+	mlx_put_image_to_window(g->mlx, g->window, g->img.img, 0, 0);
 }

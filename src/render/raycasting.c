@@ -21,18 +21,18 @@
  * @param g Game structure
  * @param rays Array to store raycasting results for each column
  */
-void calculate_raycasting(t_game *g, t_ray_info rays[])
+void	calculate_raycasting(t_game *g, t_ray_info rays[])
 {
-    int x;
-    t_ray_vars v;
+	int			x;
+	t_ray_vars	v;
 
-    x = 0;
-    while (x < SCREEN_WIDTH)
-    {
-        init_ray(g, x, &v);
-        perform_dda(g, &v);
-        compute_wall_info(g, &rays[x], &v);
-        compute_wall_orientation(&rays[x], &v);
-        x++;
-    }
+	x = 0;
+	while (x < SCREEN_WIDTH)
+	{
+		init_ray(g, x, &v);
+		perform_dda(g, &v);
+		compute_wall_info(g, &rays[x], &v);
+		compute_wall_orientation(&rays[x], &v);
+		x++;
+	}
 }

@@ -20,12 +20,12 @@
  *
  * @param p Pointer to game structure containing player data
  */
-static void set_north(t_game *p)
+static void	set_north(t_game *p)
 {
-    p->player.dir_x = 0;
-    p->player.dir_y = -1;
-    p->player.plane_x = FOV_COEF;
-    p->player.plane_y = 0;
+	p->player.dir_x = 0;
+	p->player.dir_y = -1;
+	p->player.plane_x = FOV_COEF;
+	p->player.plane_y = 0;
 }
 
 /**
@@ -36,12 +36,12 @@ static void set_north(t_game *p)
  *
  * @param p Pointer to game structure containing player data
  */
-static void set_south(t_game *p)
+static void	set_south(t_game *p)
 {
-    p->player.dir_x = 0;
-    p->player.dir_y = 1;
-    p->player.plane_x = -FOV_COEF;
-    p->player.plane_y = 0;
+	p->player.dir_x = 0;
+	p->player.dir_y = 1;
+	p->player.plane_x = -FOV_COEF;
+	p->player.plane_y = 0;
 }
 
 /**
@@ -52,12 +52,12 @@ static void set_south(t_game *p)
  *
  * @param p Pointer to game structure containing player data
  */
-static void set_east(t_game *p)
+static void	set_east(t_game *p)
 {
-    p->player.dir_x = 1;
-    p->player.dir_y = 0;
-    p->player.plane_x = 0;
-    p->player.plane_y = FOV_COEF;
+	p->player.dir_x = 1;
+	p->player.dir_y = 0;
+	p->player.plane_x = 0;
+	p->player.plane_y = FOV_COEF;
 }
 
 /**
@@ -68,12 +68,12 @@ static void set_east(t_game *p)
  *
  * @param p Pointer to game structure containing player data
  */
-static void set_west(t_game *p)
+static void	set_west(t_game *p)
 {
-    p->player.dir_x = -1;
-    p->player.dir_y = 0;
-    p->player.plane_x = 0;
-    p->player.plane_y = -FOV_COEF;
+	p->player.dir_x = -1;
+	p->player.dir_y = 0;
+	p->player.plane_x = 0;
+	p->player.plane_y = -FOV_COEF;
 }
 
 /**
@@ -85,14 +85,14 @@ static void set_west(t_game *p)
  *
  * @param p Pointer to game structure containing player data
  */
-void init_player_vectors(t_game *p)
+void	init_player_vectors(t_game *p)
 {
-    if (p->player.player_orientation == NORTH)
-        set_north(p);
-    else if (p->player.player_orientation == SOUTH)
-        set_south(p);
-    else if (p->player.player_orientation == EAST)
-        set_east(p);
-    else if (p->player.player_orientation == WEST)
-        set_west(p);
+	if (p->player.player_orientation == NORTH)
+		set_north(p);
+	else if (p->player.player_orientation == SOUTH)
+		set_south(p);
+	else if (p->player.player_orientation == EAST)
+		set_east(p);
+	else if (p->player.player_orientation == WEST)
+		set_west(p);
 }
