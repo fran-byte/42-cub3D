@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/20 09:01:34 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:25:37 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@
 /* CONSTANTS */
 #define FOV_COEF 0.66
 #define MOVE_SPEED 0.05
-
-#define SCREEN_WIDTH 1280 // Ancho en px
-#define SCREEN_HEIGHT 720 // Alto en px
+/* TEX_WIDTH is directly tied to the texture file dimensions */
+#define TEX_WIDTH 512
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
 
 // MOVEMENT
 #define KEY_W 119       // 'w'

@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:45:37 by user              #+#    #+#             */
-/*   Updated: 2025/05/20 17:09:11 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:22:34 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void compute_wall_info(t_game *g, t_ray_info *ray, t_ray_vars *v)
     double wall_x;
     int tex_width;
 
-    tex_width = 512;
+    tex_width = TEX_WIDTH;
     if (v->side == 0)
         perp_wall_dist =
             (v->map_x - g->player.x + (1 - v->step_x) / 2) / v->ray_dir_x;
