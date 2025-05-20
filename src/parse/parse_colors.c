@@ -17,27 +17,27 @@
 /**
  * @brief Frees memory and exits on color format error.
  */
-static void exit_error_color(t_game *game, char **grid)
+static void	exit_error_color(t_game *game, char **grid)
 {
-    if (grid)
-        free_split(grid);
-    report_err(FORMAT_COLOR_ERR);
-    free_function(game);
-    exit(EXIT_FAILURE);
+	if (grid)
+		free_split(grid);
+	report_err(FORMAT_COLOR_ERR);
+	free_function(game);
+	exit(EXIT_FAILURE);
 }
 
 /**
  * @brief Returns 1 if the string is numeric, 0 otherwise.
  */
-static int is_numeric(const char *str)
+static int	is_numeric(const char *str)
 {
-    while (*str)
-    {
-        if (!ft_isdigit(*str))
-            return (0);
-        str++;
-    }
-    return (1);
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
 }
 
 /**
@@ -49,29 +49,29 @@ static int is_numeric(const char *str)
  * @param game Pointer to the main game structure.
  * @param line The line containing the color definition.
  */
-int parse_color_line(t_game *game, char *line)
+int	parse_color_line(t_game *game, char *line)
 {
-    char **rgb;
-    int r;
-    int g;
-    int b;
-    int rgb_hex;
+	char	**rgb;
+	int		r;
+	int		g;
+	int		b;
+	int		rgb_hex;
 
-    r = 0;
-    g = 0;
-    b = 0;
-    rgb_hex = 0;
-    rgb = ft_split(line + 2, ',');
-    if (!rgb || ft_array_size(rgb) != 3)
-        exit_error_color(game, rgb);
-    if (!is_numeric(rgb[0]) || !is_numeric(rgb[1]) || !is_numeric(rgb[2]))
-        exit_error_color(game, rgb);
-    r = ft_atoi(rgb[0]);
-    g = ft_atoi(rgb[1]);
-    b = ft_atoi(rgb[2]);
-    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-        exit_error_color(game, rgb);
-        rgb_hex = (r << 16) | (g << 8) | b;
-    free_split(rgb);
-    return (rgb_hex);
+	r = 0;
+	g = 0;
+	b = 0;
+	rgb_hex = 0;
+	rgb = ft_split(line + 2, ',');
+	if (!rgb || ft_array_size(rgb) != 3)
+		exit_error_color(game, rgb);
+	if (!is_numeric(rgb[0]) || !is_numeric(rgb[1]) || !is_numeric(rgb[2]))
+		exit_error_color(game, rgb);
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		exit_error_color(game, rgb);
+	rgb_hex = (r << 16) | (g << 8) | b;
+	free_split(rgb);
+	return (rgb_hex);
 }

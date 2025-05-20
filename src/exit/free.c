@@ -17,29 +17,28 @@
  *
  * @param game Pointer to the game data structure.
  */
-static void free_texture_paths(t_game *game)
+static void	free_texture_paths(t_game *game)
 {
-
-    if (game->map.paths.north)
-    {
-        free(game->map.paths.north);
-        game->map.paths.north = NULL;
-    }
-    if (game->map.paths.south)
-    {
-        free(game->map.paths.south);
-        game->map.paths.south = NULL;
-    }
-    if (game->map.paths.west)
-    {
-        free(game->map.paths.west);
-        game->map.paths.west = NULL;
-    }
-    if (game->map.paths.east)
-    {
-        free(game->map.paths.east);
-        game->map.paths.east = NULL;
-    }
+	if (game->map.paths.north)
+	{
+		free(game->map.paths.north);
+		game->map.paths.north = NULL;
+	}
+	if (game->map.paths.south)
+	{
+		free(game->map.paths.south);
+		game->map.paths.south = NULL;
+	}
+	if (game->map.paths.west)
+	{
+		free(game->map.paths.west);
+		game->map.paths.west = NULL;
+	}
+	if (game->map.paths.east)
+	{
+		free(game->map.paths.east);
+		game->map.paths.east = NULL;
+	}
 }
 
 /**
@@ -48,21 +47,21 @@ static void free_texture_paths(t_game *game)
  * @param matrix The matrix to free.
  * @param height Number of rows in the matrix.
  */
-void free_char_matrix(char **matrix, int height)
+void	free_char_matrix(char **matrix, int height)
 {
-    if (matrix != NULL)
-    {
-        int i;
+		int i;
 
-        i = 0;
-        while (i < height)
-        {
-            if (matrix[i] != NULL)
-                free(matrix[i]);
-            i++;
-        }
-        free(matrix);
-    }
+	if (matrix != NULL)
+	{
+		i = 0;
+		while (i < height)
+		{
+			if (matrix[i] != NULL)
+				free(matrix[i]);
+			i++;
+		}
+		free(matrix);
+	}
 }
 
 /**
@@ -70,21 +69,20 @@ void free_char_matrix(char **matrix, int height)
  *
  * @param map Pointer to the map structure to free.
  */
-void free_map(t_map *map)
+void	free_map(t_map *map)
 {
-    if (map != NULL)
-    {
-        if (map->file != NULL && map->height_file > 0)
-        {
-            free_char_matrix(map->file, map->height_file);
-        }
-        if (map->map != NULL && map->height_map > 0)
-        {
-            free_char_matrix(map->map, map->height_map);
-        }
-
-        /* Si t_sprites necesitan liberación, hacerlo aquí*/
-    }
+	if (map != NULL)
+	{
+		if (map->file != NULL && map->height_file > 0)
+		{
+			free_char_matrix(map->file, map->height_file);
+		}
+		if (map->map != NULL && map->height_map > 0)
+		{
+			free_char_matrix(map->map, map->height_map);
+		}
+		/* Si t_sprites necesitan liberación, hacerlo aquí*/
+	}
 }
 
 /**
@@ -92,18 +90,17 @@ void free_map(t_map *map)
  *
  * @param data Pointer to the game data structure to free.
  */
-void free_function(t_game *game)
+void	free_function(t_game *game)
 {
-    if (game != NULL)
-    {
-        free_map(&game->map);
-        free_texture_paths(game);
-
-        /*Liberar otros miembros de t_game (como mlx, window, etc.)
-         if (game->mlx != NULL)
-         {
-                 mlx_destroy_window(game->mlx, game->window);
-         }
-         free(game);*/
-    }
+	if (game != NULL)
+	{
+		free_map(&game->map);
+		free_texture_paths(game);
+		/*Liberar otros miembros de t_game (como mlx, window, etc.)
+			if (game->mlx != NULL)
+			{
+					mlx_destroy_window(game->mlx, game->window);
+			}
+			free(game);*/
+	}
 }

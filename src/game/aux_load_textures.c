@@ -24,14 +24,14 @@
  * @return true if all textures have the same width and height as the first one,
  * false otherwise.
  */
-bool check_texture_sizes(int *w, int *h)
+bool	check_texture_sizes(int *w, int *h)
 {
-    for (int i = 1; i < 4; i++)
-    {
-        if (w[i] != w[0] || h[i] != h[0])
-            return (false);
-    }
-    return (true);
+	for (int i = 1; i < 4; i++)
+	{
+		if (w[i] != w[0] || h[i] != h[0])
+			return (false);
+	}
+	return (true);
 }
 
 /**
@@ -43,16 +43,16 @@ bool check_texture_sizes(int *w, int *h)
  * @param g Pointer to the main game structure.
  * @param exit_code Exit status code to return to the operating system.
  */
-void clean_exit(t_game *g, int exit_code)
+void	clean_exit(t_game *g, int exit_code)
 {
-    if (g->map.sprites.no)
-        mlx_destroy_image(g->mlx, g->map.sprites.no);
-    if (g->map.sprites.su)
-        mlx_destroy_image(g->mlx, g->map.sprites.su);
-    if (g->map.sprites.ea)
-        mlx_destroy_image(g->mlx, g->map.sprites.ea);
-    if (g->map.sprites.we)
-        mlx_destroy_image(g->mlx, g->map.sprites.we);
-    free_function(g);
-    exit(exit_code);
+	if (g->map.sprites.no)
+		mlx_destroy_image(g->mlx, g->map.sprites.no);
+	if (g->map.sprites.su)
+		mlx_destroy_image(g->mlx, g->map.sprites.su);
+	if (g->map.sprites.ea)
+		mlx_destroy_image(g->mlx, g->map.sprites.ea);
+	if (g->map.sprites.we)
+		mlx_destroy_image(g->mlx, g->map.sprites.we);
+	free_function(g);
+	exit(exit_code);
 }

@@ -18,8 +18,8 @@
  * @param str The error message to print.
  * @return Always returns 1.
  */
-int report_err(char *str)
+int	report_err(char *str)
 {
-    printf("Error\n%s\n", str);
-    return (1);
+	printf("Error\n%s\n", str);
+	return (1);
 }

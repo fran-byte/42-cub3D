@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/05/19 17:12:20 by frromero         ###   ########.fr        #
+#    Updated: 2025/05/20 19:54:22 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,9 @@ DEBUG_FLAGS	:= -g3			# Generate debug information (level 3)
 OPTIM_FLAGS	:= -O3			# Maximum optimization level
 
 # Warning flags
-#WARN_FLAGS	:= -Wall		# Enable all warnings
-#WARN_FLAGS	+= -Wextra		# Enable extra warnings
-#WARN_FLAGS	+= -Werror		# Treat warnings as errors
+WARN_FLAGS	:= -Wall		# Enable all warnings
+WARN_FLAGS	+= -Wextra		# Enable extra warnings
+WARN_FLAGS	+= -Werror		# Treat warnings as errors
 
 # Include paths for header files
 INC_FLAGS	:= -I$(INC_DIR)			# Project headers
@@ -97,10 +97,6 @@ SRCS := \
 	$(SRC_DIR)/parse/parse_map.c \
 	$(SRC_DIR)/parse/parse_items_map.c \
 	$(SRC_DIR)/parse/parse_validate_map.c \
-	$(SRC_DIR)/debugging/print_grid.c \
-	$(SRC_DIR)/debugging/testing.c \
-	$(SRC_DIR)/debugging/debug_render.c \
-	$(SRC_DIR)/debugging/debug_screen_columns.c \
 	$(SRC_DIR)/game/window_init.c \
 	$(SRC_DIR)/game/load_textures.c \
 	$(SRC_DIR)/game/aux_load_textures.c \
@@ -119,7 +115,6 @@ SRCS := \
 	$(SRC_DIR)/utils/utils.c \
 	$(SRC_DIR)/utils/utils_2.c \
 	$(SRC_DIR)/exit/free.c
-
 
 # Generate object files list by replacing .c with .o and src with obj
 OBJS := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
@@ -140,7 +135,6 @@ $(NAME): $(MLX_LIB) $(LIBFT_DIR)/libft.a $(OBJS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(MKDIR) $(dir $@)					# Create directory structure
 	@$(CC) $(CFLAGS) -c $< -o $@ -s		# Compile source to object
-
 
 # Rule to build libft library
 $(LIBFT_DIR)/libft.a:
@@ -179,7 +173,6 @@ $(SUPPRESSION_FILE):
 	@echo '   obj:/usr/lib/x86_64-linux-gnu/libxcb.so.*' >> $(SUPPRESSION_FILE)
 	@echo '   obj:/usr/lib/x86_64-linux-gnu/libX11.so.*' >> $(SUPPRESSION_FILE)
 	@echo '}' >> $(SUPPRESSION_FILE)
-
 
 # Clean rule - removes object files
 clean:

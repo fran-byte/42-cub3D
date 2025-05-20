@@ -22,12 +22,12 @@
  * @param fd File descriptor of the opened file.
  * @param game Pointer to the main game structure.
  */
-static void util_exit_fill_file_grid(int fd, t_game *game)
+static void	util_exit_fill_file_grid(int fd, t_game *game)
 {
-    report_err(MALLOC_ERR);
-    close(fd);
-    free_function(game);
-    exit(EXIT_FAILURE);
+	report_err(MALLOC_ERR);
+	close(fd);
+	free_function(game);
+	exit(EXIT_FAILURE);
 }
 
 /**
@@ -39,35 +39,31 @@ static void util_exit_fill_file_grid(int fd, t_game *game)
  * @param arg Path to the .cub file.
  * @param game Pointer to the main game structure.
  */
-static void fill_file_grid(char *arg, t_game *game)
+static void	fill_file_grid(char *arg, t_game *game)
 {
-    char *line;
-    int i;
-    int fd;
-    int len;
+	char	*line;
+	int		i;
+	int		fd;
+	int		len;
 
-    fd = open_file(arg, game);
-    i = 0;
-    line = get_next_line(fd);
-
-    while (line != NULL && i < game->map.height_file)
-    {
-        len = ft_strlen(line);
-        if (len > 0 && line[len - 1] == '\n')
-            line[len - 1] = '\0';
-
-        game->map.file[i] = malloc(len + 1);
-        if (!game->map.file[i])
-            util_exit_fill_file_grid(fd, game);
-
-        ft_strlcpy(game->map.file[i], line, len + 1);
-        free(line);
-        line = get_next_line(fd);
-        i++;
-    }
-
-    game->map.file[i] = NULL;
-    close(fd);
+	fd = open_file(arg, game);
+	i = 0;
+	line = get_next_line(fd);
+	while (line != NULL && i < game->map.height_file)
+	{
+		len = ft_strlen(line);
+		if (len > 0 && line[len - 1] == '\n')
+			line[len - 1] = '\0';
+		game->map.file[i] = malloc(len + 1);
+		if (!game->map.file[i])
+			util_exit_fill_file_grid(fd, game);
+		ft_strlcpy(game->map.file[i], line, len + 1);
+		free(line);
+		line = get_next_line(fd);
+		i++;
+	}
+	game->map.file[i] = NULL;
+	close(fd);
 }
 
 /**
@@ -79,21 +75,19 @@ static void fill_file_grid(char *arg, t_game *game)
  * @param fd File descriptor of the opened file.
  * @param game Pointer to the main game structure.
  */
-void get_height_map(int fd, t_game *game)
+void	get_height_map(int fd, t_game *game)
 {
-    char *line;
+	char	*line;
 
-    game->map.height_file = 0;
-    line = get_next_line(fd);
-
-    while (line != NULL)
-    {
-        game->map.height_file++;
-        free(line);
-        line = get_next_line(fd);
-    }
-
-    close(fd);
+	game->map.height_file = 0;
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		game->map.height_file++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
 }
 
 /**
@@ -105,31 +99,28 @@ void get_height_map(int fd, t_game *game)
  * @param arg Path to the .cub file.
  * @param game Pointer to the main game structure.
  */
-void load_file(char *arg, t_game *game)
+void	load_file(char *arg, t_game *game)
 {
-    int fd;
-    int i;
+	int	fd;
+	int	i;
 
-    fd = open_file(arg, game);
-    get_height_map(fd, game);
-
-    game->map.file = malloc(sizeof(char *) * (game->map.height_file + 1));
-    if (!game->map.file)
-    {
-        report_err(MALLOC_ERR);
-        close(fd);
-        free_function(game);
-        exit(EXIT_FAILURE);
-    }
-
-    i = 0;
-    while (i <= game->map.height_file)
-    {
-        game->map.file[i] = NULL;
-        i++;
-    }
-
-    fill_file_grid(arg, game);
+	fd = open_file(arg, game);
+	get_height_map(fd, game);
+	game->map.file = malloc(sizeof(char *) * (game->map.height_file + 1));
+	if (!game->map.file)
+	{
+		report_err(MALLOC_ERR);
+		close(fd);
+		free_function(game);
+		exit(EXIT_FAILURE);
+	}
+	i = 0;
+	while (i <= game->map.height_file)
+	{
+		game->map.file[i] = NULL;
+		i++;
+	}
+	fill_file_grid(arg, game);
 }
 
 /**
@@ -141,20 +132,19 @@ void load_file(char *arg, t_game *game)
  * @param arg Path to the .cub file.
  * @param game Pointer to the main game structure.
  */
-void parse_arg(char *arg, t_game *game)
+void	parse_arg(char *arg, t_game *game)
 {
-    int ln;
+	int	ln;
 
-    ln = ft_strlen(arg);
-    if (!(arg[ln - 1] == 'b' && arg[ln - 2] == 'u' && arg[ln - 3] == 'c' &&
-          arg[ln - 4] == '.'))
-    {
-        report_err(SYNTAX_ERR);
-        free_function(game);
-        exit(EXIT_FAILURE);
-    }
-
-    load_file(arg, game);
-    parse_elements(game);
-    parse_map(game);
+	ln = ft_strlen(arg);
+	if (!(arg[ln - 1] == 'b' && arg[ln - 2] == 'u' && arg[ln - 3] == 'c'
+			&& arg[ln - 4] == '.'))
+	{
+		report_err(SYNTAX_ERR);
+		free_function(game);
+		exit(EXIT_FAILURE);
+	}
+	load_file(arg, game);
+	parse_elements(game);
+	parse_map(game);
 }

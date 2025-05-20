@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:54:44 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/20 17:07:59 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:26:28 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int *get_texture_pixels(t_game *g, t_orientation wall_dir,
                                int *tex_width)
 {
     void *texture;
-    int tex_height;
     int *tex_;
 
     if (wall_dir == NORTH)
@@ -39,10 +38,9 @@ static int *get_texture_pixels(t_game *g, t_orientation wall_dir,
         texture = g->map.sprites.ea;
     else
         texture = g->map.sprites.we;
-
     tex_ = (int *)mlx_get_data_addr(texture, &g->img.bpp, tex_width,
                                     &g->img.endian);
-    *tex_width /= 4; /* Ajustar para 32 bits (4 bytes por píxel)*/
+    *tex_width /= 4;
     return (tex_);
 }
 

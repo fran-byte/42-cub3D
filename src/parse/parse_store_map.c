@@ -23,23 +23,23 @@
  * @param line The line containing the texture directive and path.
  * @param dest Pointer to where the extracted path will be stored.
  */
-void store_path(t_game *game, char *line, char **dest)
+void	store_path(t_game *game, char *line, char **dest)
 {
-    char *path;
+	char	*path;
 
-    path = ft_strtrim(line + 2, " \t");
-    if (!path)
-    {
-        report_err(MALLOC_ERR);
-        free_function(game);
-        exit(EXIT_FAILURE);
-    }
-    if (access(path, R_OK) != 0)
-    {
-        free(path);
-        report_err(TEXTURE_FILE_ERR);
-        free_function(game);
-        exit(EXIT_FAILURE);
-    }
-    *dest = path;
+	path = ft_strtrim(line + 2, " \t");
+	if (!path)
+	{
+		report_err(MALLOC_ERR);
+		free_function(game);
+		exit(EXIT_FAILURE);
+	}
+	if (access(path, R_OK) != 0)
+	{
+		free(path);
+		report_err(TEXTURE_FILE_ERR);
+		free_function(game);
+		exit(EXIT_FAILURE);
+	}
+	*dest = path;
 }
