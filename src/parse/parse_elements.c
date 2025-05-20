@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:50:04 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 19:23:29 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/20 09:22:45 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ static void process_colors(t_game *game, int *elem, int *i)
 {
     if (ft_strncmp(game->map.file[*i], "F ", 2) == 0 && !game->elem.floor)
     {
-        parse_color_line(game, game->map.file[*i]);
+        game->map.floor_color = parse_color_line(game, game->map.file[*i]);
         game->elem.floor = 1;
         *elem += 1;
     }
     else if (ft_strncmp(game->map.file[*i], "C ", 2) == 0 &&
              !game->elem.ceiling)
     {
-        parse_color_line(game, game->map.file[*i]);
+        game->map.ceiling_color = parse_color_line(game, game->map.file[*i]);
         game->elem.ceiling = 1;
         *elem += 1;
     }

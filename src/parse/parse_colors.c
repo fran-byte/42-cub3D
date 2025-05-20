@@ -49,16 +49,18 @@ static int is_numeric(const char *str)
  * @param game Pointer to the main game structure.
  * @param line The line containing the color definition.
  */
-void parse_color_line(t_game *game, char *line)
+int parse_color_line(t_game *game, char *line)
 {
     char **rgb;
     int r;
     int g;
     int b;
+    int rgb_hex;
 
     r = 0;
     g = 0;
     b = 0;
+    rgb_hex = 0;
     rgb = ft_split(line + 2, ',');
     if (!rgb || ft_array_size(rgb) != 3)
         exit_error_color(game, rgb);
@@ -69,5 +71,7 @@ void parse_color_line(t_game *game, char *line)
     b = ft_atoi(rgb[2]);
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
         exit_error_color(game, rgb);
+        rgb_hex = (r << 16) | (g << 8) | b;
     free_split(rgb);
+    return (rgb_hex);
 }
