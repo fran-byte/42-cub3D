@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:23:34 by user              #+#    #+#             */
-/*   Updated: 2025/05/20 20:11:37 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:16:29 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int	exit_game(t_game *game)
 }
 
 /**
- * @brief Initializes the main game loop and event hooks.
+ * @brief Starts the main game loop.
  *
- * Sets up keyboard and window close event handlers. Verifies MLX initialization
- * before starting the loop. Exits with failure if MLX resources aren't
- * available.
+ * Checks if the MLX context and window are properly initialized.
+ * Sets up event hooks for keyboard input and window close events,
+ * then enters the main rendering loop using mlx_loop.
  *
- * @param game Pointer to the game structure containing MLX context and window.
+ * @param game Pointer to the main game structure.
  */
 void	game_loop(t_game *game)
 {
@@ -48,7 +48,7 @@ void	game_loop(t_game *game)
 		free_function(game);
 		exit(EXIT_FAILURE);
 	}
-	mlx_hook(game->window, 2, 1L << 0, key_press, game); // Teclado
-	mlx_hook(game->window, 17, 0, exit_game, game);      // Botón cerrar
+	mlx_hook(game->window, 2, 1L << 0, key_press, game);
+	mlx_hook(game->window, 17, 0, exit_game, game);
 	mlx_loop(game->mlx);
 }

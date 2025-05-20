@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/20 20:37:10 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:04:06 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,4 +292,6 @@ void				game_loop(t_game *game);
 int					exit_game(t_game *game);
 void				window_init(t_game *game, int width, int height);
 void				rotate_view(t_game *g, double angle);
+int					is_wall(t_game *g, double x, double y);
+void				safe_move(t_game *g, double new_x, double new_y);
 #endif

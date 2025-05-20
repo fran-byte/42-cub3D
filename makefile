@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/05/20 19:54:22 by frromero         ###   ########.fr        #
+#    Updated: 2025/05/20 21:04:44 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,6 +105,7 @@ SRCS := \
 	$(SRC_DIR)/player/init_player.c \
 	$(SRC_DIR)/player/key_hooks.c \
 	$(SRC_DIR)/player/movement_utils.c \
+	$(SRC_DIR)/player/movement_utils2.c \
 	$(SRC_DIR)/player/rotation.c \
 	$(SRC_DIR)/render/render.c \
 	$(SRC_DIR)/render/render_walls.c \
