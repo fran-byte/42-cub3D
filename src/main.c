@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:17:52 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/19 17:22:54 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:45:49 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int main(int argc, char **argv)
     init_player(&game);
     // testing(&game); // ****** DEBUG
     window_init(&game, SCREEN_WIDTH, SCREEN_HEIGHT);
+    render_frame(&game); // <- Renderizado inicial
     game_loop(&game);
     free_function(&game);
     return (0);
