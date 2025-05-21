@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:50:04 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/20 09:22:45 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/21 18:44:33 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,9 @@ static void	parse_error(t_game *game)
 /**
  * @brief Main parser for configuration elements in the .cub file.
  *
- * Iterates through the file, identifying texture and color lines.
+ * Iterates through the file, identifying textures and color lines.
  * Handles validation and structure updates accordingly.
+ * (6 elemnts: NO SO WE EA C F)
  *
  * @param game Pointer to the main game structure.
  */
