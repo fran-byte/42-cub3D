@@ -209,10 +209,10 @@ Cub3D es un proyecto desafiante pero gratificante. ¡Disfruta el proceso de crea
 ### Recursos Adicionales  
 - [Artículo sobre so_long](https://ejemplo.com/so_long)  
 - [Introducción al Raycasting por Lode Vandevenne](https://lodev.org/cgtutor/raycasting.html)
-
-# Diagramas del Proyecto:
-![Diagrama de arquitectura](img/architecture.png)
-
 - [Tutorial de Raycasting en 2D por 3DSage](https://youtube.com/3DSage)  
 - [42-CLI por Herbie Vine](https://github.com/herbievine/42-cli)  
-```
+
+
+# Diagramas del Proyecto:
+
+![Diagrama de arquitectura](img/architecture.png)
