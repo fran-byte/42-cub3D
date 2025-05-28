@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/05/20 21:04:44 by frromero         ###   ########.fr        #
+#    Updated: 2025/05/28 21:05:27 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,7 +135,7 @@ $(NAME): $(MLX_LIB) $(LIBFT_DIR)/libft.a $(OBJS)
 # Rule to compile each source file into object file
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(MKDIR) $(dir $@)					# Create directory structure
-	@$(CC) $(CFLAGS) -c $< -o $@ -s		# Compile source to object
+	@$(CC) $(CFLAGS) -c $< -o $@		# Compile source to object
 
 # Rule to build libft library
 $(LIBFT_DIR)/libft.a:
