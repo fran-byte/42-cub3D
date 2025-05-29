@@ -22,18 +22,18 @@
  * @param argv Argument vector.
  * @return int Exit status (0 if success, 1 if error).
  */
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_game game;
+	t_game	game;
 
-    if (argc != 2)
-        return (report_err(SYNTAX_ERR), 1);
-    init_game(&game);
-    parse_arg(argv[1], &game);
-    init_player(&game);
-    window_init(&game, SCREEN_WIDTH, SCREEN_HEIGHT);
-    render_frame(&game);
-    game_loop(&game);
-    free_function(&game);
-    return (0);
+	if (argc != 2)
+		return (report_err(SYNTAX_ERR), 1);
+	init_game(&game);
+	parse_arg(argv[1], &game);
+	init_player(&game);
+	window_init(&game, SCREEN_WIDTH, SCREEN_HEIGHT);
+	render_frame(&game);
+	game_loop(&game);
+	free_function(&game);
+	return (0);
 }
