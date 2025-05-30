@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/05/30 23:40:54 by frromero         ###   ########.fr        #
+#    Updated: 2025/05/30 23:51:50 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,7 +120,7 @@ $(MLX_DIR)/$(MLX_LIB):
 
 
 # ====================================================== #
-#      Rule to run the project with Valgrind             #
+#                        VALGRIND                        #
 # ====================================================== #
 
 valgrind_e: $(NAME)
@@ -129,10 +129,9 @@ valgrind_e: $(NAME)
 
 
 # ====================================================== #
-#  Rule to run project with Valgrind & Suppresion file   #
+#             VALGRIND & SUPPRESION FILE                 #
 # ====================================================== #
 
-# Rule to run the project with Valgrind & Suppresion file (minilibx/x11 errors) (ok map)
 VALGRIND_LOG = valgrind.log
 SUPPRESSION_FILE = mlx.supp
 
