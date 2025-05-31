@@ -193,6 +193,7 @@ typedef struct s_paths
 	char			*south;
 	char			*west;
 	char			*east;
+	char			*intro;
 }					t_paths;
 
 /* ************************************************************************** */
