@@ -29,8 +29,9 @@ void	load_intro_screen(t_game *g)
 
 	tex_w = 0;
 	tex_h = 0;
-	g->intro.img = mlx_xpm_file_to_image(g->mlx, "textures/intro.xpm", &tex_w,
-			&tex_h);
+	store_path(g, "   textures/intro.xpm", &g->map.paths.intro);
+	g->intro.img =
+        	mlx_xpm_file_to_image(g->mlx, g->map.paths.intro, &tex_w, &tex_h);
 	if (!g->intro.img)
 	{
 		report_err(TEXTURE_LOADING_ERROR);
