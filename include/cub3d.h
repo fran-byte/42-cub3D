@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/20 21:04:06 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:04:28 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@
 # define KEY_RIGHT 65363 /* Right arrow key for rotate right              */
 
 /******************************************************************************/
+/*                                 INTRO                                      */
+/******************************************************************************/
+# define KEY_ENTER 65293 /* 'ENTER'  Press Enter to Start                  */
+
+/******************************************************************************/
 /*                                  ERRORS                                    */
 /******************************************************************************/
 # define SYNTAX_ERR "You must use this: ./cub3d <the_path/to/map.cub>"
@@ -75,6 +80,19 @@
 /******************************************************************************/
 /*                                STRUCTURES                                  */
 /******************************************************************************/
+
+/* ************************************************************************** */
+/*                                  Intro                                     */
+/* ************************************************************************** */
+
+typedef struct s_intro
+{
+	void			*img;
+	int				*data;
+	int				width;
+	int				height;
+	bool			active;
+}					t_intro;
 
 /* ************************************************************************** */
 /*            Special structure to store render_wall() variables              */
@@ -223,6 +241,7 @@ typedef struct s_game
 	t_player		player;
 	t_elem			elem;
 	t_img			img;
+	t_intro			intro;
 }					t_game;
 
 /******************************************************************************/
@@ -260,6 +279,7 @@ int					is_empty_line(char *line);
 /* ************************************************************************** */
 /*                          Rendering functions                              */
 /* ************************************************************************** */
+void				load_intro_screen(t_game *g);
 void				render_wall(t_game *g, int x, t_ray_info *ray);
 void				calculate_raycasting(t_game *g, t_ray_info rays[]);
 void				init_ray(t_game *g, int x, t_ray_vars *v);
@@ -281,6 +301,7 @@ bool				check_texture_sizes(int *w, int *h);
 /* ************************************************************************** */
 /*                      Player movement and controls                         */
 /* ************************************************************************** */
+void				handle_intro_input(int keycode, t_game *g);
 void				init_player(t_game *game);
 void				init_player_vectors(t_game *p);
 int					key_press(int keycode, t_game *game);
