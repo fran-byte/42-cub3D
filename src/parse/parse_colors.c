@@ -1,5 +1,3 @@
-#include "../../include/cub3d.h"
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,73 +5,71 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 09:37:27 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/08 17:25:03 by frromero         ###   ########.fr       */
+/*   Created: 2025/04/10 17:50:04 by frromero          #+#    #+#             */
+/*   Updated: 2025/05/20 20:46:50 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static void is_numeric_grid(t_game *data, char **grid_color)
-{
-	int i;
-
-	i = 0;
-	while (grid_color[i])
-	{
-		if (!is_numeric(grid_color[i]))
-		{
-			free_split(grid_color);
-			report_err(FORMAT_COLOR_ERR);
-			free_function(data);
-			exit(EXIT_FAILURE);
-		}
-		i++;
-	}
-}
-
-static void exit_error_color(t_game *data, char **grid)
+/**
+ * @brief Frees memory and exits on color format error.
+ */
+static void	exit_error_color(t_game *game, char **grid)
 {
 	if (grid)
 		free_split(grid);
 	report_err(FORMAT_COLOR_ERR);
-	free_function(data);
+	free_function(game);
 	exit(EXIT_FAILURE);
 }
 
-void parse_color_line(t_game *data, char *line)
+/**
+ * @brief Returns 1 if the string is numeric, 0 otherwise.
+ */
+static int	is_numeric(const char *str)
 {
-	char **rgb;
-	int r;
-	int g;
-	int b;
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
+/**
+ * @brief Parses an RGB color line from the map file.
+ *
+ * Validates and extracts RGB values from a string (e.g., "F 220,100,0").
+ * Ensures values are numeric and within the 0–255 range. Exits on error.
+ *
+ * @param game Pointer to the main game structure.
+ * @param line The line containing the color definition.
+ */
+int	parse_color_line(t_game *game, char *line)
+{
+	char	**rgb;
+	int		r;
+	int		g;
+	int		b;
+	int		rgb_hex;
 
 	r = 0;
 	g = 0;
 	b = 0;
+	rgb_hex = 0;
 	rgb = ft_split(line + 2, ',');
 	if (!rgb || ft_array_size(rgb) != 3)
-		exit_error_color(data, rgb);
-	is_numeric_grid(data, rgb);
+		exit_error_color(game, rgb);
+	if (!is_numeric(rgb[0]) || !is_numeric(rgb[1]) || !is_numeric(rgb[2]))
+		exit_error_color(game, rgb);
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		exit_error_color(data, rgb);
+		exit_error_color(game, rgb);
+	rgb_hex = (r << 16) | (g << 8) | b;
 	free_split(rgb);
-}
-
-void parse_colors(t_game *data)
-{
-
-	if (!data->map.file[5] || !data->map.file[6])
-		exit_error_color(data, NULL);
-	if (data->map.file[5][0] == 'C' && data->map.file[6][0] == 'F' && data->map.file[6][1] == ' ')
-		parse_color_line(data, data->map.file[6]);
-	else if (data->map.file[5][0] == 'F' && data->map.file[6][0] == 'C' && data->map.file[6][1] == ' ')
-		parse_color_line(data, data->map.file[6]);
-	else
-		exit_error_color(data, NULL);
-	if ((count_char_in_str(data->map.file[5] + 2, ',') > 2) || (count_char_in_str(data->map.file[6] + 2, ',') > 2))
-		exit_error_color(data, NULL);
+	return (rgb_hex);
 }
