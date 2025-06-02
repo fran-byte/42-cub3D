@@ -210,6 +210,8 @@ image.addr = (int *)mlx_get_data_addr(image.img, &image.bpp, &image.line_length,
 image.addr[y * (image.line_length / 4) + x] = 0x00FF00; // Asigna color verde
 ```
 
+![](img/render.png)
+
 ---
 
 ## Optimización de Rendimiento
