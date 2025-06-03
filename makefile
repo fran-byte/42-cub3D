@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/05/30 23:51:50 by frromero         ###   ########.fr        #
+#    Updated: 2025/06/03 16:23:48 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,7 +139,7 @@ valgrind: $(SUPPRESSION_FILE)
 	@valgrind --leak-check=full \
 		--suppressions=$(SUPPRESSION_FILE) \
 		--log-file=$(VALGRIND_LOG) \
-		./cub3d maps/ok/1.cub
+		./cub3d maps/ok/8.cub
 
 $(SUPPRESSION_FILE):
 	@echo "Creando archivo de supresiones $(SUPPRESSION_FILE)..."
