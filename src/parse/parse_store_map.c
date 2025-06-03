@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 18:29:10 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 19:25:16 by frromero         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:33:33 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	store_path(t_game *game, char *line, char **dest)
 		free_function(game);
 		exit(EXIT_FAILURE);
 	}
+    path = ft_strtrim(path, " ");
 	if (access(path, R_OK) != 0)
 	{
 		free(path);

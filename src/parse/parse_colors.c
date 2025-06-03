@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:50:04 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/20 20:46:50 by frromero         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:31:34 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ int	parse_color_line(t_game *game, char *line)
 	rgb = ft_split(line + 2, ',');
 	if (!rgb || ft_array_size(rgb) != 3)
 		exit_error_color(game, rgb);
+    rgb[0] = ft_strtrim(rgb[0], " ");
+    rgb[1] = ft_strtrim(rgb[1], " ");
+    rgb[2] = ft_strtrim(rgb[2], " ");
 	if (!is_numeric(rgb[0]) || !is_numeric(rgb[1]) || !is_numeric(rgb[2]))
 		exit_error_color(game, rgb);
 	r = ft_atoi(rgb[0]);
@@ -70,6 +73,5 @@ int	parse_color_line(t_game *game, char *line)
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		exit_error_color(game, rgb);
 	rgb_hex = (r << 16) | (g << 8) | b;
-	free_split(rgb);
-	return (rgb_hex);
+	return (free_split(rgb), rgb_hex);
 }
