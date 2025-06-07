@@ -5,84 +5,104 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 21:17:52 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 15:59:44 by frromero         ###   ########.fr       */
+/*   Created: 2025/04/02 21:17:52 by frromero          #+#    #+#             */
+/*   Updated: 2025/06/01 20:36:17 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static void player(t_game *data)
+/**
+ * @brief Constructs the file path for an intro frame image based on the frame
+ * index.
+ *
+ * This function generates a string path of the form "textures/i/X.xpm" where X
+ * is the frame number (1-based). It handles numbers less than 10 and those with
+ * two digits.
+ *
+ * @param path  A buffer to store the resulting path string (must be at least 64
+ * bytes).
+ * @param index The zero-based index of the frame.
+ */
+void	get_intro_frame_path(char *path, int index)
 {
-    data->player.player_x = -1;
-    data->player.player_y = -1;
-    data->player.x = 0;
-    data->player.y = 0;
-    data->player.dir_x = 0;
-    data->player.dir_y = 0;
-    data->player.plane_x = 0;
-    data->player.plane_y = 0;
-    data->player.player_orinetation = NORTH;
+	char	num[4];
+
+	if (index + 1 < 10)
+	{
+		num[0] = '0' + (index + 1);
+		num[1] = '\0';
+	}
+	else
+	{
+		num[0] = '0' + ((index + 1) / 10);
+		num[1] = '0' + ((index + 1) % 10);
+		num[2] = '\0';
+	}
+	ft_strlcpy(path, "textures/i/", 64);
+	ft_strlcat(path, num, 64);
+	ft_strlcat(path, ".xpm", 64);
 }
 
-static void elements(t_game *data)
+/**
+ * @brief Loads all intro screen frames into the game structure.
+ *
+ * This function initializes the intro screen state and loads each XPM image
+ * frame into the game's intro frames array using MiniLibX. If any frame fails
+ * to load, it reports an error, frees resources, and exits the program.
+ *
+ * @param g Pointer to the main game structure containing MLX pointers
+ *          and intro screen data.
+ */
+void	load_intro_screen(t_game *g)
 {
-    data->elem.north = 0;
-    data->elem.south = 0;
-    data->elem.east = 0;
-    data->elem.west = 0;
-    data->elem.floor = 0;
-    data->elem.ceiling = 0;
+	int		i;
+	int		w;
+	int		h;
+	char	path[64];
+
+	i = 0;
+	w = 0;
+	h = 0;
+	g->intro.current_frame = 0;
+	g->intro.ticks = 0;
+	g->intro.active = true;
+	while (i < INTRO_FRAME_COUNT)
+	{
+		get_intro_frame_path(path, i);
+		g->intro.frames[i] = mlx_xpm_file_to_image(g->mlx, path, &w, &h);
+		if (g->intro.frames[i] == NULL)
+		{
+			report_err(TEXTURE_LOADING_ERROR);
+			free_function(g);
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
 }
 
-static void sprites(t_game *data)
+/**
+ * @brief Entry point of the Cub3D program.
+ *
+ * Validates arguments, initializes the game, parses the map file,
+ * sets up the player and rendering window, and starts the main loop.
+ *
+ * @param argc Argument count.
+ * @param argv Argument vector.
+ * @return int Exit status (0 if success, 1 if error).
+ */
+int	main(int argc, char **argv)
 {
-    data->map.sprites.no = NULL;
-    data->map.sprites.su = NULL;
-    data->map.sprites.we = NULL;
-    data->map.sprites.ea = NULL;
-}
-/* Initialize all fields of the t_game structure to safe default values */
-static void init_game(t_game *data)
-{
-    data->mlx = NULL;
-    data->window = NULL;
-    data->map.file = NULL;
-    data->map.map = NULL;
-    data->map.height_map = 0;
-    data->map.height_file = 0;
-    data->map.map_start_index = -1;
-    data->map.celing_color = -1;
-    data->map.floor_color = -1;
-    data->map.paths.north = NULL;
-    data->map.paths.south = NULL;
-    data->map.paths.east = NULL;
-    data->map.paths.west = NULL;
-    sprites(data);
-    data->img.img = NULL;
-    data->img.addr = NULL;
-    data->img.bpp = 0;
-    data->img.line_len = 0;
-    data->img.endian = 0;
-    player(data);
-    elements(data);
-    data->map.file = NULL;
-    data->map.map = NULL;
-}
+	t_game	game;
 
-int main(int argc, char **argv)
-{
-    t_game data;
-    int fd;
-
-    if (argc != 2)
-        return (report_err(SYNTAX_ERR), 1);
-    init_game(&data);
-    parse_arg(argv[1], &data);
-    init_player(&data);
-    testing(&data); // ****** DEBUG
-    window_init(&data, 800, 600);
-    game_loop(&data);
-    free_function(&data);
-    return (0);
+	if (argc != 2)
+		return (report_err(SYNTAX_ERR), 1);
+	init_game(&game);
+	parse_arg(argv[1], &game);
+	init_player(&game);
+	window_init(&game, SCREEN_WIDTH, SCREEN_HEIGHT);
+	load_intro_screen(&game);
+	game_loop(&game);
+	free_function(&game);
+	return (0);
 }

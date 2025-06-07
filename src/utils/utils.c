@@ -6,31 +6,46 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 19:32:50 by frromero          #+#    #+#             */
-/*   Updated: 2025/04/08 19:15:52 by frromero         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:28:18 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int open_file(char *arg, t_game *data)
+/**
+ * @brief Opens a file for reading.
+ *
+ * Exits the program if the file cannot be opened.
+ *
+ * @param arg The path to the file.
+ * @param game Pointer to the game data structure for cleanup on error.
+ * @return File descriptor of the opened file.
+ */
+int	open_file(char *arg, t_game *game)
 {
-	int fd;
+	int	fd;
 
 	fd = open(arg, O_RDONLY);
 	if (fd < 0)
 	{
 		report_err(OPEN_FILE_ERR);
-		free_function(data);
+		free_function(game);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
 }
-void free_split(char **grid_color)
+
+/**
+ * @brief Frees a NULL-terminated array of strings.
+ *
+ * @param grid_color The array of strings to free.
+ */
+void	free_split(char **grid_color)
 {
-	int i;
+	int	i;
 
 	if (!grid_color)
-		return;
+		return ;
 	i = 0;
 	while (grid_color[i])
 	{
@@ -40,7 +55,13 @@ void free_split(char **grid_color)
 	free(grid_color);
 }
 
-int is_numeric(const char *str)
+/**
+ * @brief Checks if a string contains only numeric characters.
+ *
+ * @param str The string to check.
+ * @return 1 if the string is numeric, 0 otherwise.
+ */
+int	is_numeric(const char *str)
 {
 	while (*str)
 	{
@@ -51,10 +72,17 @@ int is_numeric(const char *str)
 	return (1);
 }
 
-int count_char_in_str(const char *str, char c)
+/**
+ * @brief Counts occurrences of a character in a string.
+ *
+ * @param str The string to search.
+ * @param c The character to count.
+ * @return Number of times c appears in str.
+ */
+int	count_char_in_str(const char *str, char c)
 {
-	int count;
-	int i;
+	int	count;
+	int	i;
 
 	count = 0;
 	i = 0;
@@ -66,9 +94,16 @@ int count_char_in_str(const char *str, char c)
 	}
 	return (count);
 }
-int ft_array_size(char **array)
+
+/**
+ * @brief Returns the size of a NULL-terminated array of strings.
+ *
+ * @param array The array to measure.
+ * @return Number of strings in the array.
+ */
+int	ft_array_size(char **array)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (array && array[count])
