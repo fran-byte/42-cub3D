@@ -25,8 +25,8 @@ static int	is_numeric(const char *str)
 	i = 0;
 	while (str[i])
 	{
-        if(str[0] == '+')
-            return (1);
+		if (str[0] == '+')
+			return (1);
 		else if (!ft_isdigit(str[i]))
 			return (0);
 		i++;
@@ -123,7 +123,7 @@ static int	extract_rgb_values(t_game *game, char **rgb)
 	b = ft_atoi(clean[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		free_color_resources(game, ptrs, rgb, 1);
-    free_color_resources(game, ptrs, rgb, 0);
+	free_color_resources(game, ptrs, rgb, 0);
 	return ((r << 16) | (g << 8) | b);
 }
 

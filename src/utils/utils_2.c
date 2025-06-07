@@ -12,23 +12,22 @@
 
 #include "../../include/cub3d.h"
 
-
-void    ft_strstrimed(t_game *game, int i)
+void	ft_strstrimed(t_game *game, int i)
 {
-    char *trimed;
-    int j;
-    int len;
+	char	*trimed;
+	int		j;
+	int		len;
 
-    len = ft_strlen(game->map.file[i]);
-    j = 0;
-    trimed = ft_strtrim(game->map.file[i], " ");
-    while(game->map.file[i][j])
-    {
-        game->map.file[i][j] = ' ';
-        j++;
-    }
-    ft_strlcpy(game->map.file[i], trimed, len + 1);
-    free (trimed);
+	len = ft_strlen(game->map.file[i]);
+	j = 0;
+	trimed = ft_strtrim(game->map.file[i], " ");
+	while (game->map.file[i][j])
+	{
+		game->map.file[i][j] = ' ';
+		j++;
+	}
+	ft_strlcpy(game->map.file[i], trimed, len + 1);
+	free(trimed);
 }
 
 /**

@@ -131,7 +131,7 @@ static void	parse_error(t_game *game)
 void	parse_elements(t_game *game)
 {
 	int	i;
-	int	elem;    
+	int	elem;
 
 	i = 0;
 	elem = 0;
@@ -143,7 +143,7 @@ void	parse_elements(t_game *game)
 			i++;
 			continue ;
 		}
-        ft_strstrimed(game, i); 
+		ft_strstrimed(game, i);
 		process_textures(game, &elem, &i);
 		process_colors(game, &elem, &i);
 		if (elem == 0 || (!game->elem.north && !game->elem.south

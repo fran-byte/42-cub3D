@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/06/07 16:28:26 by frromero         ###   ########.fr       */
+/*   Updated: 2025/06/07 18:07:58 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,13 +263,11 @@ void				free_function(t_game *game);
 /* ************************************************************************** */
 /*                          Map parsing utilities                            */
 /* ************************************************************************** */
-void				print_map_grid(char **grid, int height);
 int					open_file(char *arg, t_game *game);
 int					parse_color_line(t_game *game, char *line);
 void				store_path(t_game *game, char *line, char **dest);
 void				parse_elements(t_game *game);
 void				free_split(char **grid_color);
-void				parse_colors(t_game *game);
 int					count_char_in_str(const char *str, char c);
 void				parse_map(t_game *game);
 int					ft_array_size(char **array);
@@ -278,7 +276,7 @@ void				parse_validate_map(t_game *game);
 void				free_grid(char **grid, int height);
 char				**duplicate_grid(char **grid, int height);
 int					is_empty_line(char *line);
-void                ft_strstrimed(t_game *game, int i); 
+void				ft_strstrimed(t_game *game, int i);
 
 /* ************************************************************************** */
 /*                          Rendering functions                              */
