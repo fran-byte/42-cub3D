@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/06/07 17:05:49 by frromero         ###   ########.fr        #
+#    Updated: 2025/06/07 18:19:54 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -144,7 +144,7 @@ valgrind: $(NAME) $(SUPPRESSION_FILE)
 
 
 $(SUPPRESSION_FILE):
-	@echo "Creando archivo de supresiones $(SUPPRESSION_FILE)..."
+	@echo "Creating suppression file $(SUPPRESSION_FILE)..."
 	@echo '{' > $(SUPPRESSION_FILE)
 	@echo '   mlx_writev_suppression' >> $(SUPPRESSION_FILE)
 	@echo '   Memcheck:Param' >> $(SUPPRESSION_FILE)
