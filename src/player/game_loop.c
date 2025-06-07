@@ -6,12 +6,24 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:23:34 by user              #+#    #+#             */
-/*   Updated: 2025/06/01 18:26:16 by frromero         ###   ########.fr       */
+/*   Updated: 2025/06/07 18:40:53 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+/**
+ * @brief Handles the intro animation loop by displaying frames sequentially.
+ *
+ * This function is called on every iteration of the main MLX loop via
+ * mlx_loop_hook. It checks whether the intro is active, displays the current
+ * frame, increments a tick counter, and advances to the next frame after a 
+ * fixed number of ticks. The number 120 defines how many loop cycles each 
+ * frame should remain visible before switching to the next one.
+ *
+ * @param g Pointer to the game structure containing intro frame data.
+ * @return Always returns 0 (required by MLX loop hook signature).
+ */
 int	intro_loop(t_game *g)
 {
 	if (!g->intro.active)
