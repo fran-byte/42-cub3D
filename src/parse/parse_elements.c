@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:50:04 by frromero          #+#    #+#             */
-/*   Updated: 2025/06/03 08:09:07 by frromero         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:27:38 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ static void	parse_error(t_game *game)
 void	parse_elements(t_game *game)
 {
 	int	i;
-	int	elem;
+	int	elem;    
 
 	i = 0;
 	elem = 0;
@@ -143,6 +143,7 @@ void	parse_elements(t_game *game)
 			i++;
 			continue ;
 		}
+        ft_strstrimed(game, i); 
 		process_textures(game, &elem, &i);
 		process_colors(game, &elem, &i);
 		if (elem == 0 || (!game->elem.north && !game->elem.south

@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/06/07 11:42:23 by frromero         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:28:26 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,6 +278,7 @@ void				parse_validate_map(t_game *game);
 void				free_grid(char **grid, int height);
 char				**duplicate_grid(char **grid, int height);
 int					is_empty_line(char *line);
+void                ft_strstrimed(t_game *game, int i); 
 
 /* ************************************************************************** */
 /*                          Rendering functions                              */

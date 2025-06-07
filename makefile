@@ -6,7 +6,7 @@
 #    By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 20:34:49 by frromero          #+#    #+#              #
-#    Updated: 2025/06/07 14:06:38 by frromero         ###   ########.fr        #
+#    Updated: 2025/06/07 17:05:49 by frromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,11 +135,13 @@ valgrind_e: $(NAME)
 VALGRIND_LOG = valgrind.log
 SUPPRESSION_FILE = mlx.supp
 
-valgrind: $(SUPPRESSION_FILE)
+valgrind: $(NAME) $(SUPPRESSION_FILE)
+	@echo "\033[33m✔ Running with Valgrind...\033[0m"
 	@valgrind --leak-check=full \
 		--suppressions=$(SUPPRESSION_FILE) \
 		--log-file=$(VALGRIND_LOG) \
-		./cub3d maps/ok/8.cub
+		./$(NAME) maps/ok/10.cub
+
 
 $(SUPPRESSION_FILE):
 	@echo "Creando archivo de supresiones $(SUPPRESSION_FILE)..."

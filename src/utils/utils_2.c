@@ -6,11 +6,30 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:16:50 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/15 19:06:56 by frromero         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:37:26 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+
+void    ft_strstrimed(t_game *game, int i)
+{
+    char *trimed;
+    int j;
+    int len;
+
+    len = ft_strlen(game->map.file[i]);
+    j = 0;
+    trimed = ft_strtrim(game->map.file[i], " ");
+    while(game->map.file[i][j])
+    {
+        game->map.file[i][j] = ' ';
+        j++;
+    }
+    ft_strlcpy(game->map.file[i], trimed, len + 1);
+    free (trimed);
+}
 
 /**
  * @brief Frees a dynamically allocated 2D grid of strings.
