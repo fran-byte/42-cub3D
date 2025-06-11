@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:19:35 by frromero          #+#    #+#             */
-/*   Updated: 2025/05/20 19:59:02 by frromero         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:13:18 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,23 @@ static char	**extract_map_lines(t_game *game, int start_index)
 		i++;
 	}
 	map[i] = NULL;
+
 	return (map);
+}
+
+int parse_size(t_game *game)
+{
+    int i;
+
+    i = 0;
+    if (game->map.height_map > MAX_SIZE)
+        return (0);
+    while (i < game->map.height_map) {
+        if (ft_strlen(game->map.map[i]) > MAX_SIZE)
+            return (0);
+        i++;
+    }
+    return (1);
 }
 
 /**
@@ -74,6 +90,12 @@ void	parse_map(t_game *game)
 	if (!game->map.map)
 	{
 		report_err(MAP_VOID_ERR);
+		free_function(game);
+		exit(EXIT_FAILURE);
+	}
+    if (!parse_size(game))
+	{
+		report_err(MAP_MAX_ERR);
 		free_function(game);
 		exit(EXIT_FAILURE);
 	}
