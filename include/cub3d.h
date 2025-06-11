@@ -6,7 +6,7 @@
 /*   By: frromero <frromero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 21:19:21 by frromero          #+#    #+#             */
-/*   Updated: 2025/06/11 12:56:34 by frromero         ###   ########.fr       */
+/*   Updated: 2025/06/07 18:07:58 by frromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define INTRO_FRAME_COUNT 25
-# define MAX_SIZE 100
 
 /******************************************************************************/
 /*                                 MOVEMENT                                   */
@@ -78,7 +77,6 @@
 # define MLX_NEW_WINDOW_ERR "mlx_new_window failed"
 # define MLX_OR_WINDOW_ERR "mlx or window not initialized"
 # define TEXTURE_LOADING_ERROR "Texture loading Error"
-# define MAP_MAX_ERR "Map too big (<100 x <100)"
 
 /******************************************************************************/
 /*                                STRUCTURES                                  */
